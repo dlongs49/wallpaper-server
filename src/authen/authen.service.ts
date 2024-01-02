@@ -1,22 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import {AppService} from '../server/app/app.service'
-import { JwtService } from "@nestjs/jwt";
+import {Injectable, UnauthorizedException} from '@nestjs/common';
+import {JwtService} from "@nestjs/jwt";
+import {jwtConstants} from "./constants";
+
 @Injectable()
 export class AuthenService {
-  constructor(private readonly appService: AppService,private readonly jwtService: JwtService) {}
+    constructor(private jwtService:JwtService) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.appService.findOne();
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
+    async validateUser(username: string, password: string): Promise<any> {
+        if (username != 'test') {
+            throw new UnauthorizedException({
+                code: 401,
+                msg: "用户名不存在"
+            })
+        }
+        if (password != '123456') {
+            throw new UnauthorizedException({
+                code: 401,
+                msg: "密码不正确"
+            })
+        }
+        return {username, password}
+
     }
-    return null;
-  }
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
-  }
+    getToken(user) {
+        const payload = { ...user };
+        return this.jwtService.sign(payload, { secret: jwtConstants.secret } );
+    }
 }

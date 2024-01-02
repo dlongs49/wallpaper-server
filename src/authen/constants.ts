@@ -1,3 +1,4 @@
-export const jwtConstants = {
-  secret: '123456',
+export const jwtConstants  = {
+  secret: 'test123',
+  expiresIn: '24h',
 };
