@@ -5,4 +5,10 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+  async findOne(){
+    return {
+      username:"test",
+      password:"123456"
+    }
+  }
 }
