@@ -4,9 +4,12 @@ import { AppService } from './app.service';
 import {AuthenService} from "../../authen/authen.service";
 import {AuthenModule} from "../../authen/authen.module";
 import {JwtService} from "@nestjs/jwt";
+import { ConfigModule } from '@nestjs/config';
+import { DbModule } from "../../config/db.module";
+import { appProviders } from "./app.providers";
 @Module({
-  imports: [AuthenModule],
+  imports: [AuthenModule,ConfigModule.forRoot({envFilePath:'.env'}),DbModule],
   controllers: [AppController],
-  providers: [AppService,AuthenService,JwtService],
+  providers: [AppService,AuthenService,JwtService,...appProviders],
 })
 export class AppModule {}
