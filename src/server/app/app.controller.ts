@@ -14,7 +14,7 @@ export class AppController {
   }
 
   @UseGuards(AuthGuard("local"))
-  @Post("/reg_login")
+  @Post("/reg_logins")
   login(@Body() user: User): any {
     this.appService.sign(user)
     let token = this.authenService.getToken(user);
