@@ -8,7 +8,7 @@ import { JwtStrategy } from "../../authen/jwt.strategy";
 import * as process from "process";
 
 @ApiTags("用户管理")
-@Controller("sign")
+@Controller("/sign")
 export class AppController {
   constructor(private authenService: AuthenService, private appService: AppService) {
   }

@@ -1,7 +1,7 @@
 import { Column, Table, Model } from 'sequelize-typescript';
 @Table({
   tableName: 'user',
-  timestamps: false, // 默认true。true时会带createdAt、updatedAt字段查表
+  timestamps: false,
 })
 export class App extends Model<App> {
   @Column({ primaryKey: true })
@@ -18,4 +18,6 @@ export class App extends Model<App> {
   sex: string;
   @Column
   sex_tit: string;
+  @Column
+  nation: string;
 }
