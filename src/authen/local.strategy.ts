@@ -1,7 +1,8 @@
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { AuthenService } from './authen.service';
+import { ResFail } from "../utils/http.response";
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -13,12 +14,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(uname: string, password: string): Promise<any> {
-
-    console.log(uname,password);
     const user = await this.authService.validateUser(uname, password);
     if (!user) {
-      throw new UnauthorizedException();
+      throw new ResFail("登录或注册失败")
     }
-    return user;
+    return user
   }
 }

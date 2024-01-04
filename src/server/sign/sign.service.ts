@@ -8,7 +8,7 @@ export class SignService {
   constructor(private authenService:AuthenService) {
   }
   async loginReg(requestDto:RequestDto){
-    // let token = this.authenService.getToken(requestDto);
-    // throw new ResSuccess(token)
+    let token = this.authenService.getToken(requestDto);
+    throw new ResSuccess(token)
   }
 }
