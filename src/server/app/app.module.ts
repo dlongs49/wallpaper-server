@@ -10,7 +10,7 @@ import { appProviders } from "./app.providers";
 import {SignModule} from "../sign/sign.module";
 import {SignService} from "../sign/sign.service";
 @Module({
-  imports: [AuthenModule,ConfigModule.forRoot({envFilePath:'.env'}),DbModule],
+  imports: [AuthenModule,ConfigModule.forRoot({envFilePath:'.env'}),DbModule,SignModule],
   controllers: [AppController],
   providers: [AppService,AuthenService,JwtService,...appProviders],
 })
