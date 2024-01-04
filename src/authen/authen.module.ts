@@ -5,7 +5,7 @@ import {LocalStrategy} from "./local.strategy";
 import {JwtStrategy} from "./jwt.strategy";
 import {jwtConstants } from "./constants";
 import {JwtModule, JwtService} from '@nestjs/jwt';
-import {AppModule} from "../server/app/app.module";
+import { Sign } from "../server/sign/sign.model";
 
 @Module({
     imports: [
@@ -18,7 +18,11 @@ import {AppModule} from "../server/app/app.module";
     providers: [
         AuthenService,
         LocalStrategy,
-        JwtStrategy
+        JwtStrategy,
+        {
+            provide: 'SIGN_PROVIDERS',
+            useValue: Sign,
+        },
     ],
 })
 export class AuthenModule {

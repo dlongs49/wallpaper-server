@@ -3,7 +3,7 @@ import { Column, Table, Model } from 'sequelize-typescript';
     tableName: 'user',
     timestamps: false,
 })
-export class App extends Model<App> {
+export class Sign extends Model<Sign> {
     @Column({ primaryKey: true })
     id: string;
     @Column

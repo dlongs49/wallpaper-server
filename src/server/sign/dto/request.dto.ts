@@ -8,7 +8,7 @@ export class RequestDto{
     @ApiProperty({
         description: '用户名',
     })
-    usname: string;
+    uname: string;
     @ApiProperty({
         description: '密码',
     })

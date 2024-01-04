@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import * as process from "process";
-import { App } from "../server/app/app.model";
+import { Sign } from "../server/sign/sign.model";
 
 export const dbProviders = [
   {
@@ -14,7 +14,7 @@ export const dbProviders = [
         password: process.env.DATABASE_USER_PWD,
         database: process.env.DATABASE_NAME,
       });
-      sequelize.addModels([App]);
+      sequelize.addModels([Sign]);
       await sequelize.sync();
       return sequelize;
     },
