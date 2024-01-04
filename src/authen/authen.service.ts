@@ -1,9 +1,9 @@
-import { HttpException, HttpStatus, Inject, Injectable, UnauthorizedException } from "@nestjs/common";
+import {Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { ResFail, ResSuccess } from "../utils/http.response";
+import { ResFail } from "../utils/http.response";
 import { v4 as uid } from "uuid";
 import * as md5 from "md5";
-import { jwtConstants } from "./constants";
+import * as process from "process";
 
 @Injectable()
 export class AuthenService {
@@ -39,8 +39,8 @@ export class AuthenService {
     return { uname, password };
   }
 
-  getToken(user) {
+  getToken(user:ResponseDto) {
     const payload = { ...user };
-    return this.jwtService.sign(payload, { secret: jwtConstants.secret } );
+    return this.jwtService.sign(payload, { secret: process.env["JWTCONTENT_SECRET"] } );
   }
 }

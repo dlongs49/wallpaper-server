@@ -3,16 +3,17 @@ import {AuthenService} from './authen.service';
 import {PassportModule} from "@nestjs/passport";
 import {LocalStrategy} from "./local.strategy";
 import {JwtStrategy} from "./jwt.strategy";
-import {jwtConstants } from "./constants";
-import {JwtModule, JwtService} from '@nestjs/jwt';
+import {JwtModule} from '@nestjs/jwt';
 import { Sign } from "../server/sign/sign.model";
+import * as process from "process";
 
 @Module({
     imports: [
         PassportModule,
         JwtModule.register({
-            secret: jwtConstants.secret,
-            signOptions: {expiresIn: jwtConstants.expiresIn},
+            global: true,
+            secret: process.env['JWTCONTENT_SECRET'],
+            signOptions: {expiresIn: process.env["JWTCONTENT_EXPIREIN"]},
         }),
     ],
     providers: [

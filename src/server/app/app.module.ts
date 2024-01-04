@@ -8,7 +8,6 @@ import { ConfigModule } from '@nestjs/config';
 import { DbModule } from "../../config/db.module";
 import { appProviders } from "./app.providers";
 import {SignModule} from "../sign/sign.module";
-import {SignService} from "../sign/sign.service";
 import { Sign } from "../sign/sign.model";
 @Module({
   imports: [AuthenModule,ConfigModule.forRoot({envFilePath:'.env'}),DbModule,SignModule],
