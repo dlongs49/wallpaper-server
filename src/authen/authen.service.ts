@@ -1,4 +1,4 @@
-import {Injectable, UnauthorizedException} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from "@nestjs/common";
 import {JwtService} from "@nestjs/jwt";
 import {jwtConstants} from "./constants";
 
@@ -8,10 +8,10 @@ export class AuthenService {
 
     async validateUser(username: string, password: string): Promise<any> {
         if (username != 'test') {
-            throw new UnauthorizedException({
+            throw new HttpException({
                 code: 401,
                 msg: "用户名不存在"
-            })
+            },HttpStatus.OK)
         }
         if (password != '123456') {
             throw new UnauthorizedException({
