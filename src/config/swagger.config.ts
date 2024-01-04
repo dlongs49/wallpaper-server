@@ -4,8 +4,8 @@
 */
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 // swagger 配置
-export const swaggerConfig = (app) =>{
-    const config = new DocumentBuilder()
+export const swaggerConfig = (app) => {
+    const config = new DocumentBuilder().addBearerAuth()
         .setTitle('wallpaper-server')
         .setDescription('wallpaper-app接口服务')
         .setVersion('1.0')
