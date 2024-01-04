@@ -1,15 +1,15 @@
 import {Module} from '@nestjs/common';
 import {AuthenService} from './authen.service';
 import {PassportModule} from "@nestjs/passport";
-import {LocalStrategy} from "./local.strategy";
-import {JwtStrategy} from "./jwt.strategy";
+// import {LocalStrategy} from "./local.strategy";
+// import {JwtStrategy} from "./jwt.strategy";
 import {JwtModule} from '@nestjs/jwt';
 import { Sign } from "../server/sign/sign.model";
 import * as process from "process";
 
 @Module({
     imports: [
-        PassportModule,
+        // PassportModule,
         JwtModule.register({
             global: true,
             secret: process.env['JWTCONTENT_SECRET'],
@@ -18,8 +18,8 @@ import * as process from "process";
     ],
     providers: [
         AuthenService,
-        LocalStrategy,
-        JwtStrategy,
+        // LocalStrategy,
+        // JwtStrategy,
         {
             provide: 'SIGN_PROVIDERS',
             useValue: Sign,

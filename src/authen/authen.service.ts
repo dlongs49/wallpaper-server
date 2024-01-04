@@ -1,6 +1,6 @@
-import {Inject, Injectable, UnauthorizedException} from "@nestjs/common";
+import {Inject, Injectable} from "@nestjs/common";
 import {JwtService} from "@nestjs/jwt";
-import {ResFail, ResSuccess} from "../utils/http.response";
+import {ResFail} from "../utils/http.response";
 import {v4 as uid} from "uuid";
 import * as md5 from "md5";
 import * as process from "process";
@@ -10,7 +10,7 @@ export class AuthenService {
     constructor(private jwtService: JwtService, @Inject("SIGN_PROVIDERS") private readonly signProviders: any) {
     }
 
-    async validateUser(uname: string, password: string): Promise<any> {
+    async validateSign(uname: string, password: string): Promise<any> {
         // 查找是否注册过
         const isRegister = await this.signProviders.findOne({
             where: {
@@ -48,11 +48,6 @@ export class AuthenService {
             id = result.id
         }
 
-        return this.jwtService.sign({sub: id, password}, {secret: process.env["JWTCONTENT_SECRET"]});
+        return await this.jwtService.signAsync({uid: id, password:md5(password)}, {secret: process.env["JWTCONTENT_SECRET"]});
     }
-
-    // getToken(user: ResponseDto) {
-    //     const payload = {...user};
-    //     return this.jwtService.sign(payload, {secret: process.env["JWTCONTENT_SECRET"]});
-    // }
 }

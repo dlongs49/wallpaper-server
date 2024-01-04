@@ -14,7 +14,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(uname: string, password: string): Promise<any> {
-    const user = await this.authService.validateUser(uname, password);
+    const user = await this.authService.validateSign(uname, password);
     if (!user) {
       throw new ResFail("登录或注册失败")
     }
