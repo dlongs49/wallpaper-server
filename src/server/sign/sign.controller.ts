@@ -3,6 +3,7 @@ import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {RequestDto} from "./dto/request.dto";
 import { SignService } from "./sign.service";
 import {AuthenGuard} from "../../authen/authen.guard";
+import { Request } from "express";
 @ApiTags("登录/注册/密码")
 @Controller('sign')
 export class SignController {
@@ -15,7 +16,7 @@ export class SignController {
     @ApiBearerAuth()
     @UseGuards(AuthenGuard)
     @Get("get_user")
-    getUser(@Req() req) {
+    getUser(@Req() req:Request) {
         return this.signService.getUser(req)
     }
 }

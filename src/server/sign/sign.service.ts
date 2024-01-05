@@ -2,6 +2,7 @@ import {Inject, Injectable} from "@nestjs/common";
 import {ResSuccess} from "../../utils/http.response";
 import {RequestDto} from "./dto/request.dto";
 import {AuthenService} from "../../authen/authen.service";
+import { Request } from "express";
 
 @Injectable()
 export class SignService {
