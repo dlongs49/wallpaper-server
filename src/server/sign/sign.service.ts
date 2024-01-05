@@ -3,10 +3,11 @@ import {ResSuccess} from "../../utils/http.response";
 import {RequestDto} from "./dto/request.dto";
 import {AuthenService} from "../../authen/authen.service";
 import { Request } from "express";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class SignService {
-    constructor(private authenService: AuthenService, @Inject("SIGN_PROVIDERS") private readonly signProviders: any) {
+    constructor(private authenService: AuthenService,private jwtService:JwtService, @Inject("SIGN_PROVIDERS") private readonly signProviders: any) {
     }
 
     async loginReg(requestDto: RequestDto) {
@@ -15,8 +16,7 @@ export class SignService {
     }
 
     async getUser(req: Request) {
-        console.log(req["uid"])
-        let id = req["uid"]
+        let id = req["id"]
         const result = await this.signProviders.findOne({where: {id},raw:true})
         delete  result.password
         delete  result.id

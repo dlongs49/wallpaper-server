@@ -2,8 +2,8 @@ import {Body, Controller, Get, Post, Req, UseGuards} from "@nestjs/common";
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 import {RequestDto} from "./dto/request.dto";
 import { SignService } from "./sign.service";
-import {AuthenGuard} from "../../authen/authen.guard";
 import { Request } from "express";
+import { AuthenGuard } from "../../authen/authen.guard";
 @ApiTags("登录/注册/密码")
 @Controller('sign')
 export class SignController {

@@ -3,13 +3,18 @@ import { SignService } from './sign.service';
 import { SignController } from "./sign.controller";
 import { AuthenService } from "../../authen/authen.service";
 import { AuthenModule } from "../../authen/authen.module";
-import { JwtService } from "@nestjs/jwt";
 import { Sign } from "./sign.model";
+import * as process from "process";
 
 @Module({
-  imports:[AuthenModule],
+  imports:[
+    AuthenModule,
+  ],
   controllers:[SignController],
-  providers: [SignService,AuthenService,JwtService,{
+  providers: [
+    SignService,
+    AuthenService,
+    {
     provide: 'SIGN_PROVIDERS',
     useValue: Sign,
   },]
