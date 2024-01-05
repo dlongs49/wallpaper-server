@@ -17,7 +17,7 @@ export class AuthenGuard implements CanActivate {
       throw new HttpException({ code: Status.NOSIGN, msg: "未登录" }, HttpStatus.OK);
     }
     try {
-      const payload = await this.jwtService.verifyAsync(token, { secret: '123456' });
+      const payload = await this.jwtService.verifyAsync(token, { secret: process.env.JWTCONTENT_SECRET });
       request["id"] = payload.uid;
       return true;
     } catch (e) {
