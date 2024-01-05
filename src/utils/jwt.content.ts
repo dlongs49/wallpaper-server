@@ -5,6 +5,6 @@
 
 // jwt 密钥 过期时间常量
 export enum JwtContent{
-    JWTCONTENT_SECRET="wallpaper123",
+    JWTCONTENT_SECRET="wallpaper123s",
     JWTCONTENT_EXPIREIN='20s'
 }
