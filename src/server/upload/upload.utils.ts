@@ -31,10 +31,10 @@ export const HandleFileFilter = (req, file, cb) => {
 };
 // 返回路径
 export const JsonFile = (files)=>{
-  console.log(files);
   let files_path = files.path.replace(/\\/g,"/")
   let i = files_path.lastIndexOf(files.fieldname)
-  let slice_path = files_path.slice(files_path.length-i,files_path.length)
-  let url = `/upload/${files.fieldname}${slice_path}`
+  let slice_path = files_path.slice(i,files_path.length)
+  console.log(files_path,i,files.fieldname,slice_path)
+  let url = `/upload/${slice_path}`
   return {url,name:files.originalname}
 }
