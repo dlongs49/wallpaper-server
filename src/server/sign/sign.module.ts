@@ -4,7 +4,6 @@ import { SignController } from "./sign.controller";
 import { AuthenService } from "../../authen/authen.service";
 import { AuthenModule } from "../../authen/authen.module";
 import { Sign } from "./sign.model";
-import * as process from "process";
 
 @Module({
   imports:[
