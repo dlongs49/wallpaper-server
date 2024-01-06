@@ -4,13 +4,13 @@
 */
 import {ApiProperty} from "@nestjs/swagger";
 
-export class PageDto{
+export class PageReqDto{
     @ApiProperty({
         description: '页码',
     })
-    offset: string;
+    offset: number;
     @ApiProperty({
         description: '每页条数',
     })
-    limit: string;
+    limit: number;
 }

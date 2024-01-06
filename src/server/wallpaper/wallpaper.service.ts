@@ -2,6 +2,8 @@ import {Inject, Injectable} from '@nestjs/common';
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
 import {v4 as uid} from "uuid";
 import {ResFail, ResSuccess} from "../../utils/http.response";
+import {PageReqDto} from "../../utils/global.dto";
+
 @Injectable()
 export class WallpaperService {
     constructor(@Inject("WALLPAPER_TYPEE_PROVIDERS") private readonly wallpaper_type_providers: any) {
@@ -57,18 +59,25 @@ export class WallpaperService {
         let flag = false
         let for_id = ''
         for (let i = 0; i < idArr.length; i++) {
-            const result = await this.wallpaper_type_providers.destroy({where:{id:idArr[i]}})
-            if(result == 0){
+            const result = await this.wallpaper_type_providers.destroy({where: {id: idArr[i]}})
+            if (result == 0) {
                 flag = true
                 for_id = idArr[i]
                 break;
-            }else{
+            } else {
                 flag = false
             }
         }
-        if(flag){
-            throw new ResSuccess(`删除id为{`+for_id+`}的条目失败`)
+        if (flag) {
+            throw new ResSuccess(`删除id为{` + for_id + `}的条目失败`)
         }
         throw new ResSuccess("删除条目成功")
+    }
+
+    async getWallpaperTypeList(pageReqDto: PageReqDto) {
+        let offset = pageReqDto.offset
+        let limit = pageReqDto.limit
+        const result = await this.wallpaper_type_providers.findAndCountAll({raw: true})
+        throw new ResSuccess(result)
     }
 }

@@ -2,6 +2,7 @@ import {Body, Controller, Get, Inject, Param, Post, Query} from '@nestjs/common'
 import {ApiOperation, ApiParam, ApiQuery, ApiTags} from "@nestjs/swagger";
 import {WallpaperService} from "./wallpaper.service";
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
+import {PageReqDto} from "../../utils/global.dto";
 @ApiTags("壁纸管理")
 @Controller('wallpaper')
 export class WallpaperController {
@@ -26,5 +27,10 @@ export class WallpaperController {
     @Post("del_wallpaper_type")
     delWallpaperType(@Body() idArr:Array<string>){
         return this.wallpaperService.delWallpaperType(idArr)
+    }
+    @ApiOperation({ summary: '壁纸类型列表' })
+    @Get("get_wallpaper_type")
+    getWallpaperTypeList(@Query() pageReqDto: PageReqDto){
+        return this.wallpaperService.getWallpaperTypeList(pageReqDto)
     }
 }
