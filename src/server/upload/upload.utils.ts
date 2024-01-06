@@ -6,7 +6,6 @@ import { ResFail } from "../../utils/http.response";
 let file_type = ["image/png", "image/jpeg", "image/gif"];
 // 配置文件路径
 export const HandleDestination = (req, file, cb) => {
-  console.log(file);
   let date = dayjs(new Date()).format("YYYY-MM-DD");
   // 检查是否存在该目录
   const isdir = fs.existsSync(join(__dirname, `../../../www/public/${file.fieldname}/${date}`));

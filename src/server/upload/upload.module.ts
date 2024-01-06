@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { UploadService } from './upload.service';
 import {UploadController} from "./upload.controller";
 import { MulterModule } from "@nestjs/platform-express";
@@ -9,10 +9,10 @@ import { HandleFileFilter, HandleFilename,HandleDestination } from "./upload.uti
   imports:[
     MulterModule.register({
       storage: diskStorage({
-        destination: HandleDestination,
-        filename: HandleFilename
+        destination: HandleDestination, // 文件路径处理回调
+        filename: HandleFilename // 文件名称处理回调
       }),
-      fileFilter: HandleFileFilter
+      fileFilter: HandleFileFilter // 文件校验处理回调
     }),
   ],
   providers: [UploadService],
