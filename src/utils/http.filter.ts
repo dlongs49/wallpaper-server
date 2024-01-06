@@ -6,7 +6,8 @@ import {
     ExceptionFilter,
     Catch,
     ArgumentsHost,
-    HttpException, ServiceUnavailableException,
+    HttpException,
+    InternalServerErrorException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import {Status} from "./status";
@@ -17,10 +18,10 @@ export class HttpAllFilter implements ExceptionFilter {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
-        const r:any = new ServiceUnavailableException().getResponse();
+        const r:any = new InternalServerErrorException().getResponse();
         response.status(200).send({
             code:Status.ERROR,
-            msg:r.message,
+            msg:ex.message,
             status:r.statusCode
         })
 
