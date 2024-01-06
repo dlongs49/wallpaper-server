@@ -16,7 +16,7 @@ export class UploadController {
     @Post("avatar")
     @UseInterceptors(FilesInterceptor('avatar_file'))
     uploadAvatar(@UploadedFiles() files: Array<Express.Multer.File>){
-        console.log(files)
+        console.log(files[0])
     }
     @ApiOperation({ summary: '壁纸上传' })
     @ApiConsumes('multipart/form-data')
