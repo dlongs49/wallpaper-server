@@ -6,10 +6,11 @@ import { ResFail } from "../../utils/http.response";
 let file_type = ["image/png", "image/jpeg", "image/gif"];
 // 配置文件路径
 export const HandleDestination = (req, file, cb) => {
+  console.log(file);
   let date = dayjs(new Date()).format("YYYY-MM-DD");
   // 检查是否存在该目录
-  const isdir = fs.existsSync(join(__dirname, "../../../www/public/avatar/" + date));
-  let dir_path = join(__dirname, "../../../www/public/avatar/" + date);
+  const isdir = fs.existsSync(join(__dirname, `../../../www/public/${file.fieldname}/${date}`));
+  let dir_path = join(__dirname, `../../../www/public/${file.fieldname}/${date}`);
   if (!isdir) {
     // 创建目录
     fs.mkdirSync(dir_path);
@@ -17,10 +18,10 @@ export const HandleDestination = (req, file, cb) => {
   return cb(null, dir_path);
 };
 // 配置文件名称
-export const HandleFilename = (req, file, callback) => {
+export const HandleFilename = (req, file, cb) => {
   const file_origin = file.originalname.split('.');
   const file_name = uid()+'.'+file_origin[1]
-  callback(null, file_name);
+  cb(null, file_name);
 };
 // 校验文件
 export const HandleFileFilter = (req, file, cb) => {
@@ -31,8 +32,10 @@ export const HandleFileFilter = (req, file, cb) => {
 };
 // 返回路径
 export const JsonFile = (files)=>{
+  console.log(files);
   let files_path = files.path.replace(/\\/g,"/")
-  let i = files_path.indexOf(files.fieldname)
-  let url = '/upload' + files_path.slice(i-1,files_path.length)
+  let i = files_path.lastIndexOf(files.fieldname)
+  let slice_path = files_path.slice(files_path.length-i,files_path.length)
+  let url = `/upload/${files.fieldname}${slice_path}`
   return {url,name:files.originalname}
 }

@@ -8,4 +8,7 @@ export class UploadService {
     throw new ResSuccess(JsonFile(files[0]))
 
   }
+  uploadWallpaperSer(files:Array<Express.Multer.File>){
+    throw new ResSuccess(JsonFile(files[0]))
+  }
 }

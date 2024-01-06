@@ -30,6 +30,6 @@ export class UploadController {
     @Post("wallpaper")
     @UseInterceptors(FilesInterceptor('wallpaper'))
     uploadWallpaper(@UploadedFiles() files: Array<Express.Multer.File>){
-        console.log(files)
+        return this.uploadService.uploadWallpaperSer(files)
     }
 }
