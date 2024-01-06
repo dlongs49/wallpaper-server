@@ -2,8 +2,6 @@ import {Inject, Injectable} from '@nestjs/common';
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
 import {v4 as uid} from "uuid";
 import {ResFail, ResSuccess} from "../../utils/http.response";
-import {where} from "sequelize";
-
 @Injectable()
 export class WallpaperService {
     constructor(@Inject("WALLPAPER_TYPEE_PROVIDERS") private readonly wallpaper_type_providers: any) {

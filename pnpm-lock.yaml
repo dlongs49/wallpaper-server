@@ -17,6 +17,7 @@ specifiers:
   '@types/passport-local': ^1.0.38
   '@types/sequelize': ^4.28.19
   '@types/supertest': ^2.0.12
+  '@types/uuid': ^9.0.7
   dayjs: ^1.11.10
   md5: ^2.3.0
   mysql2: ^3.6.5
@@ -63,6 +64,7 @@ devDependencies:
   '@types/passport-local': 1.0.38
   '@types/sequelize': 4.28.19
   '@types/supertest': registry.npmmirror.com/@types/supertest/2.0.16
+  '@types/uuid': registry.npmmirror.com/@types/uuid/9.0.7
   prettier: registry.npmmirror.com/prettier/3.1.1
   source-map-support: registry.npmmirror.com/source-map-support/0.5.21
   ts-loader: registry.npmmirror.com/ts-loader/9.5.1_typescript@5.3.3
@@ -1350,6 +1352,12 @@ packages:
     version: 2.0.16
     dependencies:
       '@types/superagent': registry.npmmirror.com/@types/superagent/8.1.1
+    dev: true
+
+  registry.npmmirror.com/@types/uuid/9.0.7:
+    resolution: {integrity: sha512-WUtIVRUZ9i5dYXefDEAI7sh9/O7jGvHg7Df/5O/gtH3Yabe5odI3UWopVR1qbPXQtvOxWu3mM4XxlYeZtMWF4g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/uuid/-/uuid-9.0.7.tgz}
+    name: '@types/uuid'
+    version: 9.0.7
     dev: true
 
   registry.npmmirror.com/@webassemblyjs/ast/1.11.6:
