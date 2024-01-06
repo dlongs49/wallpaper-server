@@ -19,7 +19,7 @@ export class AuthenGuard implements CanActivate {
     }
     try {
       const payload = await this.jwtService.verifyAsync(token, { secret: JwtContent.JWTCONTENT_SECRET });
-      request["id"] = payload.uid;
+      request["uid"] = payload.uid;
       return true;
     } catch (e) {
       console.log("JWT异常:", e.message);

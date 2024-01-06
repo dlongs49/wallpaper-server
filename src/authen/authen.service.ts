@@ -2,7 +2,7 @@ import {Inject, Injectable} from "@nestjs/common";
 import {JwtService} from "@nestjs/jwt";
 import {ResFail} from "../utils/http.response";
 import {v4 as uid} from "uuid";
-import * as md5 from "md5";
+import  md5 from "md5";
 import * as process from "process";
 @Injectable()
 export class AuthenService {
@@ -28,7 +28,7 @@ export class AuthenService {
             await this.signProviders.create({
                 id,
                 uname,
-                password: md5(password),
+                password: md5(password, {encoding:process.env.MD5_KEY}),
                 reg_time: new Date(),
                 sex: 1, // 0 女 1 男
                 sex_tit: "男",
@@ -38,7 +38,7 @@ export class AuthenService {
             const result = await this.signProviders.findOne({
                 where: {
                     uname,
-                    password: md5(password)
+                    password: md5(password, {encoding:process.env.MD5_KEY})
                 }
             });
             if (result == null) {
