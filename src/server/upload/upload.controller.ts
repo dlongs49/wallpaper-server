@@ -1,12 +1,15 @@
-import {Controller, Post, UploadedFiles, UseInterceptors} from '@nestjs/common';
+import { Controller, Post, Res, UploadedFiles, UseInterceptors } from "@nestjs/common";
 import {FilesInterceptor} from "@nestjs/platform-express";
 import {ApiBody, ApiConsumes, ApiOperation, ApiTags} from "@nestjs/swagger";
 import {FileDto, WallpaperFileDto} from "./dto/file.dto";
+import { UploadService } from "./upload.service";
 @ApiTags("文件上传")
 
 
 @Controller('upload')
 export class UploadController {
+    constructor(private  uploadService:UploadService) {
+    }
     @ApiOperation({ summary: '头像上传 ' })
     @ApiConsumes('multipart/form-data')
     @ApiBody({
@@ -14,9 +17,9 @@ export class UploadController {
         type: FileDto,
     })
     @Post("avatar")
-    @UseInterceptors(FilesInterceptor('avatar_file'))
+    @UseInterceptors(FilesInterceptor('avatar'))
     uploadAvatar(@UploadedFiles() files: Array<Express.Multer.File>){
-        console.log(files[0])
+       return this.uploadService.uploadAvatarSer(files)
     }
     @ApiOperation({ summary: '壁纸上传' })
     @ApiConsumes('multipart/form-data')
@@ -25,7 +28,7 @@ export class UploadController {
         type: WallpaperFileDto,
     })
     @Post("wallpaper")
-    @UseInterceptors(FilesInterceptor('wallpaper_file'))
+    @UseInterceptors(FilesInterceptor('wallpaper'))
     uploadWallpaper(@UploadedFiles() files: Array<Express.Multer.File>){
         console.log(files)
     }
