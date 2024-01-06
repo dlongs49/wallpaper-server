@@ -51,7 +51,26 @@ export class WallpaperService {
             create_time: new Date(),
             ...wallpaperTypeExDto
         }
-        const result = await this.wallpaper_type_providers.update(dto, {where: {id}})
+        await this.wallpaper_type_providers.update(dto, {where: {id}})
         throw new ResSuccess("更新条目成功")
+    }
+
+    async delWallpaperType(idArr: Array<string>) {
+        let flag = false
+        let for_id = ''
+        for (let i = 0; i < idArr.length; i++) {
+            const result = await this.wallpaper_type_providers.destroy({where:{id:idArr[i]}})
+            if(result == 0){
+                flag = true
+                for_id = idArr[i]
+                break;
+            }else{
+                flag = false
+            }
+        }
+        if(flag){
+            throw new ResSuccess(`删除id为{`+for_id+`}的条目失败`)
+        }
+        throw new ResSuccess("删除条目成功")
     }
 }

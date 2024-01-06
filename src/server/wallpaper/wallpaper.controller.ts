@@ -22,4 +22,9 @@ export class WallpaperController {
     uploadWallpaperType(@Body() wallpaperTypeExDto:WallpaperTypeExDto){
         return this.wallpaperService.uploadWallpaperType(wallpaperTypeExDto)
     }
+    @ApiOperation({ summary: '删除壁纸类型' })
+    @Post("del_wallpaper_type")
+    delWallpaperType(@Body() idArr:Array<string>){
+        return this.wallpaperService.delWallpaperType(idArr)
+    }
 }
