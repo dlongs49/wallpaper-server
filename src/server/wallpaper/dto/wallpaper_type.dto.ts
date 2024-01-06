@@ -17,4 +17,12 @@ export class WallpaperTypeReqDto {
         description: '壁纸链接类型 0 上传 1 链接',
     })
     cover_type: number;
+
+}
+
+export class WallpaperTypeExDto extends WallpaperTypeReqDto {
+    @ApiProperty({
+        description: 'id',
+    })
+    id: string;
 }
