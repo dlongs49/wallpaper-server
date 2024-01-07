@@ -5,6 +5,7 @@ import {ResFail, ResSuccess} from "../../utils/http.response";
 import {FilterReqDto, PageReqDto} from "../../utils/global.dto";
 import {Op} from "sequelize";
 import {SeqScreen} from "../../utils/tool";
+import {WallpaperReqDto} from "./dto/wallpaper.dto";
 
 @Injectable()
 export class WallpaperService {
@@ -87,4 +88,30 @@ export class WallpaperService {
         })
         throw new ResSuccess(result)
     }
+    async setWallpaper(wallpaperReqDto: WallpaperReqDto) {
+        if (!wallpaperReqDto.title) {
+            throw new ResFail("壁纸标题不能为空")
+        }
+        if (wallpaperReqDto.title.length > 10 || wallpaperReqDto.title.length < 2) {
+            throw new ResFail("壁纸标题在2至10个字符之间")
+        }
+        if (!wallpaperReqDto.type_id) {
+            throw new ResFail("壁纸类型必传")
+        }
+        if (!wallpaperReqDto.url) {
+            throw new ResFail("封面不能为空")
+        }
+        let arr = [0, 1]
+        if (!arr.includes(wallpaperReqDto.url_type)) {
+            throw new ResFail("壁纸链接类型不合法")
+        }
+        let dto = {
+            id: uid(),
+            create_time: new Date(),
+            ...wallpaperReqDto
+        }
+        await this.wallpaper_type_providers.create(dto)
+        throw new ResSuccess("操作成功")
+    }
+
 }

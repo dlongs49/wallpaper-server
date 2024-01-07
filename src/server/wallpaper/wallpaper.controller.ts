@@ -3,6 +3,7 @@ import {ApiOperation, ApiParam, ApiQuery, ApiTags} from "@nestjs/swagger";
 import {WallpaperService} from "./wallpaper.service";
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
 import {FilterReqDto, PageReqDto} from "../../utils/global.dto";
+import {WallpaperReqDto} from "./dto/wallpaper.dto";
 @ApiTags("壁纸管理")
 @Controller('wallpaper')
 export class WallpaperController {
@@ -38,4 +39,15 @@ export class WallpaperController {
     getWTAppList(@Query() pageReqDto: PageReqDto,@Body() filterReqDto:FilterReqDto){
         return this.wallpaperService.getWallpaperTypeList(pageReqDto,filterReqDto)
     }
+
+    /**
+     * 壁纸列表
+     */
+    @ApiOperation({ summary: '新增壁纸' })
+    @Post("set_wallpaper")
+    setWallpaper(@Body() wallpaperReqDto: WallpaperReqDto){
+        return this.wallpaperService.setWallpaper(wallpaperReqDto)
+    }
+
+
 }
