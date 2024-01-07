@@ -5,6 +5,7 @@ import { AuthenService } from "../../authen/authen.service";
 import { AuthenModule } from "../../authen/authen.module";
 import { SignModel } from "./model/sign.model";
 import { CollectModel } from "./model/collect.model";
+import {WallpaperModel} from "../wallpaper/model/wallpaper.model";
 
 @Module({
   imports:[
@@ -14,9 +15,9 @@ import { CollectModel } from "./model/collect.model";
   providers: [
     SignService,
     AuthenService,
-    {
-    provide: 'SIGN_PROVIDERS',
-    useValue: SignModel,
-  },]
+    { provide: 'SIGN_PROVIDERS', useValue: SignModel},
+    { provide: 'COLLECT_PROVIDERS', useValue: CollectModel},
+    {  provide: 'WALLPAPER_PROVIDERS',useValue: WallpaperModel},
+  ]
 })
 export class SignModule {}

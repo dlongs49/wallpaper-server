@@ -1,7 +1,7 @@
 import {Inject, Injectable} from "@nestjs/common";
 import {JwtService} from "@nestjs/jwt";
 import {ResFail} from "../utils/http.response";
-import {v4 as uid} from "uuid";
+import {v4 as uuid} from "uuid";
 import  md5 from "md5";
 import * as process from "process";
 @Injectable()
@@ -16,7 +16,7 @@ export class AuthenService {
                 uname
             }
         });
-        let id = uid()
+        let id = uuid()
         // 注册
         if (!isRegister) {
             if (uname.length > 10 || uname.length < 3) {

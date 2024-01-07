@@ -22,3 +22,7 @@ export class  ArticleListResponse{
     @ApiProperty({ description: '状态码', example: 200, })
     code: number
 }
+export class IdDto{
+    @ApiProperty({ description: 'id' })
+    wallpaper_id: string
+}

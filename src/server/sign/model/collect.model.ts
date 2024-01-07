@@ -5,7 +5,7 @@
 import {Column, DataType, Model, Table} from "sequelize-typescript";
 
 @Table({
-    tableName: 'user_collcet',
+    tableName: 'user_collect',
     timestamps: false,
 })
 export class CollectModel extends Model<CollectModel> {

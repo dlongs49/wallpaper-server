@@ -3,6 +3,7 @@ import * as process from "process";
 import { SignModel } from "../server/sign/model/sign.model";
 import {WallpaperTypeModel} from "../server/wallpaper/model/wallpaper_type.model";
 import {WallpaperModel} from "../server/wallpaper/model/wallpaper.model";
+import {CollectModel} from "../server/sign/model/collect.model";
 
 export const dbProviders = [
   {
@@ -17,7 +18,7 @@ export const dbProviders = [
         database: process.env.DATABASE_NAME,
         timezone: '+08:00'
       });
-      sequelize.addModels([SignModel,WallpaperTypeModel,WallpaperModel]);
+      sequelize.addModels([SignModel,WallpaperTypeModel,WallpaperModel,CollectModel]);
       await sequelize.sync();
       return sequelize;
     },
