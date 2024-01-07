@@ -9,6 +9,7 @@ import {PageReqDto} from "../../utils/global.dto";
 import {SeqScreen} from "../../utils/tool";
 import {v4 as uuid} from "uuid";
 import {Op} from "sequelize";
+
 @Injectable()
 export class SignService {
     constructor(private authenService: AuthenService, private jwtService: JwtService, @Inject("SIGN_PROVIDERS") private readonly signProviders: any, @Inject("COLLECT_PROVIDERS") private readonly collectProviders: any, @Inject("WALLPAPER_PROVIDERS") private readonly wallpaper_providers: any) {
@@ -56,7 +57,7 @@ export class SignService {
 
     async setUerCollect(idDto: IdDto, req: Request) {
         // 查询壁纸是否存在
-        const result = await this.wallpaper_providers.findOne({where: {id: idDto.wallpaper_id},raw:true})
+        const result = await this.wallpaper_providers.findOne({where: {id: idDto.wallpaper_id}, raw: true})
         if (!result) {
             throw new ResFail("该壁纸不存在")
         }
@@ -65,7 +66,8 @@ export class SignService {
             where: {
                 [Op.and]: [{
                     user_id: req["uid"],
-                    wallpaper_id: idDto.wallpaper_id
+                    wallpaper_id: idDto.wallpaper_id,
+                    opear_type: 0, // 0 壁纸收藏  1 应用壁纸记录
                 }]
             },
             raw: true
@@ -74,14 +76,15 @@ export class SignService {
             await this.collectProviders.destroy({where: {id: isOn.id}})
             throw new ResSuccess("取消收藏成功")
         }
-       const con = await this.collectProviders.create({
-            id:uuid(),
-            user_id:req["uid"],
+        await this.collectProviders.create({
+            id: uuid(),
+            user_id: req["uid"],
             wallpaper_id: idDto.wallpaper_id,
-            wallpaper_title:result.title,
-            wallpaper_url:result.url,
-            wallpaper_type:result.url_type,
-            create_time:new Date()
+            wallpaper_title: result.title,
+            wallpaper_url: result.url,
+            wallpaper_type: result.url_type,
+            opear_type: 0,
+            create_time: new Date()
         })
         throw new ResSuccess("收藏成功")
     }

@@ -5,7 +5,7 @@
 import {Column, DataType, Model, Table} from "sequelize-typescript";
 
 @Table({
-    tableName: 'user_collect',
+    tableName: 'collect_apply',
     timestamps: false,
 })
 export class CollectModel extends Model<CollectModel> {
@@ -20,7 +20,9 @@ export class CollectModel extends Model<CollectModel> {
     @Column({type:DataType.STRING })
     wallpaper_url: string;
     @Column({type:DataType.INTEGER,defaultValue: 0 })
-    wallpaper_type: string;
+    wallpaper_type: number;
+    @Column({type:DataType.INTEGER,defaultValue: 0 })
+    opear_type: number;
     @Column({type:DataType.DATE })
     create_time: Date;
 }
