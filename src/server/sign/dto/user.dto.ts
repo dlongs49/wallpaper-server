@@ -23,6 +23,6 @@ export class  ArticleListResponse{
     code: number
 }
 export class IdDto{
-    @ApiProperty({ description: 'id' })
+    @ApiProperty({ description: '壁纸id' })
     wallpaper_id: string
 }

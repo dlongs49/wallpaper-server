@@ -55,7 +55,7 @@ export class SignService {
         throw new ResSuccess(data)
     }
 
-    async setUerCollect(idDto: IdDto, req: Request) {
+    async setUerWallpaper(idDto: IdDto, req: Request,type:number) {
         // 查询壁纸是否存在
         const result = await this.wallpaper_providers.findOne({where: {id: idDto.wallpaper_id}, raw: true})
         if (!result) {
@@ -67,14 +67,14 @@ export class SignService {
                 [Op.and]: [{
                     user_id: req["uid"],
                     wallpaper_id: idDto.wallpaper_id,
-                    opear_type: 0, // 0 壁纸收藏  1 应用壁纸记录
+                    opear_type: type, // 0 壁纸收藏  1 应用壁纸记录
                 }]
             },
             raw: true
         })
         if (isOn) {
             await this.collectProviders.destroy({where: {id: isOn.id}})
-            throw new ResSuccess("取消收藏成功")
+            throw new ResSuccess(type == 0 ? "取消收藏成功" : "已取消应用壁纸")
         }
         await this.collectProviders.create({
             id: uuid(),
@@ -83,17 +83,18 @@ export class SignService {
             wallpaper_title: result.title,
             wallpaper_url: result.url,
             wallpaper_type: result.url_type,
-            opear_type: 0,
+            opear_type: type,
             create_time: new Date()
         })
-        throw new ResSuccess("收藏成功")
+        throw new ResSuccess(type == 0 ? "收藏成功" : "应用壁纸成功")
     }
 
-    async getUerCollect(pageReqDto: PageReqDto) {
+    async getUerWallpaper(pageReqDto: PageReqDto,type:number) {
         let offset = Number(pageReqDto.offset)
         let limit = Number(pageReqDto.limit)
+        let order = [['opear_type',type]]
         const result = await this.collectProviders.findAndCountAll({
-            ...SeqScreen(offset, limit),
+            ...SeqScreen(offset, limit,'','','',order),
             raw: true
         })
         throw new ResSuccess(result)
