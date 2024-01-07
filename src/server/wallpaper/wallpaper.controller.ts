@@ -33,4 +33,9 @@ export class WallpaperController {
     getWallpaperTypeList(@Query() pageReqDto: PageReqDto,@Body() filterReqDto:FilterReqDto){
         return this.wallpaperService.getWallpaperTypeList(pageReqDto,filterReqDto)
     }
+    @ApiOperation({ summary: '壁纸类型【App端】' })
+    @Post("/app/get_wallpaper_type")
+    getWTAppList(@Query() pageReqDto: PageReqDto,@Body() filterReqDto:FilterReqDto){
+        return this.wallpaperService.getWallpaperTypeList(pageReqDto,filterReqDto)
+    }
 }
