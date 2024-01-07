@@ -3,7 +3,8 @@ import { SignService } from './sign.service';
 import { SignController } from "./sign.controller";
 import { AuthenService } from "../../authen/authen.service";
 import { AuthenModule } from "../../authen/authen.module";
-import { Sign } from "./sign.model";
+import { SignModel } from "./model/sign.model";
+import { CollectModel } from "./model/collect.model";
 
 @Module({
   imports:[
@@ -15,7 +16,7 @@ import { Sign } from "./sign.model";
     AuthenService,
     {
     provide: 'SIGN_PROVIDERS',
-    useValue: Sign,
+    useValue: SignModel,
   },]
 })
 export class SignModule {}

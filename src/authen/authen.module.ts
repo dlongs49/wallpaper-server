@@ -1,7 +1,7 @@
 import {Module} from '@nestjs/common';
 import {AuthenService} from './authen.service';
 import {JwtModule} from '@nestjs/jwt';
-import {Sign} from "../server/sign/sign.model";
+import {SignModel} from "../server/sign/model/sign.model";
 import {JwtStrategy} from "./jwt.strategy";
 import {JwtContent} from "../utils/jwt.content";
 
@@ -18,7 +18,7 @@ import {JwtContent} from "../utils/jwt.content";
         JwtStrategy,
         {
             provide: 'SIGN_PROVIDERS',
-            useValue: Sign,
+            useValue: SignModel,
         },
     ],
 })

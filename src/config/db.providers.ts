@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import * as process from "process";
-import { Sign } from "../server/sign/sign.model";
+import { SignModel } from "../server/sign/model/sign.model";
 import {WallpaperTypeModel} from "../server/wallpaper/model/wallpaper_type.model";
 import {WallpaperModel} from "../server/wallpaper/model/wallpaper.model";
 
@@ -17,7 +17,7 @@ export const dbProviders = [
         database: process.env.DATABASE_NAME,
         timezone: '+08:00'
       });
-      sequelize.addModels([Sign,WallpaperTypeModel,WallpaperModel]);
+      sequelize.addModels([SignModel,WallpaperTypeModel,WallpaperModel]);
       await sequelize.sync();
       return sequelize;
     },

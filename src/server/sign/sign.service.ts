@@ -5,6 +5,7 @@ import {AuthenService} from "../../authen/authen.service";
 import {Request} from "express";
 import {JwtService} from "@nestjs/jwt";
 import {UserDto} from "./dto/user.dto";
+import {PageReqDto} from "../../utils/global.dto";
 
 @Injectable()
 export class SignService {
@@ -46,5 +47,8 @@ export class SignService {
             throw new ResSuccess("个人信息更新成功")
         }
         throw new ResSuccess(data)
+    }
+    async getUerCollect(pageReqDto,PageReqDto){
+
     }
 }

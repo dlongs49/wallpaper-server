@@ -1,10 +1,11 @@
-import {Body, Controller, Get, HttpCode, HttpStatus, Post, Req, Res, UseGuards} from "@nestjs/common";
+import {Body, Controller, Get, HttpCode, HttpStatus, Post, Query, Req, Res, UseGuards} from "@nestjs/common";
 import {ApiBearerAuth, ApiOkResponse, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {RequestDto} from "./dto/request.dto";
 import { SignService } from "./sign.service";
 import { Request } from "express";
 import { AuthenGuard } from "../../authen/authen.guard";
 import {ArticleListResponse, UserDto} from "./dto/user.dto";
+import {PageReqDto} from "../../utils/global.dto";
 @ApiTags("登录/注册/用户信息")
 @Controller('sign')
 export class SignController {
@@ -30,5 +31,13 @@ export class SignController {
     @Post("put_user")
     updateUser(@Body() userDto:UserDto,@Req() request:Request) {
         return this.signService.updateUser(userDto,request)
+    }
+
+    @ApiBearerAuth()
+    @UseGuards(AuthenGuard)
+    @ApiOperation({ summary: '个人收藏的壁纸【App端】' })
+    @Post("/app/get_collect_wallpaper")
+    getUerCollect(@Query() pageReqDto: PageReqDto) {
+        return this.signService.getUerCollect(pageReqDto,PageReqDto)
     }
 }
