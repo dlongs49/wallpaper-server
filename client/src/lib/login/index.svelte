@@ -5,7 +5,7 @@
     let rules = []
 
     function handleSubmit() {
-        push("/wallpaper_tye")
+        push("/")
     }
 </script>
 
