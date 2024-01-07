@@ -13,6 +13,8 @@ export class WallpaperModel extends Model{
     @Column({type:DataType.STRING })
     type_id: string;
     @Column({type:DataType.STRING })
+    type_name: string;
+    @Column({type:DataType.STRING })
     title: string;
     @Column({type:DataType.STRING })
     url: string;

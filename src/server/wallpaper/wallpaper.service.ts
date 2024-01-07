@@ -94,7 +94,7 @@ export class WallpaperService {
         if (wallpaperReqDto.title.length > 10 || wallpaperReqDto.title.length < 2) {
             throw new ResFail("壁纸标题在2至10个字符之间")
         }
-        const result = await this.wallpaper_type_providers.findOne({where:{id:wallpaperReqDto.type_id}})
+        const result = await this.wallpaper_type_providers.findOne({where:{id:wallpaperReqDto.type_id},raw:true})
         if (!wallpaperReqDto.type_id) {
             throw new ResFail("壁纸类型必传")
         }
@@ -111,11 +111,18 @@ export class WallpaperService {
         let dto = {
             id: uid(),
             create_time: new Date(),
-            is_like:0,
+            type_name:result.title,
             ...wallpaperReqDto
         }
         await this.wallpaper_providers.create(dto)
         throw new ResSuccess("操作成功")
     }
-
+    async getWallpaperDetail(id: string) {
+        const result = await this.wallpaper_providers.findOne({where: {id}, raw: true})
+        if (result) {
+            throw new ResSuccess(result)
+        } else {
+            throw new ResFail("未查找到该条目")
+        }
+    }
 }

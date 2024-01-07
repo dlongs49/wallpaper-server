@@ -48,6 +48,11 @@ export class WallpaperController {
     setWallpaper(@Body() wallpaperReqDto: WallpaperReqDto){
         return this.wallpaperService.setWallpaper(wallpaperReqDto)
     }
-
+    @ApiOperation({ summary: '壁纸详情' })
+    @ApiParam({ name: 'id' })
+    @Get("detail_wallpaper/:id")
+    getWallpaperDetail(@Param('id') id:string){
+        return this.wallpaperService.getWallpaperDetail(id)
+    }
 
 }
