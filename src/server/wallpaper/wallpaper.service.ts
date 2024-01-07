@@ -3,13 +3,12 @@ import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto"
 import {v4 as uid} from "uuid";
 import {ResFail, ResSuccess} from "../../utils/http.response";
 import {FilterReqDto, PageReqDto} from "../../utils/global.dto";
-import {Op} from "sequelize";
 import {SeqScreen} from "../../utils/tool";
 import {WallpaperReqDto} from "./dto/wallpaper.dto";
 
 @Injectable()
 export class WallpaperService {
-    constructor(@Inject("WALLPAPER_TYPEE_PROVIDERS") private readonly wallpaper_type_providers: any) {
+    constructor(@Inject("WALLPAPER_TYPEE_PROVIDERS") private readonly wallpaper_type_providers: any,@Inject("WALLPAPER_PROVIDERS") private readonly wallpaper_providers: any) {
     }
 
     async setWallpaperType(wallpaperTypeResDto: WallpaperTypeReqDto) {
@@ -95,8 +94,12 @@ export class WallpaperService {
         if (wallpaperReqDto.title.length > 10 || wallpaperReqDto.title.length < 2) {
             throw new ResFail("壁纸标题在2至10个字符之间")
         }
+        const result = await this.wallpaper_type_providers.findOne({where:{id:wallpaperReqDto.type_id}})
         if (!wallpaperReqDto.type_id) {
             throw new ResFail("壁纸类型必传")
+        }
+        if(!result){
+            throw new ResFail("未查到该壁纸类型")
         }
         if (!wallpaperReqDto.url) {
             throw new ResFail("封面不能为空")
@@ -108,9 +111,10 @@ export class WallpaperService {
         let dto = {
             id: uid(),
             create_time: new Date(),
+            is_like:0,
             ...wallpaperReqDto
         }
-        await this.wallpaper_type_providers.create(dto)
+        await this.wallpaper_providers.create(dto)
         throw new ResSuccess("操作成功")
     }
 

@@ -14,7 +14,7 @@ export class WallpaperTypeModel extends Model{
     title: string;
     @Column({type:DataType.STRING })
     cover_url: string;
-    @Column({type:DataType.INTEGER })
+    @Column({type:DataType.INTEGER,defaultValue: 0 })
     cover_type: number;
     @Column({type:DataType.DATE })
     create_time: Date;
