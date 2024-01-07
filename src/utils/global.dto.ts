@@ -14,12 +14,14 @@ export class PageReqDto{
     })
     limit: number;
 }
-// 列表筛选 dto
-export class FilterReqDto{
+export class FilterKwDto {
     @ApiProperty({
         description: '关键字',
     })
     keyword: string;
+}
+// 列表筛选 dto
+export class FilterReqDto extends FilterKwDto{
     @ApiProperty({
         description: '根据时间排序 asc 正序 desc 倒序',
     })

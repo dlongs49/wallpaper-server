@@ -2,13 +2,13 @@ import {Inject, Injectable} from '@nestjs/common';
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
 import {v4 as uid} from "uuid";
 import {ResFail, ResSuccess} from "../../utils/http.response";
-import {FilterReqDto, PageReqDto} from "../../utils/global.dto";
+import {FilterKwDto, FilterReqDto, PageReqDto} from "../../utils/global.dto";
 import {SeqScreen} from "../../utils/tool";
-import {WallpaperReqDto, WallpaperReqExDto} from "./dto/wallpaper.dto";
+import {WallpaperReqDto, WallpaperReqExDto, WallpaperSortExDto} from "./dto/wallpaper.dto";
 
 @Injectable()
 export class WallpaperService {
-    constructor(@Inject("WALLPAPER_TYPEE_PROVIDERS") private readonly wallpaper_type_providers: any,@Inject("WALLPAPER_PROVIDERS") private readonly wallpaper_providers: any) {
+    constructor(@Inject("WALLPAPER_TYPEE_PROVIDERS") private readonly wallpaper_type_providers: any, @Inject("WALLPAPER_PROVIDERS") private readonly wallpaper_providers: any) {
     }
 
     async setWallpaperType(wallpaperTypeResDto: WallpaperTypeReqDto) {
@@ -50,9 +50,9 @@ export class WallpaperService {
             throw new ResFail("更新条目失败")
         }
         let dto = {
-            title:wallpaperTypeExDto.title,
-            cover_url:wallpaperTypeExDto.cover_url,
-            cover_type:wallpaperTypeExDto.cover_type,
+            title: wallpaperTypeExDto.title,
+            cover_url: wallpaperTypeExDto.cover_url,
+            cover_type: wallpaperTypeExDto.cover_type,
             create_time: new Date(),
         }
         await this.wallpaper_type_providers.update(dto, {where: {id}})
@@ -84,11 +84,12 @@ export class WallpaperService {
         let offset = Number(pageReqDto.offset)
         let limit = Number(pageReqDto.limit)
         const result = await this.wallpaper_type_providers.findAndCountAll({
-            ...SeqScreen(offset,limit,kw,'title',sort),
+            ...SeqScreen(offset, limit, kw, 'title', sort),
             raw: true
         })
         throw new ResSuccess(result)
     }
+
     async setWallpaper(wallpaperReqDto: WallpaperReqDto) {
         if (!wallpaperReqDto.title) {
             throw new ResFail("壁纸标题不能为空")
@@ -96,11 +97,11 @@ export class WallpaperService {
         if (wallpaperReqDto.title.length > 10 || wallpaperReqDto.title.length < 2) {
             throw new ResFail("壁纸标题在2至10个字符之间")
         }
-        const result = await this.wallpaper_type_providers.findOne({where:{id:wallpaperReqDto.type_id},raw:true})
+        const result = await this.wallpaper_type_providers.findOne({where: {id: wallpaperReqDto.type_id}, raw: true})
         if (!wallpaperReqDto.type_id) {
             throw new ResFail("壁纸类型必传")
         }
-        if(!result){
+        if (!result) {
             throw new ResFail("未查到该壁纸类型")
         }
         if (!wallpaperReqDto.url) {
@@ -113,12 +114,13 @@ export class WallpaperService {
         let dto = {
             id: uid(),
             create_time: new Date(),
-            type_name:result.title,
+            type_name: result.title,
             ...wallpaperReqDto
         }
         await this.wallpaper_providers.create(dto)
         throw new ResSuccess("操作成功")
     }
+
     async getWallpaperDetail(id: string) {
         const result = await this.wallpaper_providers.findOne({where: {id}, raw: true})
         if (result) {
@@ -127,6 +129,7 @@ export class WallpaperService {
             throw new ResFail("未查找到该条目")
         }
     }
+
     async updateWallpaper(wallpaperReqExDto: WallpaperReqExDto) {
         let id = wallpaperReqExDto.id
         const result_one = await this.wallpaper_type_providers.findOne({where: {id}})
@@ -134,12 +137,12 @@ export class WallpaperService {
             throw new ResFail("更新条目失败")
         }
         let dto = {
-            title:wallpaperReqExDto.title,
-            url:wallpaperReqExDto.url,
-            url_type:wallpaperReqExDto.url_type,
-            type_id:wallpaperReqExDto.type_id,
+            title: wallpaperReqExDto.title,
+            url: wallpaperReqExDto.url,
+            url_type: wallpaperReqExDto.url_type,
+            type_id: wallpaperReqExDto.type_id,
             create_time: new Date(),
-            type_name:result_one.type_name,
+            type_name: result_one.type_name,
 
         }
         await this.wallpaper_type_providers.update(dto, {where: {id}})
@@ -164,13 +167,28 @@ export class WallpaperService {
         }
         throw new ResSuccess("删除条目成功")
     }
-    async getWallpaperList(pageReqDto: PageReqDto, filterReqDto: FilterReqDto) {
-        let kw = filterReqDto.keyword
-        let sort = filterReqDto.sort_type
+
+    async getWallpaperList(pageReqDto: PageReqDto, wallpaperSortExDto: WallpaperSortExDto) {
+        let kw = wallpaperSortExDto.keyword
+        let sort = wallpaperSortExDto.sort_type
+        let url_type = wallpaperSortExDto.url_type
+        let offset = Number(pageReqDto.offset)
+        let limit = Number(pageReqDto.limit)
+        let order = [
+            url_type == 0 || url_type == 1 ? ['url_type', url_type] : []
+        ]
+        const result = await this.wallpaper_providers.findAndCountAll({
+            ...SeqScreen(offset, limit, kw, 'title', sort,order),
+            raw: true
+        })
+        throw new ResSuccess(result)
+    }
+    async getWallpaperAppList(pageReqDto: PageReqDto, filterKwDto:FilterKwDto) {
+        let kw = filterKwDto.keyword
         let offset = Number(pageReqDto.offset)
         let limit = Number(pageReqDto.limit)
         const result = await this.wallpaper_providers.findAndCountAll({
-            ...SeqScreen(offset,limit,kw,'title',sort),
+            ...SeqScreen(offset, limit, kw, 'title'),
             raw: true
         })
         throw new ResSuccess(result)

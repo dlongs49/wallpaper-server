@@ -4,7 +4,7 @@
 */
 import {Op} from "sequelize";
 // sql 查询列表筛选条件
-export const SeqScreen = (offset=1,limit = 1,kw = '', filed='', sort = 'desc') => {
+export const SeqScreen = (offset=1,limit = 1,kw = '', filed='', sort = 'desc',orders = []) => {
     let where = {}
     if (kw) {
         where[filed] = {
@@ -13,6 +13,7 @@ export const SeqScreen = (offset=1,limit = 1,kw = '', filed='', sort = 'desc') =
     }
     // 排序 DESC 升序 ASC 降序 通过传入的 sort
     let order = [
+        ...orders,
         ['create_time', sort == 'asc' ? 'asc' : 'desc']
     ]
     return {

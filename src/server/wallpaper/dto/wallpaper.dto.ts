@@ -3,6 +3,7 @@
 * DateTime:2024/1/7 下午 1:47
 */
 import {ApiProperty} from "@nestjs/swagger";
+import {FilterReqDto} from "../../../utils/global.dto";
 
 export class WallpaperReqDto {
     @ApiProperty({
@@ -27,4 +28,10 @@ export class WallpaperReqExDto extends WallpaperReqDto{
         description: 'id',
     })
     id:string
+}
+export class WallpaperSortExDto extends  FilterReqDto{
+    @ApiProperty({
+        description: '壁纸链接类型 0 上传 1 链接',
+    })
+    url_type: number;
 }
