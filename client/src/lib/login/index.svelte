@@ -1,11 +1,11 @@
 <script>
     import {BeButton, BeForm, BeFormItem, BeInput} from "@brewer/beerui";
-
+    import { push } from 'svelte-spa-router';
     let form = {}
     let rules = []
 
     function handleSubmit() {
-
+        push("/wallpaper_tye")
     }
 </script>
 
