@@ -1,0 +1,19 @@
+{
+  "name": "wallpaper-client",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@brewer/beerui": "^1.1.17",
+    "@sveltejs/vite-plugin-svelte": "^3.0.1",
+    "less": "^4.2.0",
+    "less-loader": "^11.1.4",
+    "svelte": "^4.2.8",
+    "vite": "^5.0.8"
+  }
+}

@@ -3,6 +3,9 @@
 /node_modules
 /build
 /www
+/client/node_modules
+/client/.vscode
+/client/.idea
 # Logs
 logs
 *.log
