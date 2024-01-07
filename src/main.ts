@@ -6,7 +6,7 @@ import {join} from 'path'
 import * as express from 'express';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('wallpaper_api'); // 路由前缀
+  app.setGlobalPrefix('api'); // 路由前缀
   app.useGlobalFilters(new HttpAllFilter(), new HttpFilter())
   let file_path = join(__dirname,'..')
   app.use('/upload', express.static(join(file_path, 'www/public'))); // 静态资源开放

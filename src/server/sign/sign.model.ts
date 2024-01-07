@@ -1,23 +1,23 @@
-import { Column, Table, Model } from 'sequelize-typescript';
+import {Column, Table, Model, DataType} from 'sequelize-typescript';
 @Table({
     tableName: 'user',
     timestamps: false,
 })
 export class Sign extends Model<Sign> {
-    @Column({ primaryKey: true })
+    @Column({ primaryKey: true,type:DataType.STRING })
     id: string;
-    @Column
+    @Column({type:DataType.STRING })
     uname: string;
-    @Column
+    @Column({type:DataType.STRING })
     password: string;
-    @Column
+    @Column({type:DataType.STRING })
     avatar: string;
-    @Column
+    @Column({type:DataType.DATE })
     reg_time: Date;
-    @Column
+    @Column({type:DataType.INTEGER,defaultValue: 0 })
     sex: string;
-    @Column
+    @Column({type:DataType.STRING })
     sex_tit: string;
-    @Column
+    @Column({type:DataType.STRING })
     nation: string;
 }

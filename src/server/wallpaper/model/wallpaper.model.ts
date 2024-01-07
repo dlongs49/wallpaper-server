@@ -22,6 +22,6 @@ export class WallpaperModel extends Model{
     url_type: number;
     @Column({type:DataType.INTEGER,defaultValue: 0})
     is_like: number;
-    @Column({type:DataType.DATE,defaultValue: 0 })
+    @Column({type:DataType.DATE })
     create_time: Date;
 }
