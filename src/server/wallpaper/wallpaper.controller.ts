@@ -3,7 +3,7 @@ import {ApiOperation, ApiParam, ApiQuery, ApiTags} from "@nestjs/swagger";
 import {WallpaperService} from "./wallpaper.service";
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
 import {FilterReqDto, PageReqDto} from "../../utils/global.dto";
-import {WallpaperReqDto} from "./dto/wallpaper.dto";
+import {WallpaperReqDto, WallpaperReqExDto} from "./dto/wallpaper.dto";
 @ApiTags("壁纸管理")
 @Controller('wallpaper')
 export class WallpaperController {
@@ -21,8 +21,8 @@ export class WallpaperController {
     }
     @ApiOperation({ summary: '更新壁纸类型' })
     @Post("update_wallpaper_type")
-    uploadWallpaperType(@Body() wallpaperTypeExDto:WallpaperTypeExDto){
-        return this.wallpaperService.uploadWallpaperType(wallpaperTypeExDto)
+    updateWallpaperType(@Body() wallpaperTypeExDto:WallpaperTypeExDto){
+        return this.wallpaperService.updateWallpaperType(wallpaperTypeExDto)
     }
     @ApiOperation({ summary: '删除壁纸类型' })
     @Post("del_wallpaper_type")
@@ -54,5 +54,24 @@ export class WallpaperController {
     getWallpaperDetail(@Param('id') id:string){
         return this.wallpaperService.getWallpaperDetail(id)
     }
-
+    @ApiOperation({ summary: '更新壁纸' })
+    @Post("update_wallpaper")
+    updateWallpaper(@Body() wallpaperReqExDto: WallpaperReqExDto){
+        return this.wallpaperService.updateWallpaper(wallpaperReqExDto)
+    }
+    @ApiOperation({ summary: '删除壁纸' })
+    @Post("del_wallpaper")
+    delWallpaper(@Body() idArr:Array<string>){
+        return this.wallpaperService.delWallpaper(idArr)
+    }
+    @ApiOperation({ summary: '壁纸列表' })
+    @Post("get_wallpaper")
+    getWallpaperList(@Query() pageReqDto: PageReqDto,@Body() filterReqDto:FilterReqDto){
+        return this.wallpaperService.getWallpaperList(pageReqDto,filterReqDto)
+    }
+    @ApiOperation({ summary: '壁纸列表【App端】' })
+    @Post("/app/get_wallpaper")
+    getWPAppList(@Query() pageReqDto: PageReqDto,@Body() filterReqDto:FilterReqDto){
+        return this.wallpaperService.getWallpaperList(pageReqDto,filterReqDto)
+    }
 }

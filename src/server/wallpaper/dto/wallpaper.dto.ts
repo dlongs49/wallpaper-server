@@ -22,3 +22,9 @@ export class WallpaperReqDto {
     })
     url_type: number;
 }
+export class WallpaperReqExDto extends WallpaperReqDto{
+    @ApiProperty({
+        description: 'id',
+    })
+    id:string
+}
