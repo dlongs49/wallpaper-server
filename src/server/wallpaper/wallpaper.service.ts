@@ -2,7 +2,9 @@ import {Inject, Injectable} from '@nestjs/common';
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
 import {v4 as uid} from "uuid";
 import {ResFail, ResSuccess} from "../../utils/http.response";
-import {PageReqDto} from "../../utils/global.dto";
+import {FilterReqDto, PageReqDto} from "../../utils/global.dto";
+import {Op} from "sequelize";
+import {SeqScreen} from "../../utils/tool";
 
 @Injectable()
 export class WallpaperService {
@@ -74,10 +76,15 @@ export class WallpaperService {
         throw new ResSuccess("删除条目成功")
     }
 
-    async getWallpaperTypeList(pageReqDto: PageReqDto) {
-        let offset = pageReqDto.offset
-        let limit = pageReqDto.limit
-        const result = await this.wallpaper_type_providers.findAndCountAll({raw: true})
+    async getWallpaperTypeList(pageReqDto: PageReqDto, filterReqDto: FilterReqDto) {
+        let kw = filterReqDto.keyword
+        let sort = filterReqDto.sort_type
+        let offset = Number(pageReqDto.offset)
+        let limit = Number(pageReqDto.limit)
+        const result = await this.wallpaper_type_providers.findAndCountAll({
+            ...SeqScreen(offset,limit,kw,'title',sort),
+            raw: true
+        })
         throw new ResSuccess(result)
     }
 }
