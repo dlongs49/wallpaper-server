@@ -12,6 +12,7 @@
     import {fetchPost} from "@/utils/fetch.js";
     import {createEventDispatcher} from "svelte";
 
+    const base_url = import.meta.env.VITE_APP_BASE_URL
     const dispatch = createEventDispatcher();
     export let visible = false;
     let rules = {
@@ -37,8 +38,33 @@
         }
     }
     // 检查图片链接是否生效
-    const handleInspect = () => {
+    const handleInspect = async () => {
+        console.log(form.cover_url)
+        const reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+        if (!reg.test(form.cover_url)) {
+            showNotice({
+                message: '图片链接以http或https开头进行检查',
+                duration: 3000,
+                type: 'error'
+            });
+            return
+        }
+        const res = await fetch(form.cover_url)
+        if (!res.ok) {
+            showNotice({
+                message: '图片资源出现错误 - ' + res.status,
+                duration: 3000,
+                type: 'error'
+            });
+            form.cover_url = ""
+        } else {
 
+            showNotice({
+                message: '图片资源检查正常 - ' + res.status,
+                duration: 3000,
+                type: 'success'
+            });
+        }
     }
     // 提交表单
     const handleOk = async () => {
@@ -83,7 +109,6 @@
     };
 </script>
 <main>
-
     <BeDialog
             title="壁纸类型表单"
             width="30%"
@@ -116,7 +141,7 @@
             <BeFormItem label="链接地址" prop="cover_url">
                 <div style="display: flex">
                     <BeInput disabled={form.cover_type === '0'} bind:value={form.cover_url}
-                             placeholder="输入壁纸链接/上传链接" />
+                             placeholder="输入壁纸链接/上传链接"/>
                     {#if form.cover_type === '1'}
                         <BeButton type="primary" on:click={handleInspect} style="margin-left: 10px">检查</BeButton>
                     {/if}

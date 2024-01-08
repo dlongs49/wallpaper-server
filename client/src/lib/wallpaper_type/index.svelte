@@ -44,10 +44,11 @@
         page.count = data.count;
       }
     } catch (e) {
-      messageBox({
-        type: "error",
-        title: "提示",
-        message: "服务内部错误"
+      showNotice({
+        toast: true,
+        message: '服务内部错误',
+        duration: 1500,
+        type: 'error'
       });
     }
   };
