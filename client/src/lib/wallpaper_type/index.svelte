@@ -8,7 +8,7 @@
     BeSelect,
     BeTable,
     BeTableColumn,
-    messageBox
+    messageBox, showNotice
   } from "@brewer/beerui";
   import { onMount } from "svelte";
   import { fetchGet, fetchPost } from "@/utils/fetch.js";
@@ -59,24 +59,27 @@
     try {
       const { code, msg } = await fetchPost("/api/wallpaper/del_wallpaper_type", params);
       if (code === 200) {
-        messageBox({
-          type: "success",
-          title: "提示",
-          message: "删除成功"
+        showNotice({
+          toast: true,
+          message: '删除成功',
+          duration: 1500,
+          type: 'success'
         });
         getWallpaperType()
       } else {
-        messageBox({
-          type: "warning",
-          title: "提示",
-          message: msg
+        showNotice({
+          toast: true,
+          message: msg,
+          duration: 1500,
+          type: 'warning'
         });
       }
     } catch (e) {
-      messageBox({
-        type: "error",
-        title: "提示",
-        message: "服务内部错误"
+      showNotice({
+        toast: true,
+        message: '服务内部错误',
+        duration: 1500,
+        type: 'error'
       });
     }
   };
@@ -99,7 +102,10 @@
     visible = true
   };
   // 关闭 dialog
-  const handleClose = ()=>{
+  const handleClose = (data)=>{
+    if(data){
+      getWallpaperType()
+    }
     visible = false
   }
   // 选中key
@@ -165,7 +171,7 @@
     </BeTable>
     <Pagination page={page} {changePage} />
   </div>
-  <FormDialog visible={visible} handleClose={handleClose}/>
+  <FormDialog visible={visible} on:disClose={handleClose}/>
 </main>
 <style lang="less">
   header {
