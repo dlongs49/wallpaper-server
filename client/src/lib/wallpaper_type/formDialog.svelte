@@ -9,12 +9,14 @@
         BeRadioGroup, showNotice
     } from "@brewer/beerui";
     import UploadImg from "@/components/upload/BeUpload.svelte";
-    import {fetchPost} from "@/utils/fetch.js";
-    import {createEventDispatcher} from "svelte";
+    import {fetchPost, fetchGet} from "@/utils/fetch.js";
+    import {createEventDispatcher, onMount} from "svelte";
+    import {message} from '@/components/message/showNotice.js'
 
     const base_url = import.meta.env.VITE_APP_BASE_URL
     const dispatch = createEventDispatcher();
     export let visible = false;
+    export let id = null
     let rules = {
         title: [{required: true}],
         cover_type: [{required: true}],
@@ -29,6 +31,26 @@
     let form = {
         cover_type: "0"
     };
+    onMount(() => {
+        if (id) {
+            getDetail()
+        }
+    })
+
+    // 详情
+    const getDetail = async () => {
+        try {
+            const {code, data, msg} = await fetchGet("/api/wallpaper/detail_wallpaper_type/" + id)
+            if (code === 200) {
+                form = {...data}
+                console.log(form)
+            } else {
+                message.warning(msg)
+            }
+        } catch (e) {
+            message.error()
+        }
+    }
     const changeRadio = () => {
         form.cover_url = ""
     };
@@ -42,39 +64,21 @@
         console.log(form.cover_url)
         const reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
         if (!reg.test(form.cover_url)) {
-            showNotice({
-                message: '图片链接以http或https开头进行检查',
-                duration: 3000,
-                type: 'error'
-            });
+            message.error('图片链接以http或https开头进行检查', false)
             return
         }
         const res = await fetch(form.cover_url)
         if (!res.ok) {
-            showNotice({
-                message: '图片资源出现错误 - ' + res.status,
-                duration: 3000,
-                type: 'error'
-            });
+            message.error('图片资源出现错误 - ' + res.status, false)
             form.cover_url = ""
         } else {
-
-            showNotice({
-                message: '图片资源检查正常 - ' + res.status,
-                duration: 3000,
-                type: 'success'
-            });
+            message.success('图片资源检查正常 - ' + res.status, false)
         }
     }
     // 提交表单
     const handleOk = async () => {
         if (!form.cover_type || !form.cover_url || !form.title) {
-            showNotice({
-                toast: true,
-                message: '带*字段必填',
-                duration: 1500,
-                type: 'warning'
-            });
+            message.warning('带*字段必填')
             return
         }
         try {
@@ -83,12 +87,7 @@
                 cover_type: Number(form.cover_type)
             });
             if (code === 200) {
-                showNotice({
-                    toast: true,
-                    message: '提交成功',
-                    duration: 1500,
-                    type: 'success'
-                });
+                message.success('提交成功')
                 dispatch('disClose', true);
             } else {
                 showNotice({
@@ -99,12 +98,7 @@
                 });
             }
         } catch (e) {
-            showNotice({
-                toast: true,
-                message: '服务内部错误',
-                duration: 1500,
-                type: 'error'
-            });
+            message.error()
         }
     };
 </script>

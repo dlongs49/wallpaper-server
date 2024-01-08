@@ -1,178 +1,164 @@
 <script>
-  import {
-    BeButton,
-    BeIcon,
-    BeInput,
-    BeOption,
-    BePagination,
-    BeSelect,
-    BeTable,
-    BeTableColumn,
-    messageBox, showNotice
-  } from "@brewer/beerui";
-  import { onMount } from "svelte";
-  import { fetchGet, fetchPost } from "@/utils/fetch.js";
-  import Pagination from "@/components/pagination/BePagination.svelte";
-  import FormDialog from './formDialog.svelte'
-  import dayjs from "dayjs";
+    import {
+        BeButton,
+        BeIcon,
+        BeInput,
+        BeOption,
+        BeSelect,
+        BeTable,
+        BeTableColumn,
+    } from "@brewer/beerui";
+    import {onMount} from "svelte";
+    import {fetchGet, fetchPost} from "@/utils/fetch.js";
+    import Pagination from "@/components/pagination/BePagination.svelte";
+    import FormDialog from './formDialog.svelte'
+    import dayjs from "dayjs";
+    import {message} from "@/components/message/showNotice.js";
 
-  let isLoading = false;
-  let tableData = [];
-  let visible = false
-  let sort = {
-    keyword: "",
-    sort_type: ""
-  };
-  let page = {
-    count: 0,
-    offset: 1,
-    limit: 15
-  };
-  let rowKey = [];
-  let base_url = import.meta.env.VITE_APP_BASE_URL;
-  onMount(() => {
-    getWallpaperType();
-  });
-  // 数据列表
-  const getWallpaperType = async () => {
-    try {
-      let { code, data, msg } = await fetchPost("/api/wallpaper/get_wallpaper_type", sort, page);
-      if (code === 200) {
-        tableData = data.rows.map(v => {
-          return { ...v, create_time: dayjs(v.create_time).format("YYYY-MM-DD HH:mm:ss") };
-        });
-        page.count = data.count;
-      }
-    } catch (e) {
-      showNotice({
-        toast: true,
-        message: '服务内部错误',
-        duration: 1500,
-        type: 'error'
-      });
-    }
-  };
-  const handleEdit = (params) => {
-
-  };
-  // 删除
-  const handleDel = async (params) => {
-    try {
-      const { code, msg } = await fetchPost("/api/wallpaper/del_wallpaper_type", params);
-      if (code === 200) {
-        showNotice({
-          toast: true,
-          message: '删除成功',
-          duration: 1500,
-          type: 'success'
-        });
-        getWallpaperType()
-      } else {
-        showNotice({
-          toast: true,
-          message: msg,
-          duration: 1500,
-          type: 'warning'
-        });
-      }
-    } catch (e) {
-      showNotice({
-        toast: true,
-        message: '服务内部错误',
-        duration: 1500,
-        type: 'error'
-      });
-    }
-  };
-  // 分页改变
-  const changePage = (data) => {
-    page.offset = data.detail;
-    getWallpaperType();
-  };
-  // 查询
-  const handleSearch = () => {
-    getWallpaperType();
-  };
-  // 重置
-  const handleReset = () => {
-    sort = {
-      keyword: "",
-      sort_type: ""
+    let isLoading = false;
+    let tableData = [];
+    let visible = false
+    let sort = {
+        keyword: "",
+        sort_type: ""
     };
-    getWallpaperType();
-    visible = true
-  };
-  // 关闭 dialog
-  const handleClose = (data)=>{
-    if(data){
-      getWallpaperType()
-    }
-    visible = false
-  }
-  // 选中key
-  const handleGetKey = (data) => {
-    rowKey = data.detail;
-  };
-  const changeSelect = () => {
+    let page = {
+        count: 0,
+        offset: 1,
+        limit: 15
+    };
+    let rowKey = [];
+    let id = null
+    let base_url = import.meta.env.VITE_APP_BASE_URL;
+    onMount(() => {
+        getWallpaperType();
+    });
+    // 数据列表
+    const getWallpaperType = async () => {
+        try {
+            let {code, data, msg} = await fetchPost("/api/wallpaper/get_wallpaper_type", sort, page);
+            if (code === 200) {
+                tableData = data.rows.map(v => {
+                    return {...v, create_time: dayjs(v.create_time).format("YYYY-MM-DD HH:mm:ss")};
+                });
+                page.count = data.count;
+            }
+        } catch (e) {
+            message.error()
+        }
+    };
+    const handleEdit = (params) => {
 
-  };
+    };
+    // 删除
+    const handleDel = async (params) => {
+        try {
+            const {code, msg} = await fetchPost("/api/wallpaper/del_wallpaper_type", params);
+            if (code === 200) {
+                message.success('删除成功')
+                getWallpaperType()
+            } else {
+                message.warning(msg)
+            }
+        } catch (e) {
+            message.error()
+        }
+    };
+    // 分页改变
+    const changePage = (data) => {
+        page.offset = data.detail;
+        getWallpaperType();
+    };
+    // 查询
+    const handleSearch = () => {
+        getWallpaperType();
+        id = '34fd7c6f-2814-49d9-85e4-bd6d17517341'
+        visible = true
+    };
+    // 重置
+    const handleReset = () => {
+        sort = {
+            keyword: "",
+            sort_type: ""
+        };
+        getWallpaperType();
+        id = ''
+        visible = true
+    };
+    // 关闭 dialog
+    const handleClose = (data) => {
+        if (data) {
+            getWallpaperType()
+        }
+        visible = false
+    }
+    // 选中key
+    const handleGetKey = (data) => {
+        rowKey = data.detail;
+    };
+    const changeSelect = () => {
+
+    };
 </script>
+
 <main>
-  <header>
-    <BeButton type="primary">
+    <header>
+        <BeButton type="primary">
       <span class="middle_spn">
-        <BeIcon name="add" color="#fff" />
+        <BeIcon name="add" color="#fff"/>
         <strong>新增</strong>
       </span>
-    </BeButton>
-    <BeButton type="danger" disabled={rowKey.length === 0} on:click={()=>handleDel(rowKey)}>
+        </BeButton>
+        <BeButton type="danger" disabled={rowKey.length === 0} on:click={()=>handleDel(rowKey)}>
       <span class="middle_spn">
-        <BeIcon name="remove" color="#fff" />
+        <BeIcon name="remove" color="#fff"/>
         <strong>删除</strong>
       </span>
-    </BeButton>
-    <BeSelect class="ml" bind:value={sort.sort_type} size="small" clearable on:change={changeSelect}
-              placeholder="请选择排序类型">
-      <BeOption label="时间正序" value="asc" />
-      <BeOption label="时间倒叙" value="desc" />
-    </BeSelect>
-    <BeInput class="ml" bind:value={sort.keyword} placeholder="根据关键字查询" style="width: 200px" clearable/>
-    <BeButton type="success" on:click={handleSearch}>
+        </BeButton>
+        <BeSelect class="ml" bind:value={sort.sort_type} size="small" clearable on:change={changeSelect}
+                  placeholder="请选择排序类型">
+            <BeOption label="时间正序" value="asc"/>
+            <BeOption label="时间倒叙" value="desc"/>
+        </BeSelect>
+        <BeInput class="ml" bind:value={sort.keyword} placeholder="根据关键字查询" style="width: 200px" clearable/>
+        <BeButton type="success" on:click={handleSearch}>
       <span class="middle_spn">
-        <BeIcon name="search" color="#fff" />
+        <BeIcon name="search" color="#fff"/>
         <strong>查询</strong>
       </span>
-    </BeButton>
-    <BeButton type="info" on:click={handleReset}>
+        </BeButton>
+        <BeButton type="info" on:click={handleReset}>
       <span class="middle_spn">
-        <BeIcon name="loading" color="#fff" />
+        <BeIcon name="loading" color="#fff"/>
         <strong>重置</strong>
       </span>
-    </BeButton>
-  </header>
-  <div>
-    <BeTable
-      border
-      data={tableData}
-      on:handleSelectionChangeGetId={handleGetKey}
-    >
-      <BeTableColumn prop="selection" width="55" />
-      <BeTableColumn prop="title" label="类型名称" />
-      <BeTableColumn prop="cover_url" label="封面" />
-      <BeTableColumn prop="cover_type" label="封面类型" />
-      <BeTableColumn prop="create_time" name="tableSlot1" label="操作时间" />
-      <BeTableColumn prop="action" name="tableSlot2" label="操作" />
-      <div slot="tableSlot1" let:prop={row}>
-        {row}
-      </div>
-      <div slot="tableSlot2" let:prop={row}>
-        <BeButton type="primary" on:click={()=>handleEdit(row)}>编辑</BeButton>
-        <BeButton type="danger" on:click={()=>handleDel(row)}>删除</BeButton>
-      </div>
-    </BeTable>
-    <Pagination page={page} {changePage} />
-  </div>
-  <FormDialog visible={visible} on:disClose={handleClose}/>
+        </BeButton>
+    </header>
+    <div>
+        <BeTable
+                border
+                data={tableData}
+                on:handleSelectionChangeGetId={handleGetKey}
+        >
+            <BeTableColumn prop="selection" width="55"/>
+            <BeTableColumn prop="title" label="类型名称"/>
+            <BeTableColumn prop="cover_url" label="封面"/>
+            <BeTableColumn prop="cover_type" label="封面类型"/>
+            <BeTableColumn prop="create_time" name="tableSlot1" label="操作时间"/>
+            <BeTableColumn prop="action" name="tableSlot2" label="操作"/>
+            <div slot="tableSlot1" let:prop={row}>
+                {row}
+            </div>
+            <div slot="tableSlot2" let:prop={row}>
+                <BeButton type="primary" on:click={()=>handleEdit(row)}>编辑</BeButton>
+                <BeButton type="danger" on:click={()=>handleDel(row)}>删除</BeButton>
+            </div>
+        </BeTable>
+        <Pagination page={page} {changePage}/>
+    </div>
+    {#if visible}
+        <FormDialog visible={visible} id={id} on:disClose={handleClose}/>
+    {/if}
 </main>
 <style lang="less">
   header {
