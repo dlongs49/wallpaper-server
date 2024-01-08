@@ -42,8 +42,7 @@
         try {
             const {code, data, msg} = await fetchGet("/api/wallpaper/detail_wallpaper_type/" + id)
             if (code === 200) {
-                form = {...data}
-                console.log(form)
+                form = {...data, cover_type: data.cover_type.toString()}
             } else {
                 message.warning(msg)
             }
@@ -52,7 +51,9 @@
         }
     }
     const changeRadio = () => {
-        form.cover_url = ""
+        if(!form.id){
+            form.cover_url = ""
+        }
     };
     const onUrl = (res) => {
         if (res.code === 200) {
@@ -61,7 +62,6 @@
     }
     // 检查图片链接是否生效
     const handleInspect = async () => {
-        console.log(form.cover_url)
         const reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
         if (!reg.test(form.cover_url)) {
             message.error('图片链接以http或https开头进行检查', false)
@@ -82,12 +82,13 @@
             return
         }
         try {
-            const {code, msg} = await fetchPost("/api/wallpaper/set_wallpaper_type", {
+            let url = form.id ? '/api/wallpaper/update_wallpaper_type' : '/api/wallpaper/set_wallpaper_type'
+            const {code, msg} = await fetchPost(url, {
                 ...form,
                 cover_type: Number(form.cover_type)
             });
             if (code === 200) {
-                message.success('提交成功')
+                message.success('操作成功')
                 dispatch('disClose', true);
             } else {
                 showNotice({
@@ -129,7 +130,7 @@
             </BeFormItem>
             {#if form.cover_type === '0'}
                 <BeFormItem label="本地上传">
-                    <UploadImg bind:value={form.cover_url} onUrl={onUrl}/>
+                    <UploadImg onUrl={onUrl}/>
                 </BeFormItem>
             {/if}
             <BeFormItem label="链接地址" prop="cover_url">

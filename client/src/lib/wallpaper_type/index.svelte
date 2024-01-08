@@ -47,6 +47,10 @@
             message.error()
         }
     };
+    // 新增
+    const  handleAdd = ()=>{
+        visible = true
+    }
     const handleEdit = (params) => {
 
     };
@@ -72,7 +76,7 @@
     // 查询
     const handleSearch = () => {
         getWallpaperType();
-        id = '34fd7c6f-2814-49d9-85e4-bd6d17517341'
+        id = 'f3ae2967-391a-4a61-aa92-5f6bd69d9931'
         visible = true
     };
     // 重置
@@ -82,14 +86,13 @@
             sort_type: ""
         };
         getWallpaperType();
-        id = ''
-        visible = true
     };
     // 关闭 dialog
     const handleClose = (data) => {
         if (data) {
             getWallpaperType()
         }
+        id = ""
         visible = false
     }
     // 选中key
@@ -103,7 +106,7 @@
 
 <main>
     <header>
-        <BeButton type="primary">
+        <BeButton type="primary" on:click={handleAdd}>
       <span class="middle_spn">
         <BeIcon name="add" color="#fff"/>
         <strong>新增</strong>
