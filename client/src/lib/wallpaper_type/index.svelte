@@ -11,12 +11,14 @@
     messageBox
   } from "@brewer/beerui";
   import { onMount } from "svelte";
-  import { fetchGet, fetchPost } from "../../utils/fetch.js";
+  import { fetchGet, fetchPost } from "@/utils/fetch.js";
   import Pagination from "@/components/pagination/BePagination.svelte";
+  import FormDialog from './formDialog.svelte'
   import dayjs from "dayjs";
 
   let isLoading = false;
   let tableData = [];
+  let visible = false
   let sort = {
     keyword: "",
     sort_type: ""
@@ -94,7 +96,12 @@
       sort_type: ""
     };
     getWallpaperType();
+    visible = true
   };
+  // 关闭 dialog
+  const handleClose = ()=>{
+    visible = false
+  }
   // 选中key
   const handleGetKey = (data) => {
     rowKey = data.detail;
@@ -122,7 +129,7 @@
       <BeOption label="时间正序" value="asc" />
       <BeOption label="时间倒叙" value="desc" />
     </BeSelect>
-    <BeInput class="ml" bind:value={sort.keyword} placeholder="根据关键字查询" style="width: 200px" />
+    <BeInput class="ml" bind:value={sort.keyword} placeholder="根据关键字查询" style="width: 200px" clearable/>
     <BeButton type="success" on:click={handleSearch}>
       <span class="middle_spn">
         <BeIcon name="search" color="#fff" />
@@ -158,6 +165,7 @@
     </BeTable>
     <Pagination page={page} {changePage} />
   </div>
+  <FormDialog visible={visible} handleClose={handleClose}/>
 </main>
 <style lang="less">
   header {
