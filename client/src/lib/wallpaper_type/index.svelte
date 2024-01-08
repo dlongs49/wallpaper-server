@@ -1,14 +1,15 @@
 <script>
   import { BeButton, BeIcon, BeInput, BeOption, BeSelect, BeTable, BeTableColumn } from "@brewer/beerui";
   import { onMount } from "svelte";
-
+  import {fetchGet,fetchPost} from '../../utils/fetch.js'
   let data = [];
   let sort = {
     keyword: "",
     sort_type: ""
   };
+  let base_url = import.meta.env.VITE_APP_BASE_URL
   onMount(() => {
-    console.log(import.meta.env);
+    fetchPost('/api/wallpaper/get_wallpaper_type',{},{})
   });
   const handleSelectionChangeGetId = ({ detail }) => console.log("handleSelectionChangeGetId", detail);
   const handleSelectionChangeGetRows = ({ detail }) => console.log("handleSelectionChangeGetRows", detail);
