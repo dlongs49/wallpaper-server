@@ -1,18 +1,59 @@
 <script>
-  import { BeButton, BeIcon, BeInput, BeOption, BeSelect, BeTable, BeTableColumn } from "@brewer/beerui";
+  import {
+    BeButton,
+    BeIcon,
+    BeInput,
+    BeOption,
+    BePagination,
+    BeSelect,
+    BeTable,
+    BeTableColumn,
+    messageBox
+  } from "@brewer/beerui";
   import { onMount } from "svelte";
-  import {fetchGet,fetchPost} from '../../utils/fetch.js'
-  let data = [];
+  import { fetchGet, fetchPost } from "../../utils/fetch.js";
+  import Pagination from '@/components/pagination/BePagination.svelte'
+  let isLoading = false
+  let tableData = [];
   let sort = {
     keyword: "",
     sort_type: ""
   };
-  let base_url = import.meta.env.VITE_APP_BASE_URL
+  let page = {
+    count:0,
+    offset: 1,
+    limit: 15
+  };
+  let base_url = import.meta.env.VITE_APP_BASE_URL;
   onMount(() => {
-    fetchPost('/api/wallpaper/get_wallpaper_type',{},{})
+    getWallpaperType()
   });
-  const handleSelectionChangeGetId = ({ detail }) => console.log("handleSelectionChangeGetId", detail);
-  const handleSelectionChangeGetRows = ({ detail }) => console.log("handleSelectionChangeGetRows", detail);
+  // 数据列表
+  const getWallpaperType = async () => {
+    try {
+      let { code,data,msg } = await fetchPost("/api/wallpaper/get_wallpaper_type", sort, page);
+      if(code === 200){
+        tableData = data.rows
+        page.count = data.count
+      }
+    }catch (e) {
+      messageBox({
+        type:'error' ,
+        title: '提示',
+        message: '服务内部错误'
+      })
+    }
+  };
+  const changePage = (data) => {
+    page.offset = data.detail
+    getWallpaperType()
+  }
+  const handleSelectionChangeGetId = () => {
+
+  }
+  const handleSelectionChangeGetRows = ({ detail }) => {
+
+  }
   const changeSelect = () => {
 
   };
@@ -50,9 +91,10 @@
       </span>
     </BeButton>
   </header>
+  <div >
   <BeTable
     border
-    data={data}
+    data={tableData}
     on:handleSelectionChangeGetId={handleSelectionChangeGetId}
     on:handleSelectionChangeGetRows={handleSelectionChangeGetRows}
   >
@@ -62,6 +104,8 @@
     <BeTableColumn prop="cover_type" label="封面类型" />
     <BeTableColumn prop="create_time" label="操作时间" />
   </BeTable>
+    <Pagination page={page} {changePage}/>
+  </div>
 </main>
 <style lang="less">
   header {
@@ -85,7 +129,8 @@
 
   main {
     width: 98%;
-    margin: 20px auto 0;
+    margin: 0 auto;
+    padding: 20px 0;
   }
 
 </style>

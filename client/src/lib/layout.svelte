@@ -1,36 +1,36 @@
 <script>
-    import {BeIcon} from "@brewer/beerui";
-    import WallpaperType from './wallpaper_type/index.svelte'
-    import Wallpaper from './wallpaper/index.svelte'
+  import { BeIcon } from "@brewer/beerui";
+  import WallpaperType from "./wallpaper_type/index.svelte";
+  import Wallpaper from "./wallpaper/index.svelte";
 
-    let data = [
-        {i:0,title: '壁纸类型管理', component: WallpaperType},
-        {i:1,title: "壁纸管理", component: Wallpaper}]
-    let selected = data[0]
+  let data = [
+    { i: 0, title: "壁纸类型管理", component: WallpaperType },
+    { i: 1, title: "壁纸管理", component: Wallpaper }];
+  let selected = data[0];
 
-    function handleMenu(val) {
-        selected = val
-    }
+  function handleMenu(val) {
+    selected = val;
+  }
 </script>
 <main>
-    <div class="bmenu">
-        <div class="head_logo">
-            <img class="logo" src="/static/images/svelte.svg" alt="">
-        </div>
-        <div class="menu_list">
-            {#each data as item, i}
-                <button class={i === selected.i ? 'item active' : 'item'} on:click={()=>handleMenu({...item,i})}>
-                <span class="bicon">
-                    <BeIcon name='app' color={i === selected.i ? '#fff' : '#000'}/>
-                </span>
-                    <span class="title">{item.title}</span>
-                </button>
-            {/each}
-        </div>
+  <div class="bmenu">
+    <div class="head_logo">
+      <img class="logo" src="/static/images/svelte.svg" alt="">
     </div>
-    <section>
-        <svelte:component this={selected.component}/>
-    </section>
+    <div class="menu_list">
+      {#each data as item, i}
+        <button class={i === selected.i ? 'item active' : 'item'} on:click={()=>handleMenu({...item,i})}>
+                <span class="bicon">
+                    <BeIcon name="app" color={i === selected.i ? '#fff' : '#000'} />
+                </span>
+          <span class="title">{item.title}</span>
+        </button>
+      {/each}
+    </div>
+  </div>
+  <section>
+    <svelte:component this={selected.component} />
+  </section>
 </main>
 <style lang="less">
   main {
@@ -40,12 +40,43 @@
     display: flex;
   }
 
+
   section {
     margin-left: 10px;
     flex: 1;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     background: #fff;
+    overflow-y: auto;
+    // 美化滚动条
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      width: 6px;
+      background: rgba(#101F1C, 0.1);
+      -webkit-border-radius: 2em;
+      -moz-border-radius: 2em;
+      border-radius: 2em;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(144, 147, 153, .5);
+      background-clip: padding-box;
+      min-height: 28px;
+      -webkit-border-radius: 2em;
+      -moz-border-radius: 2em;
+      border-radius: 2em;
+      transition: background-color .3s;
+      cursor: pointer;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(144, 147, 153, .3);
+    }
+
   }
 
   .bmenu {

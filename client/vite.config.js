@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import {resolve} from 'path'
 
 export default ({ mode }) => {
   let base_url = loadEnv(mode, process.cwd()).VITE_APP_BASE_URL
@@ -16,6 +17,12 @@ export default ({ mode }) => {
           rewrite: (path) => path.replace('^/api', '/api')
         }
       }
+    },
+    resolve: {
+      alias: [{
+        find: "@",
+        replacement: resolve(__dirname, "src"),
+      }],
     },
     build: {
       outDir: "dist",
