@@ -13,7 +13,7 @@ function spStr(data) {
   return str;
 }
 
-let base_url = import.meta.env.VITE_APP_BASE_URL;
+let base_url = import.meta.env.MODE === "development" ? '' : import.meta.env.VITE_APP_BASE_URL
 export const fetchGet = (api, params = {}) => {
   let par_str = "";
   for (let key in params) {
