@@ -14,7 +14,8 @@ function spStr(data) {
 }
 
 // 判断环境
-let base_url = import.meta.env.MODE === "development" ? "" : import.meta.env.VITE_APP_BASE_URL;
+// let base_url = import.meta.env.MODE == "development" ? "" : import.meta.env.VITE_APP_BASE_URL;
+let base_url = import.meta.env.VITE_APP_BASE_URL;
 // get 请求
 export const fetchGet = (api, params = {}) => {
   let par_str = "";
@@ -27,11 +28,12 @@ export const fetchGet = (api, params = {}) => {
     .then(data => console.log(data));
 };
 // post 请求
-export const fetchPost = (api, body = {}, query = {}) => {
+export const fetchPost = (api, body = null, query = {}) => {
   return new Promise((resolve, reject) => {
     fetch(`${base_url}${api}${spStr(query)}`, {
       method: "POST",
-      body: JSON.stringify(body.spm ? body : { ...body, spm: new Date().getTime() })
+      headers: { "Content-Type" :"application/json" },
+      body: JSON.stringify(body)
     })
       .then(response => response.json())
       .then(data => resolve(data)).catch((err) => reject(err));

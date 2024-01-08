@@ -12,6 +12,7 @@ async function bootstrap() {
   app.use('/upload', express.static(join(file_path, 'www/public'))); // 静态资源开放
   app.use('/', express.static(join(file_path, 'www/client'))); // 静态资源开放
   swaggerConfig(app) // swagger抽出
+  app.enableCors();
   await app.listen(process.env.SERVER_POTY);
 }
 bootstrap();
