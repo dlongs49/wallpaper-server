@@ -14,6 +14,7 @@
     import FormDialog from './formDialog.svelte'
     import dayjs from "dayjs";
     import {message} from "@/components/message/showNotice.js";
+    import {loading} from '@/utils/useLoading.js'
 
     let isLoading = false;
     let tableData = [];
@@ -35,20 +36,27 @@
     });
     // 数据列表
     const getWallpaperType = async () => {
+        isLoading = true
         try {
             let {code, data, msg} = await fetchPost("/api/wallpaper/get_wallpaper_type", sort, page);
+            setTimeout(() => {
+                isLoading = false
+            }, 2000)
             if (code === 200) {
                 tableData = data.rows.map(v => {
                     return {...v, create_time: dayjs(v.create_time).format("YYYY-MM-DD HH:mm:ss")};
                 });
                 page.count = data.count;
+            } else {
+                message.warning(msg)
             }
         } catch (e) {
+            isLoading = false
             message.error()
         }
     };
     // 新增
-    const  handleAdd = ()=>{
+    const handleAdd = () => {
         visible = true
     }
     const handleEdit = (params) => {
@@ -137,7 +145,7 @@
       </span>
         </BeButton>
     </header>
-    <div>
+    <div use:loading={isLoading}>
         <BeTable
                 border
                 data={tableData}
