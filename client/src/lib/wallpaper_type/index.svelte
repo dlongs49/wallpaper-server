@@ -39,9 +39,7 @@
         isLoading = true
         try {
             let {code, data, msg} = await fetchPost("/api/wallpaper/get_wallpaper_type", sort, page);
-            setTimeout(() => {
-                isLoading = false
-            }, 2000)
+            isLoading = false
             if (code === 200) {
                 tableData = data.rows.map(v => {
                     return {...v, create_time: dayjs(v.create_time).format("YYYY-MM-DD HH:mm:ss")};

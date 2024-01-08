@@ -29,7 +29,9 @@ export const loading = (node) => {
         },
         destroy() {
             let n = document.getElementById("load_mask")
-            node.removeChild(n)
+            if(n){
+                node.removeChild(n)
+            }
         }
     }
 }

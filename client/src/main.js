@@ -1,9 +1,11 @@
 import './app.css'
-import App from './App.svelte'
-import './app.css'
 import '@brewer/beerui/assets/beer.css'
-const app = new App({
-  target: document.getElementById('app'),
-})
-
-export default app
+import { ClientApp } from 'svelte-pilot'
+import router from './router/index'
+router.start(
+    () =>
+        new ClientApp({
+          target: document.getElementById('app'),
+          props: { router }
+        })
+)

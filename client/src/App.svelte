@@ -1,6 +1,4 @@
 <script>
-    import Router from 'svelte-spa-router';
-    import routes from './routes/index';
+    import { View } from 'svelte-pilot'
 </script>
-
-<Router {routes}/>
+<View/>

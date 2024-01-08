@@ -1,36 +1,37 @@
 <script>
-  import { BeIcon } from "@brewer/beerui";
-  import WallpaperType from "./wallpaper_type/index.svelte";
-  import Wallpaper from "./wallpaper/index.svelte";
+    import {BeIcon} from "@brewer/beerui";
+    import {View} from 'svelte-pilot'
+    import router from "@/router/index.js";
 
-  let data = [
-    { i: 0, title: "壁纸类型管理", component: WallpaperType },
-    { i: 1, title: "壁纸管理", component: Wallpaper }];
-  let selected = data[0];
+    let data = [
+        {i: 0, title: "壁纸类型管理", path: "/wallpaper_type"},
+        {i: 1, title: "壁纸管理", path: "/wallpaper"}];
+    let selected = data[0];
 
-  function handleMenu(val) {
-    selected = val;
-  }
+    function handleMenu(val) {
+        selected = val;
+        router.push(val.path)
+    }
 </script>
 <main>
-  <div class="bmenu">
-    <div class="head_logo">
-      <img class="logo" src="/static/images/svelte.svg" alt="">
-    </div>
-    <div class="menu_list">
-      {#each data as item, i}
-        <button class={i === selected.i ? 'item active' : 'item'} on:click={()=>handleMenu({...item,i})}>
+    <div class="bmenu">
+        <div class="head_logo">
+            <img class="logo" src="/static/images/svelte.svg" alt="">
+        </div>
+        <div class="menu_list">
+            {#each data as item, i}
+                <button class={i === selected.i ? 'item active' : 'item'} on:click={()=>handleMenu({...item,i})}>
                 <span class="bicon">
-                    <BeIcon name="app" color={i === selected.i ? '#fff' : '#000'} />
+                    <BeIcon name="app" color={i === selected.i ? '#fff' : '#000'}/>
                 </span>
-          <span class="title">{item.title}</span>
-        </button>
-      {/each}
+                    <span class="title">{item.title}</span>
+                </button>
+            {/each}
+        </div>
     </div>
-  </div>
-  <section>
-    <svelte:component this={selected.component} />
-  </section>
+    <section>
+        <View/>
+    </section>
 </main>
 <style lang="less">
   main {
