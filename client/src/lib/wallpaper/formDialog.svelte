@@ -6,7 +6,7 @@
         BeFormItem,
         BeInput, BeOption,
         BeRadio,
-        BeRadioGroup, BeSelect, showNotice
+        BeRadioGroup, BeSelect
     } from "@brewer/beerui";
     import UploadImg from "@/components/upload/BeUpload.svelte";
     import {fetchPost, fetchGet} from "@/utils/fetch.js";
@@ -15,7 +15,6 @@
     import {loading} from "@/utils/useLoading.js";
     import {handleInspectImg} from "@/utils/tools.js";
 
-    const base_url = import.meta.env.VITE_APP_BASE_URL;
     const dispatch = createEventDispatcher();
     let isLoading = false;
     export let visible = false;

@@ -5,11 +5,10 @@
     BeInput,
     BeOption,
     BeSelect,
-    BeTable,
-    BeTableColumn
+    BeTable
   } from "@brewer/beerui";
   import { onMount } from "svelte";
-  import { fetchGet, fetchPost } from "@/utils/fetch.js";
+  import { fetchPost } from "@/utils/fetch.js";
   import Pagination from "@/components/pagination/BePagination.svelte";
   import FormDialog from "./formDialog.svelte";
   import dayjs from "dayjs";
