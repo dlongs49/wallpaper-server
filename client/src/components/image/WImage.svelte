@@ -1,11 +1,16 @@
 <script>
 export const url = "https://www.dillonl.com/u/demo.png"
 export const width = '120px'
+const handlePreview = ()=>{
+
+}
 </script>
 <div class="w-image" style={'width:'+width}>
   <img class="w-image-show" src={url} alt=""/>
   <div class="w-image_mask">
-    <span>预览</span>
+    <button class="w-preview" on:click={handlePreview}>
+      <svg focusable="false" data-icon="eye" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path></svg>
+      预览</button>
   </div>
 </div>
 <style lang="less">
@@ -24,9 +29,23 @@ export const width = '120px'
       position: absolute;
       inset: 0 0;
       background: rgba(0, 0, 0, 0.4);
-      span{
-        color: #fff;
+      opacity: 0;
+      transition: opacity 0.3s;
+      &:hover{
+        opacity: 1;
       }
+      .w-preview{
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        background: none;
+        color: #fff;
+        font-size: 14px;
+        svg{
+          margin-right: 6px;
+        }
+      }
+
     }
   }
 </style>
