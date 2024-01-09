@@ -22,10 +22,10 @@
   let tableData = [];
   let visible = false;
   let column = [
-    { key: "title", title: "类型名称" },
-    { key: "cover_url", title: "封面", idx: 1 },
-    { key: "cover_type", title: "封面类型", idx: 2 },
-    { key: "create_time", title: "操作时间", idx: 3 },
+    { key: "title", title: "类型名称",width:'20%' },
+    { key: "cover_url", title: "封面", idx: 1,width:'20%' },
+    { key: "cover_type", title: "封面类型", idx: 2,width:'20%' },
+    { key: "create_time", title: "操作时间", idx: 3,width:'20%' },
     { key: "action", title: "操作", idx: 4 }
   ];
   let sort = {
@@ -64,8 +64,10 @@
   const handleAdd = () => {
     visible = true;
   };
+  // 编辑
   const handleEdit = (params) => {
-
+    id = params;
+    visible = true;
   };
   // 删除
   const handleDel = async (params) => {
@@ -151,18 +153,6 @@
     </BeButton>
   </header>
   <div use:loading={isLoading}>
-    <BeTable
-      border
-      data={tableData}
-      on:handleSelectionChangeGetId={handleGetKey}
-    >
-      <BeTableColumn prop="selection" width="55" />
-      <BeTableColumn prop="title" label="类型名称" />
-      <BeTableColumn prop="cover_url" label="封面" />
-      <BeTableColumn prop="cover_type" label="封面类型" />
-      <BeTableColumn prop="create_time" label="操作时间" />
-      <BeTableColumn prop="action" label="操作" />
-    </BeTable>
     <WTable data={tableData} column={column}>
       <div slot="cell_1" let:prop={row}>
         <img src={row.cover_type === 0 ? base_url + row.cover_url : row.cover_url} alt="" style="width:100px" />
@@ -174,8 +164,8 @@
         {dayjs(row.create_time).format("YYYY-MM-DD HH:mm:ss")}
       </div>
       <div slot="cell_4" let:prop={row}>
-        <BeButton type="primary" on:click={handleAdd}>编辑</BeButton>
-        <BeButton type="danger" on:click={handleAdd}>删除</BeButton>
+        <BeButton type="primary" size="small" on:click={()=>handleEdit(row.id)}>编辑</BeButton>
+        <BeButton type="danger" size="small" on:click={()=>handleDel([row.id])}>删除</BeButton>
       </div>
     </WTable>
     <Pagination page={page} {changePage} />

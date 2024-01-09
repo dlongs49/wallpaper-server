@@ -4,12 +4,10 @@
 </script>
 <div class="wtable">
   <table>
-    <colgroup>
-      <col width="205">
-      <col width="158">
-      <col width="158">
-      <col width="158">
-      <col width="158">
+    <colgroup style="width:100%">
+      {#each column as cell}
+        <col width={cell.width}>
+      {/each}
     </colgroup>
     <thead>
     <tr>
@@ -39,7 +37,7 @@
               </div>
             {:else if cell.idx === 4}
               <div class="cell">
-                <slot name="cell_3" prop={item}></slot>
+                <slot name="cell_4" prop={item}></slot>
               </div>
             {:else}
               <div class="cell">{item[cell.key]}</div>
