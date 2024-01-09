@@ -13,6 +13,7 @@
   import { createEventDispatcher, onMount } from "svelte";
   import { message } from "@/components/message/showNotice.js";
   import { loading } from "@/utils/useLoading.js";
+  import {handleInspectImg} from "@/utils/tools.js";
 
   const base_url = import.meta.env.VITE_APP_BASE_URL;
   const dispatch = createEventDispatcher();
@@ -65,21 +66,6 @@
   const onUrl = (res) => {
     if (res.code === 200) {
       form.cover_url = res.data.url;
-    }
-  };
-  // 检查图片链接是否生效
-  const handleInspect = async () => {
-    const reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-    if (!reg.test(form.cover_url)) {
-      message.error("图片链接以http或https开头进行检查", false);
-      return;
-    }
-    const res = await fetch(form.cover_url);
-    if (!res.ok) {
-      message.error("图片资源出现错误 - " + res.status, false);
-      form.cover_url = "";
-    } else {
-      message.success("图片资源检查正常 - " + res.status, false);
     }
   };
   // 提交表单
@@ -148,7 +134,7 @@
             <BeInput disabled={form.cover_type === '0'} bind:value={form.cover_url}
                      placeholder="输入壁纸链接/上传链接" />
             {#if form.cover_type === '1'}
-              <BeButton type="primary" on:click={handleInspect} style="margin-left: 10px">检查</BeButton>
+              <BeButton type="primary" on:click={()=>handleInspectImg(form.url)} style="margin-left: 10px">检查</BeButton>
             {/if}
           </div>
         </BeFormItem>
