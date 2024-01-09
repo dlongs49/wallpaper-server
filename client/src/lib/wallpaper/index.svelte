@@ -11,13 +11,11 @@
   import { onMount } from "svelte";
   import { fetchGet, fetchPost } from "@/utils/fetch.js";
   import Pagination from "@/components/pagination/BePagination.svelte";
-  import WTable from "@/components/table/WTable.svelte";
   import FormDialog from "./formDialog.svelte";
   import dayjs from "dayjs";
   import { message } from "@/components/message/showNotice.js";
   import { loading } from "@/utils/useLoading.js";
-  import WTag from "@/components/tag/WTag.svelte";
-  import WImage from '@/components/image/WImage.svelte'
+  import {WTable,WTag,WImage} from "@/components/w_component/index.js";
   let isLoading = false;
   let tableData = [];
   let visible = false;
