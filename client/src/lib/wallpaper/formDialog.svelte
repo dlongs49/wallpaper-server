@@ -103,12 +103,7 @@
                 message.success("操作成功");
                 dispatch("disClose", true);
             } else {
-                showNotice({
-                    toast: true,
-                    message: msg,
-                    duration: 1500,
-                    type: "warning"
-                });
+                message.warning(msg)
             }
         } catch (e) {
             message.error();
