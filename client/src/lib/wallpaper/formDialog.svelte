@@ -8,9 +8,9 @@
         BeRadio,
         BeRadioGroup, BeSelect
     } from "@brewer/beerui";
+    import {createEventDispatcher, onMount} from "svelte";
     import UploadImg from "@/components/upload/BeUpload.svelte";
     import {fetchPost, fetchGet} from "@/utils/fetch.js";
-    import {createEventDispatcher, onMount} from "svelte";
     import {message} from "@/components/message/showNotice.js";
     import {loading} from "@/utils/useLoading.js";
     import {handleInspectImg} from "@/utils/tools.js";

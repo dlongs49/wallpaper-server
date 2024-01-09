@@ -14,6 +14,7 @@
   import { message } from "@/components/message/showNotice.js";
   import { loading } from "@/utils/useLoading.js";
   import {WTable,WTag,WImage} from "@/components/w_component/index.js";
+  import WButton from "@/components/w_component/button/WButton.svelte";
   let isLoading = false;
   let tableData = [];
   let visible = false;
@@ -164,6 +165,7 @@
       </div>
     </WTable>
     <Pagination page={page} {changePage} />
+    <WButton>点击</WButton>
   </div>
   {#if visible}
     <FormDialog visible={visible} id={id} on:disClose={handleClose} />

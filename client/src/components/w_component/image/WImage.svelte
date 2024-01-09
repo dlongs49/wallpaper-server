@@ -3,7 +3,7 @@
     export let width = '120px'
     // 点击预览
     const handlePreview = () => {
-        let style = 'position: fixed;inset: 0 0; background: #000000;z-index: 999;opacity: .75;'
+        let style = 'position: fixed;inset: 0 0; background: #000000;z-index: 999;'
         let imgStyle = 'max-width: 100%;max-height: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);padding: 50px 15px;box-sizing: border-box;'
         let svg = ``
         let close = `<button class="w-image_close" style="position: absolute;right:34px;cursor:pointer;z-index:99;top:34px;width: 50px;height: 50px;border-radius: 50%;display: flex;align-items: center;justify-content: center;background: #0000008f"><svg version="1.1" id="close-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve"><line fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" x1="6.808" y1="6.808" x2="25.192" y2="25.192"></line><line fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" x1="6.808" y1="25.192" x2="25.192" y2="6.808"></line></svg></>`
