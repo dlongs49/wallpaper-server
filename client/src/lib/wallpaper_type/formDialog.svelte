@@ -130,7 +130,9 @@
             </BeFormItem>
             {#if form.cover_type === '0'}
                 <BeFormItem label="本地上传">
-                    <UploadImg onUrl={onUrl}/>
+                    <!--{#if visible}-->
+                    <UploadImg onUrl={onUrl} imgUrl={form.cover_url}/>
+                    <!--{/if}-->
                 </BeFormItem>
             {/if}
             <BeFormItem label="链接地址" prop="cover_url">

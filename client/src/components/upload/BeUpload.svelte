@@ -1,13 +1,18 @@
 <script>
     import {BeIcon, BeUpload} from "@brewer/beerui";
-    let action = import.meta.env.VITE_APP_BASE_URL + "/api/upload/wallpaper"
+    import { onMount } from "svelte";
+    let base_url = import.meta.env.VITE_APP_BASE_URL
+    let action = base_url + "/api/upload/wallpaper"
     let fileList = []
-    export let imgUrl = ''
-    export let onUrl = (res) => {
-        if (res.data.code === 200) {
-            imgUrl = res.data.url
-        }
-    }
+    export let imgUrl
+    export let onUrl = () => {}
+    onMount(()=>{
+        setTimeout(()=>{
+            fileList = [
+                {uid:new Date().getTime().toString(),url:base_url+imgUrl,name:""}
+            ]
+        },500)
+    })
 </script>
 <main>
     <BeUpload

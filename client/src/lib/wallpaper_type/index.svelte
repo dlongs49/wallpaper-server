@@ -20,7 +20,7 @@
     let tableData = [];
     let visible = false
     let sort = {
-        keyword: "",
+        keyword: "3a8387c3-7c48-4ece-9058-b3e1669303bd",
         sort_type: ""
     };
     let page = {
@@ -82,7 +82,7 @@
     // 查询
     const handleSearch = () => {
         getWallpaperType();
-        id = 'f3ae2967-391a-4a61-aa92-5f6bd69d9931'
+        id = sort.keyword
         visible = true
     };
     // 重置
@@ -155,13 +155,6 @@
             <BeTableColumn prop="cover_type" label="封面类型"/>
             <BeTableColumn prop="create_time" name="tableSlot1" label="操作时间"/>
             <BeTableColumn prop="action" name="tableSlot2" label="操作"/>
-            <div slot="tableSlot1" let:prop={row}>
-                {row}
-            </div>
-            <div slot="tableSlot2" let:prop={row}>
-                <BeButton type="primary" on:click={()=>handleEdit(row)}>编辑</BeButton>
-                <BeButton type="danger" on:click={()=>handleDel(row)}>删除</BeButton>
-            </div>
         </BeTable>
         <Pagination page={page} {changePage}/>
     </div>
