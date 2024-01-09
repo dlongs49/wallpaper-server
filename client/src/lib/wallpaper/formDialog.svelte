@@ -146,7 +146,7 @@
                     bind:model={form}
                     labelWidth="130px"
             >
-                <BeFormItem label="类型名称" prop="title">
+                <BeFormItem label="壁纸名称" prop="title">
                     <BeInput bind:value={form.title} placeholder="输入壁纸类型名称"/>
                 </BeFormItem>
                 <BeFormItem label="壁纸分类" prop="type_id">
@@ -164,9 +164,7 @@
                 </BeFormItem>
                 {#if form.url_type === '0'}
                     <BeFormItem label="本地上传">
-                        <!--{#if visible}-->
                         <UploadImg onUrl={onUrl} imgUrl={form.url}/>
-                        <!--{/if}-->
                     </BeFormItem>
                 {/if}
                 <BeFormItem label="链接地址" prop="url">

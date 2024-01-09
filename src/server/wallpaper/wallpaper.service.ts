@@ -132,7 +132,7 @@ export class WallpaperService {
 
     async updateWallpaper(wallpaperReqExDto: WallpaperReqExDto) {
         let id = wallpaperReqExDto.id
-        const result_one = await this.wallpaper_type_providers.findOne({where: {id}})
+        const result_one = await this.wallpaper_providers.findOne({where: {id}})
         if (!result_one) {
             throw new ResFail("更新条目失败")
         }
@@ -145,7 +145,7 @@ export class WallpaperService {
             type_name: result_one.type_name,
 
         }
-        await this.wallpaper_type_providers.update(dto, {where: {id}})
+        await this.wallpaper_providers.update(dto, {where: {id}})
         throw new ResSuccess("更新条目成功")
     }
 
