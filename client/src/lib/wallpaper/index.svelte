@@ -22,9 +22,9 @@
   let tableData = [];
   let visible = false;
   let column = [
-    { key: "title", title: "类型名称",width:'20%' },
-    { key: "cover_url", title: "封面", width:'20%' },
-    { key: "cover_type", title: "封面类型", width:'20%' },
+    { key: "title", title: "壁纸名称",width:'20%' },
+    { key: "url", title: "壁纸资源", width:'20%' },
+    { key: "url_type", title: "类型", width:'20%' },
     { key: "create_time", title: "操作时间",width:'20%' },
     { key: "action", title: "操作",}
   ];
@@ -154,10 +154,10 @@
   <div use:loading={isLoading}>
     <WTable data={tableData} column={column}>
       <div slot="cell_1" let:prop={row}>
-        <WImage url={row.cover_type === 0 ? base_url + row.cover_url : row.cover_url}  width="80px" />
+        <WImage url={row.url_type === 0 ? base_url + row.url : row.url}  width="80px" />
       </div>
       <div slot="cell_2" let:prop={row}>
-        <WTag type={row.cover_type === 1 ? '' : 'info'}>{row.cover_type === 1 ? '链接' : '本地'}</WTag>
+        <WTag type={row.url_type === 1 ? '' : 'info'}>{row.url_type === 1 ? '链接' : '本地'}</WTag>
       </div>
       <div slot="cell_3" let:prop={row}>
         {dayjs(row.create_time).format("YYYY-MM-DD HH:mm:ss")}

@@ -131,7 +131,7 @@
 </script>
 <main>
     <BeDialog
-            title="壁纸类型表单"
+            title="壁纸表单"
             width="30%"
             bind:visible={visible}
             bind:isDrag={isDrag}
@@ -147,7 +147,7 @@
                     labelWidth="130px"
             >
                 <BeFormItem label="壁纸名称" prop="title">
-                    <BeInput bind:value={form.title} placeholder="输入壁纸类型名称"/>
+                    <BeInput bind:value={form.title} placeholder="输入壁纸名称"/>
                 </BeFormItem>
                 <BeFormItem label="壁纸分类" prop="type_id">
                     <BeSelect bind:value={form.type_id} placeholder="选择壁纸分类" clearable>
