@@ -22,7 +22,9 @@ export const loading = (node) => {
             let n = document.getElementById("load_mask")
             // true 加载dom移除 false 重新插入dom
             if(!data){
-                node.removeChild(n)
+                if(n){
+                    node.removeChild(n)
+                }
             }else{
                 node.appendChild(mask)
             }

@@ -57,6 +57,7 @@
     margin-top: 20px;
 
     table {
+      width: 100%;
       table-layout: fixed;
       border-collapse: collapse;
     }

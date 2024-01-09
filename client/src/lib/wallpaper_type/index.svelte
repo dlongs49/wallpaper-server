@@ -91,8 +91,6 @@
   // 查询
   const handleSearch = () => {
     getWallpaperType();
-    id = sort.keyword;
-    visible = true;
   };
   // 重置
   const handleReset = () => {
@@ -108,7 +106,7 @@
       getWallpaperType();
     }
     id = "";
-    visible = false;
+    visible = isLoading = false;
   };
   // 选中key
   const handleGetKey = (data) => {
