@@ -1,11 +1,11 @@
 <script>
     import {BeButton, BeForm, BeFormItem, BeInput} from "@brewer/beerui";
-    import { push } from 'svelte-spa-router';
+    import router from '@/router/index'
     let form = {}
     let rules = []
 
     function handleSubmit() {
-        push("/")
+      router.push("/")
     }
 </script>
 
