@@ -13,13 +13,13 @@ export const SeqScreen = (offset=1,limit = 1,kw = '', filed='', sort = 'desc',or
     }
     // 排序 DESC 升序 ASC 降序 通过传入的 sort
     let order = [
-        ...orders,
         ['create_time', sort == 'asc' ? 'asc' : 'desc']
     ]
+    let of = (offset - 1) * limit
     return {
         where,
         order,
-        offset: (offset - 1) * limit,
+        offset: of === 0 ? 0 : of,
         limit: limit,
     }
 }

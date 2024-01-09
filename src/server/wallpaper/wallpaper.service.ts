@@ -171,7 +171,7 @@ export class WallpaperService {
     async getWallpaperList(pageReqDto: PageReqDto, wallpaperSortExDto: WallpaperSortExDto) {
         let kw = wallpaperSortExDto.keyword
         let sort = wallpaperSortExDto.sort_type
-        let url_type = wallpaperSortExDto.url_type
+        let url_type = Number(wallpaperSortExDto.url_type)
         let offset = Number(pageReqDto.offset)
         let limit = Number(pageReqDto.limit)
         let order = [

@@ -153,7 +153,7 @@
   <div use:loading={isLoading}>
     <WTable data={tableData} column={column}>
       <div slot="cell_1" let:prop={row}>
-        <WImage url={row.cover_type === 0 ? base_url + row.cover_url : row.cover_url}  width="200px" />
+        <WImage url={row.cover_type === 0 ? base_url + row.cover_url : row.cover_url}  width="80px" />
       </div>
       <div slot="cell_2" let:prop={row}>
         <WTag type={row.cover_type === 1 ? '' : 'info'}>{row.cover_type === 1 ? '链接' : '本地'}</WTag>
