@@ -13,6 +13,7 @@
     import {createEventDispatcher, onMount} from "svelte";
     import {message} from "@/components/message/showNotice.js";
     import {loading} from "@/utils/useLoading.js";
+    import {handleInspectImg} from "@/utils/tools.js";
 
     const base_url = import.meta.env.VITE_APP_BASE_URL;
     const dispatch = createEventDispatcher();
@@ -88,18 +89,23 @@
     };
     // 检查图片链接是否生效
     const handleInspect = async () => {
-        const reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-        if (!reg.test(form.url)) {
-            message.error("图片链接以http或https开头进行检查", false);
-            return;
+        try {
+            await handleInspectImg(form.url)
+        }catch (e){
+            console.log(e)
         }
-        const res = await fetch(form.url);
-        if (!res.ok) {
-            message.error("图片资源出现错误 - " + res.status, false);
-            form.url = "";
-        } else {
-            message.success("图片资源检查正常 - " + res.status, false);
-        }
+        // const reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+        // if (!reg.test(form.url)) {
+        //     message.error("图片链接以http或https开头进行检查", false);
+        //     return;
+        // }
+        // const res = await fetch(form.url);
+        // if (!res.ok) {
+        //     message.error("图片资源出现错误 - " + res.status, false);
+        //     form.url = "";
+        // } else {
+        //     message.success("图片资源检查正常 - " + res.status, false);
+        // }
     };
     // 提交表单
     const handleOk = async () => {
