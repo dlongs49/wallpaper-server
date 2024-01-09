@@ -10,9 +10,12 @@
   };
   onMount(() => {
     setTimeout(() => {
-      fileList = [
-        { uid: new Date().getTime().toString(), url: base_url + imgUrl, name: "" }
-      ];
+      if (imgUrl) {
+        fileList = [
+          { uid: new Date().getTime().toString(), url: base_url + imgUrl, name: "" }
+        ];
+      }
+
     }, 500);
   });
 </script>
