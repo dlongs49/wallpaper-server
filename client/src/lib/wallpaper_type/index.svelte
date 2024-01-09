@@ -17,16 +17,16 @@
   import { message } from "@/components/message/showNotice.js";
   import { loading } from "@/utils/useLoading.js";
   import WTag from "@/components/tag/WTag.svelte";
-
+  import WImage from '@/components/image/WImage.svelte'
   let isLoading = false;
   let tableData = [];
   let visible = false;
   let column = [
     { key: "title", title: "类型名称",width:'20%' },
-    { key: "cover_url", title: "封面", idx: 1,width:'20%' },
-    { key: "cover_type", title: "封面类型", idx: 2,width:'20%' },
-    { key: "create_time", title: "操作时间", idx: 3,width:'20%' },
-    { key: "action", title: "操作", idx: 4 }
+    { key: "cover_url", title: "封面", width:'20%' },
+    { key: "cover_type", title: "封面类型", width:'20%' },
+    { key: "create_time", title: "操作时间",width:'20%' },
+    { key: "action", title: "操作",}
   ];
   let sort = {
     keyword: "",
@@ -153,7 +153,9 @@
   <div use:loading={isLoading}>
     <WTable data={tableData} column={column}>
       <div slot="cell_1" let:prop={row}>
-        <img src={row.cover_type === 0 ? base_url + row.cover_url : row.cover_url} alt="" style="width:100px" />
+
+        <WImage url={row.cover_type === 0 ? base_url + row.cover_url : row.cover_url}  width="200px" />
+<!--        <img src={row.cover_type === 0 ? base_url + row.cover_url : row.cover_url} alt="" style="width:100px" />-->
       </div>
       <div slot="cell_2" let:prop={row}>
         <WTag type={row.cover_type === 1 ? '' : 'info'}>{row.cover_type === 1 ? '链接' : '本地'}</WTag>

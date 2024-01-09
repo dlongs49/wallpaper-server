@@ -23,19 +23,19 @@
       <tr>
         {#each column as cell,i}
           <td>
-            {#if cell.idx === 1}
+            {#if i === 1}
               <div class="cell">
                 <slot name="cell_1" prop={item}></slot>
               </div>
-            {:else if cell.idx === 2}
+            {:else if i === 2}
               <div class="cell">
                 <slot name="cell_2" prop={item}></slot>
               </div>
-            {:else if cell.idx === 3}
+            {:else if i === 3}
               <div class="cell">
                 <slot name="cell_3" prop={item}></slot>
               </div>
-            {:else if cell.idx === 4}
+            {:else if i === 4}
               <div class="cell">
                 <slot name="cell_4" prop={item}></slot>
               </div>
