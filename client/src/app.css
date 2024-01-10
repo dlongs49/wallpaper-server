@@ -11,35 +11,3 @@ html, body, #app {
 .w-image_close:hover {
     background: rgba(0, 0, 0, 0.78) !important;
 }
-.w-image_open{
-    -webkit-animation: backgroundFadeIn .3s ease-in;
-    animation: backgroundFadeIn .3s ease-in;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-.w-image_closing{
-    -webkit-animation: backgroundFadeOut .3s ease-in .1s;
-    animation: backgroundFadeOut .3s ease-in .1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-@keyframes backgroundFadeIn {
-    from {
-        background-color: #000;
-        opacity: 0;
-    }
-
-    to {
-        opacity: .75;
-    }
-}
-@keyframes backgroundFadeOut {
-    from {
-        background-color: #000;
-        opacity: .75;
-    }
-
-    to {
-        opacity: 0;
-    }
-}

@@ -1,8 +1,9 @@
 <script>
 
+import { BeEmpty } from "@brewer/beerui";
 </script>
 <main>
-    <h1> 未找到该页面 404</h1>
+    <BeEmpty description="未找到该页面 - 404" size="300px"/>
     <a href="/">返回首页</a>
 </main>
 <style lang="less">

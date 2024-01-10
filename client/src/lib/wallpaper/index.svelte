@@ -7,14 +7,13 @@
     BeSelect,
   } from "@brewer/beerui";
   import { onMount } from "svelte";
-  import {  fetchPost } from "@/utils/fetch.js";
-  import Pagination from "@/components/pagination/BePagination.svelte";
+  import {  fetchPost } from "../../utils/fetch.js";
+  import Pagination from "../../components/pagination/BePagination.svelte";
   import FormDialog from "./formDialog.svelte";
   import dayjs from "dayjs";
-  import { message } from "@/components/message/showNotice.js";
-  import { loading } from "@/utils/useLoading.js";
-  import {WTable,WTag,WImage} from "@/components/w_component/index.js";
-  import WButton from "@/components/w_component/button/WButton.svelte";
+  import { message } from "../../components/message/showNotice.js";
+  import { loading } from "../../utils/useLoading.js";
+  import {WTable,WTag,WImage} from "../../components/w_component/index.js";
   let isLoading = false;
   let tableData = [];
   let visible = false;
@@ -165,8 +164,6 @@
       </div>
     </WTable>
     <Pagination page={page} {changePage} />
-    <WButton type="primary" loading={false} style="margin-left: 10px">检查</WButton>
-
   </div>
   {#if visible}
     <FormDialog visible={visible} id={id} on:disClose={handleClose} />
