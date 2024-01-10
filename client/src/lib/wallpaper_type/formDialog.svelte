@@ -8,15 +8,17 @@
     BeRadio,
     BeRadioGroup
   } from "@brewer/beerui";
-  import UploadImg from "@/components/upload/BeUpload.svelte";
-  import { fetchPost, fetchGet } from "@/utils/fetch.js";
+  import UploadImg from "../../components/upload/BeUpload.svelte";
+  import { fetchPost, fetchGet } from "../../utils/fetch.js";
   import { createEventDispatcher, onMount } from "svelte";
-  import { message } from "@/components/message/showNotice.js";
-  import { loading } from "@/utils/useLoading.js";
-  import {handleInspectImg} from "@/utils/tools.js";
+  import { message } from "../../components/message/showNotice.js";
+  import { loading } from "../../utils/useLoading.js";
+  import {handleInspectImg} from "../../utils/tools.js";
+  import WButton from "../../components/w_component/button/WButton.svelte";
 
   const dispatch = createEventDispatcher();
   let isLoading = false;
+  let isInspec = false
   export let visible = false;
   export let id = null;
   let rules = {
@@ -67,6 +69,13 @@
       form.cover_url = res.data.url;
     }
   };
+  // 检查图片是否可用
+  let handleIsImg = (data)=>{
+    isInspec = true
+    handleInspectImg(data,()=>{
+      isInspec = false
+    })
+  }
   // 提交表单
   const handleOk = async () => {
     if (!form.cover_type || !form.cover_url || !form.title) {
@@ -118,9 +127,7 @@
         </BeFormItem>
         {#if form.cover_type === '0'}
           <BeFormItem label="本地上传">
-            <!--{#if visible}-->
             <UploadImg onUrl={onUrl} imgUrl={form.cover_url} />
-            <!--{/if}-->
           </BeFormItem>
         {/if}
         <BeFormItem label="链接地址" prop="cover_url">
@@ -128,7 +135,7 @@
             <BeInput disabled={form.cover_type === '0'} bind:value={form.cover_url}
                      placeholder="输入壁纸链接/上传链接" />
             {#if form.cover_type === '1'}
-              <BeButton type="primary" on:click={()=>handleInspectImg(form.url)} style="margin-left: 10px">检查</BeButton>
+              <WButton type="primary" on:click={()=>handleIsImg(form.cover_url)} loading={isInspec} style="margin-left: 10px">{isInspec?"检查中" : '检查'}</WButton>
             {/if}
           </div>
         </BeFormItem>

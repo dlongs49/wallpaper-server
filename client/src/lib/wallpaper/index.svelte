@@ -165,7 +165,8 @@
       </div>
     </WTable>
     <Pagination page={page} {changePage} />
-    <WButton>点击</WButton>
+    <WButton type="primary" loading={false} style="margin-left: 10px">检查</WButton>
+
   </div>
   {#if visible}
     <FormDialog visible={visible} id={id} on:disClose={handleClose} />

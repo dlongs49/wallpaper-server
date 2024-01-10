@@ -1,27 +1,32 @@
 <script>
-    export let type = 'primary'
-    export let title = ""
+  export let type = "primary";
+  export let loading = false;
+  export let title = "";
+  export let style = "";
+
 </script>
 <!-- 参考ElementUI -->
-<button class="w-button w-button_primary w-button_loading">
-    <div class="w-button_flex">
-        {#if true}
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                 style="margin: auto; background: none;" width="200px" height="200px"
-                 viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-                <circle cx="50" cy="50" fill="none" stroke="#fff" stroke-width="10" r="35"
-                        stroke-dasharray="164.93361431346415 56.97787143782138">
-                    <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite"
-                                      dur="0.5952380952380952s"
-                                      values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-                </circle>
-            </svg>
-        {/if}
-        <span>
-          <slot title={title}/>
+<button class={'w-button w-button_'+type} class:w-button_loading={loading} style={style} on:click type="button">
+  <span class="w-button_flex">
+    {#if loading}
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+           style="margin: auto; background: none;" width="200px" height="200px"
+           viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <circle cx="50" cy="50" fill="none" stroke="#fff" stroke-width="10" r="35"
+                stroke-dasharray="164.93361431346415 56.97787143782138">
+          <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite"
+                            dur="0.5952380952380952s"
+                            values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+        </circle>
+      </svg>
+    {/if}
+    <span>
+          <slot title={title} />
         </span>
-    </div>
+  </span>
+  {#if loading}
     <span class="w-button_mask"></span>
+  {/if}
 </button>
 <style lang="less">
   .w-button {

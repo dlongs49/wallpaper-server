@@ -5,22 +5,23 @@
 import {message} from "@/components/message/showNotice.js";
 
 // 检查图片资源是否可用
-export const handleInspectImg = (url)=>{
+export const handleInspectImg = (url,cb)=>{
     const reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-    if (!reg.test(url)) {
-        message.error("图片链接以http或https开头进行检查", false);
-        return;
-    }
     return new Promise((resolve,reject)=>{
+        if (!reg.test(url)) {
+            message.error("图片链接以http或https开头进行检查", false);
+            cb()
+            return
+        }
         const image = new Image()
         image.src = url
         image.onload = (e)=>{
             message.success("该资源检查正常", false);
-            resolve()
+            cb()
         }
         image.onerror = (e)=>{
             message.error("该资源不可用", false);
-            reject()
+            cb()
         }
     })
 }
