@@ -1,6 +1,6 @@
 <script>
     import {BeButton, BeForm, BeFormItem, BeInput} from "@brewer/beerui";
-    import router from '@/router/index'
+    import router from '../../router/index'
     let form = {}
     let rules = []
 
