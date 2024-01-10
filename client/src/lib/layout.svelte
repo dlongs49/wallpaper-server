@@ -1,37 +1,41 @@
 <script>
-    import {BeIcon} from "@brewer/beerui";
-    import {View} from 'svelte-pilot'
-    import router from "@/router/index.js";
+  import { BeIcon } from "@brewer/beerui";
+  import { View } from "svelte-pilot";
+  import router from "../router/index.js";
+  import { onMount } from "svelte";
 
-    let data = [
-        {i: 0, title: "壁纸类型管理", path: "/wallpaper_type"},
-        {i: 1, title: "壁纸管理", path: "/wallpaper"}];
-    let selected = data[0];
+  let data = [
+    { i: 0, title: "壁纸类型管理", path: "/wallpaper_type" },
+    { i: 1, title: "壁纸管理", path: "/wallpaper" }];
+  let path = "/wallpaper";
+  onMount(() => {
+    path = router.current.path;
+  });
 
-    function handleMenu(val) {
-        selected = val;
-        router.push(val.path)
-    }
+  function handleMenu(val) {
+    path = val.path;
+    router.push(val.path);
+  }
 </script>
 <main>
-    <div class="bmenu">
-        <div class="head_logo">
-            <img class="logo" src="/static/images/svelte.svg" alt="">
-        </div>
-        <div class="menu_list">
-            {#each data as item, i}
-                <button class={i === selected.i ? 'item active' : 'item'} on:click={()=>handleMenu({...item,i})}>
-                <span class="bicon">
-                    <BeIcon name="app" color={i === selected.i ? '#fff' : '#000'}/>
-                </span>
-                    <span class="title">{item.title}</span>
-                </button>
-            {/each}
-        </div>
+  <div class="bmenu">
+    <div class="head_logo">
+      <img class="logo" src="/static/images/svelte.svg" alt="">
     </div>
-    <section>
-        <View/>
-    </section>
+    <div class="menu_list">
+      {#each data as item, i}
+        <button class={item.path === path ? 'item active' : 'item'} on:click={()=>handleMenu(item)}>
+                <span class="bicon">
+                    <BeIcon name="app" color={item.path === path ? '#fff' : '#000'} />
+                </span>
+          <span class="title">{item.title}</span>
+        </button>
+      {/each}
+    </div>
+  </div>
+  <section>
+    <View />
+  </section>
 </main>
 <style lang="less">
   main {

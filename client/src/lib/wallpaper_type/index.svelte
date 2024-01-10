@@ -8,13 +8,13 @@
     BeTable
   } from "@brewer/beerui";
   import { onMount } from "svelte";
-  import { fetchPost } from "@/utils/fetch.js";
-  import Pagination from "@/components/pagination/BePagination.svelte";
+  import { fetchPost } from "../../utils/fetch.js";
+  import Pagination from "../../components/pagination/BePagination.svelte";
   import FormDialog from "./formDialog.svelte";
   import dayjs from "dayjs";
-  import { message } from "@/components/message/showNotice.js";
-  import { loading } from "@/utils/useLoading.js";
-  import {WTable,WTag,WImage} from "@/components/w_component/index.js";
+  import { message } from "../../components/message/showNotice.js";
+  import { loading } from "../../utils/useLoading.js";
+  import {WTable,WTag,WImage} from "../../components/w_component/index.js";
   let isLoading = false;
   let tableData = [];
   let visible = false;
