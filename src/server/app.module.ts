@@ -4,6 +4,7 @@ import {DbModule} from "../config/db.module";
 import {SignModule} from "./sign/sign.module";
 import {UploadModule} from "./upload/upload.module";
 import { WallpaperModule } from './wallpaper/wallpaper.module';
+import {LoginModule} from "./admin/login/login.module";
 
 
 @Module({
@@ -12,7 +13,8 @@ import { WallpaperModule } from './wallpaper/wallpaper.module';
         DbModule,
         SignModule,
         UploadModule,
-        WallpaperModule
+        WallpaperModule,
+        LoginModule
     ],
     controllers: [],
 })
