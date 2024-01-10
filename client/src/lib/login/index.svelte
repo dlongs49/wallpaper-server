@@ -28,9 +28,6 @@
         }
 
     }
-    function toreq() {
-        fetchPost("/api/login/test",{})
-    }
 </script>
 
 <main>
@@ -53,7 +50,6 @@
             <BeFormItem>
 <!--                <WButton>登录</WButton>-->
                 <BeButton type='primary' class="login_btn" on:click={handleSubmit}>登录</BeButton>
-                <BeButton type='primary' class="login_btn" on:click={toreq}>请求</BeButton>
             </BeFormItem>
         </BeForm>
     </div>

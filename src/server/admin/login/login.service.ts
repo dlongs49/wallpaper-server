@@ -22,8 +22,7 @@ export class LoginService {
         await this.cacheManager.set('w_k', val, expired*1000);
         throw new ResSuccess('登录成功')
     }
-    test(loginDto:LoginDto,req:Request,session:any){
-        // console.log(session)
+    test(loginDto:LoginDto,req:Request){
         throw new ResSuccess({})
     }
 }
