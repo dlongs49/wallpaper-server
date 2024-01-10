@@ -3,10 +3,11 @@
 * DateTime:2024/1/10 下午 10:47
 */
 import { Request, Response, NextFunction } from 'express';
-import {Inject, NestMiddleware} from "@nestjs/common";
+import {HttpException, HttpStatus, Inject, NestMiddleware} from "@nestjs/common";
 import {CACHE_MANAGER} from "@nestjs/common/cache";
 import {Cache} from 'cache-manager'
 import {ResFail} from "./http.response";
+import {Status} from "./status";
 export class SessionMiddleware implements  NestMiddleware{
     constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {
     }
@@ -16,7 +17,7 @@ export class SessionMiddleware implements  NestMiddleware{
             next()
         }
         if(!value){
-            throw new ResFail("登录失效")
+            throw new HttpException({ code: Status.NOSIGN, msg: "令牌失效,重新登录" }, HttpStatus.OK);
         }
         next();
     }

@@ -1,4 +1,6 @@
 // 将对象形式参数拼接 url
+import router from "@/router/index.js";
+
 function spStr(data) {
     let str = "";
     if (JSON.stringify(data) === "{}") {
@@ -26,7 +28,13 @@ export const fetchGet = (api, params = {}) => {
     return new Promise((resolve, reject) => {
         fetch(`${base_url}${api}?${par_str}`)
             .then(response => response.json())
-            .then(data => resolve(data)).catch((err) => reject(err));
+            .then(data => {
+                if (data.code === 401) {
+                    document.cookie = "cookieName=; path=/;";
+                    router.push("/login")
+                }
+                resolve(data)
+            }).catch((err) => reject(err));
     })
 
 };
@@ -39,7 +47,13 @@ export const fetchPost = (api, body = null, query = {}) => {
             body: JSON.stringify(body)
         })
             .then(response => response.json())
-            .then(data => resolve(data)).catch((err) => reject(err));
+            .then(data => {
+                if (data.code === 401) {
+                    document.cookie = "cookieName=; path=/;";
+                    router.push("/login")
+                }
+                resolve(data)
+            }).catch((err) => reject(err));
     });
 
 };

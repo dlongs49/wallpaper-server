@@ -16,6 +16,9 @@ async function bootstrap() {
     let file_path = join(__dirname, '..')
     app.use('/upload', express.static(join(file_path, 'www/public'))); // 静态资源开放
     app.use('/', express.static(join(file_path, 'www/client'))); // 静态资源开放
+    app.use("/dev",(req,res)=>{
+        res.status(202).send("http://127.0.0.1:81")
+    })
     swaggerConfig(app) // swagger抽出
     app.enableCors(); // 解决跨域
     await app.listen(process.env.SERVER_POTY);
