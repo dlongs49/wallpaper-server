@@ -18,6 +18,7 @@ specifiers:
   '@types/sequelize': ^4.28.19
   '@types/supertest': ^2.0.12
   '@types/uuid': ^9.0.7
+  cookie-parser: ^1.4.6
   dayjs: ^1.11.10
   md5: ^2.3.0
   mysql2: ^3.6.5
@@ -29,7 +30,6 @@ specifiers:
   sequelize: ^6.35.2
   sequelize-typescript: ^2.1.6
   source-map-support: ^0.5.21
-  svelte-pilot: ^0.6.2
   ts-loader: ^9.4.3
   ts-node: ^10.9.1
   tsconfig-paths: ^4.2.0
@@ -44,6 +44,7 @@ dependencies:
   '@nestjs/passport': 10.0.3_vimfyl3wpjcywyuazl7dig7gki
   '@nestjs/platform-express': registry.npmmirror.com/@nestjs/platform-express/10.3.0_3rapiyhwjmezpbsl5hhpinbhca
   '@nestjs/swagger': registry.npmmirror.com/@nestjs/swagger/7.1.17_jqsf354cn24bdr6g6bveaykq2y
+  cookie-parser: registry.npmmirror.com/cookie-parser/1.4.6
   dayjs: 1.11.10
   md5: 2.3.0
   mysql2: 3.6.5
@@ -68,7 +69,6 @@ devDependencies:
   '@types/uuid': registry.npmmirror.com/@types/uuid/9.0.7
   prettier: registry.npmmirror.com/prettier/3.1.1
   source-map-support: registry.npmmirror.com/source-map-support/0.5.21
-  svelte-pilot: registry.npmmirror.com/svelte-pilot/0.6.2
   ts-loader: registry.npmmirror.com/ts-loader/9.5.1_typescript@5.3.3
   ts-node: registry.npmmirror.com/ts-node/10.9.2_7ln3lwozyybesesf4lghtaucbi
   tsconfig-paths: registry.npmmirror.com/tsconfig-paths/4.2.0
@@ -1848,12 +1848,6 @@ packages:
     version: 1.0.30001572
     dev: true
 
-  registry.npmmirror.com/cast-string/0.6.4:
-    resolution: {integrity: sha512-lcizm+ZFpgljMGx2EZjw+S8ezgxwBpU893yTFODQkiL6Eld7cvwYgeVVx2pQSGMI2ZuvJfrKXI7vYjzOUi6a3A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cast-string/-/cast-string-0.6.4.tgz}
-    name: cast-string
-    version: 0.6.4
-    dev: true
-
   registry.npmmirror.com/chalk/2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/chalk/-/chalk-2.4.2.tgz}
     name: chalk
@@ -2038,10 +2032,27 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
+  registry.npmmirror.com/cookie-parser/1.4.6:
+    resolution: {integrity: sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cookie-parser/-/cookie-parser-1.4.6.tgz}
+    name: cookie-parser
+    version: 1.4.6
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      cookie: registry.npmmirror.com/cookie/0.4.1
+      cookie-signature: registry.npmmirror.com/cookie-signature/1.0.6
+    dev: false
+
   registry.npmmirror.com/cookie-signature/1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cookie-signature/-/cookie-signature-1.0.6.tgz}
     name: cookie-signature
     version: 1.0.6
+    dev: false
+
+  registry.npmmirror.com/cookie/0.4.1:
+    resolution: {integrity: sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cookie/-/cookie-0.4.1.tgz}
+    name: cookie
+    version: 0.4.1
+    engines: {node: '>= 0.6'}
     dev: false
 
   registry.npmmirror.com/cookie/0.5.0:
@@ -2916,12 +2927,6 @@ packages:
     name: loader-runner
     version: 4.3.0
     engines: {node: '>=6.11.5'}
-    dev: true
-
-  registry.npmmirror.com/lodash-es/4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lodash-es/-/lodash-es-4.17.21.tgz}
-    name: lodash-es
-    version: 4.17.21
     dev: true
 
   registry.npmmirror.com/lodash/4.17.21:
@@ -3843,18 +3848,6 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  registry.npmmirror.com/svelte-pilot/0.6.2:
-    resolution: {integrity: sha512-sel6AI85L9Dh4DYr6x9s2HItgwJeY6i074sTZsD4wPfIZIyf3bm+ChMGHW8pnYmA8l6cSA5LWNPz9guS68I9LQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/svelte-pilot/-/svelte-pilot-0.6.2.tgz}
-    name: svelte-pilot
-    version: 0.6.2
-    peerDependencies:
-      svelte: ^4
-    dependencies:
-      cast-string: registry.npmmirror.com/cast-string/0.6.4
-      lodash-es: registry.npmmirror.com/lodash-es/4.17.21
-      url-router: registry.npmmirror.com/url-router/13.0.0
-    dev: true
-
   registry.npmmirror.com/swagger-ui-dist/5.10.3:
     resolution: {integrity: sha512-fu3aozjxFWsmcO1vyt1q1Ji2kN7KlTd1vHy27E9WgPyXo9nrEzhQPqgxaAjbMsOmb8XFKNGo4Sa3Q+84Fh+pFw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/swagger-ui-dist/-/swagger-ui-dist-5.10.3.tgz}
     name: swagger-ui-dist
@@ -4125,12 +4118,6 @@ packages:
     version: 4.4.1
     dependencies:
       punycode: registry.npmmirror.com/punycode/2.3.1
-    dev: true
-
-  registry.npmmirror.com/url-router/13.0.0:
-    resolution: {integrity: sha512-ePA6wkquLJfX+mjEcFvFzdLx/PuthtUN0u6eqK/EIux8iQY7Ky03UTCyerDqlvA5lgyImtwNbtTIjp1a1/VtKQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/url-router/-/url-router-13.0.0.tgz}
-    name: url-router
-    version: 13.0.0
     dev: true
 
   registry.npmmirror.com/util-deprecate/1.0.2:
