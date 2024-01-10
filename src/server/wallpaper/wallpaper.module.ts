@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import {Module, NestMiddleware} from '@nestjs/common';
 import { WallpaperService } from './wallpaper.service';
 import {WallpaperController} from "./wallpaper.controller";
 import {WallpaperTypeModel} from "./model/wallpaper_type.model";
@@ -12,4 +12,4 @@ import {WallpaperModel} from "./model/wallpaper.model";
       {  provide: 'WALLPAPER_PROVIDERS',useValue: WallpaperModel},
   ]
 })
-export class WallpaperModule {}
+export class WallpaperModule{}

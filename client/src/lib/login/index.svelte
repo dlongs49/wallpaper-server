@@ -1,11 +1,35 @@
 <script>
     import {BeButton, BeForm, BeFormItem, BeInput} from "@brewer/beerui";
+    import {message} from "../../components/message/showNotice.js";
+    import {fetchPost} from "../../utils/fetch.js";
+    import {WButton} from "../../components/w_component/index.js";
     import router from '../../router/index'
-    let form = {}
-    let rules = []
 
-    function handleSubmit() {
-      router.push("/")
+    let form = {
+        password:'string',
+        account:'string'
+    }
+
+    const handleSubmit = async () => {
+
+        if (!form.account || !form.password) {
+            message.warning("账号密码不能为空")
+            return
+        }
+        try {
+            const {code, msg} = await fetchPost("/api/login/admin_login", form)
+            if(code == 200){
+                // router.push("/")
+            }else{
+                message.warning(msg)
+            }
+        } catch (e) {
+            message.error("服务内部异常,联系管理员")
+        }
+
+    }
+    function toreq() {
+        fetchPost("/api/login/test",{})
     }
 </script>
 
@@ -18,18 +42,18 @@
         <BeForm
                 class="bform"
                 bind:model={form}
-                bind:rules={rules}
-                on:submit={handleSubmit}
                 labelWidth="40px"
         >
-            <BeFormItem label='账号' prop='name'>
-                <BeInput bind:value={form.name} placeholder="输入账号"/>
+            <BeFormItem label='账号'>
+                <BeInput bind:value={form.account} placeholder="输入账号"/>
             </BeFormItem>
-            <BeFormItem label='密码' prop='name'>
-                <BeInput bind:value={form.name} type="password" placeholder="输入密码"/>
+            <BeFormItem label='密码'>
+                <BeInput bind:value={form.password} type="password" placeholder="输入密码"/>
             </BeFormItem>
             <BeFormItem>
+<!--                <WButton>登录</WButton>-->
                 <BeButton type='primary' class="login_btn" on:click={handleSubmit}>登录</BeButton>
+                <BeButton type='primary' class="login_btn" on:click={toreq}>请求</BeButton>
             </BeFormItem>
         </BeForm>
     </div>
@@ -52,6 +76,7 @@
       background: rgba(255, 255, 255, 0.2);
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
+
       .head {
         display: flex;
         align-items: center;

@@ -1,7 +1,9 @@
-import {Body, Controller, Post} from '@nestjs/common';
+import {Body, Controller, Post, Req, Res, Session} from '@nestjs/common';
 import {LoginService} from "./login.service";
 import {LoginDto} from "./dto/login.dto";
 import {ApiOperation, ApiTags} from "@nestjs/swagger";
+import {Request, Response} from "express";
+
 @ApiTags("后台登录")
 @Controller('login')
 export class LoginController {
@@ -9,7 +11,12 @@ export class LoginController {
     }
     @ApiOperation({ summary: '登录' })
     @Post("admin_login")
-    setCookies(@Body() loginDto:LoginDto){
-        return this.loginServie.setCookies(loginDto)
+    adminLogin(@Body() loginDto:LoginDto,@Res() res:Response){
+        return this.loginServie.adminLogin(loginDto,res)
+    }
+    @ApiOperation({ summary: '测试' })
+    @Post("test")
+    test(@Body() loginDto:LoginDto,@Req() req:Request,@Session() session:any){
+        return this.loginServie.test(loginDto,req,session)
     }
 }
