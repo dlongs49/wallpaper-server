@@ -11,16 +11,6 @@ import session from "express-session";
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.use(cookieParser(process.env.COOKEIS_KEY));
-    // app.use(
-    //     session({
-    //         secret: '__wa__',
-    //         cookie: {maxAge: 10000, httpOnly: true, signed: false},
-    //         rolling: true,
-    //         saveUninitialized: false,
-    //         name: 'wa_suid',
-    //         resave: false
-    //     }),
-    // );
     app.setGlobalPrefix('api'); // 路由前缀
     app.useGlobalFilters(new HttpAllFilter(), new HttpFilter())
     let file_path = join(__dirname, '..')

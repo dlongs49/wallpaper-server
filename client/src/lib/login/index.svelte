@@ -18,8 +18,8 @@
         }
         try {
             const {code, msg} = await fetchPost("/api/login/admin_login", form)
-            if(code == 200){
-                // router.push("/")
+            if(code === 200){
+                router.push("/")
             }else{
                 message.warning(msg)
             }
