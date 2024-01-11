@@ -13,14 +13,17 @@ export class SessionMiddleware implements  NestMiddleware{
     async use(req: Request, res: Response, next: NextFunction) {
         const value = await this.cacheManager.get('w_k');
         const w_k = req.headers.w_k.toString()
+        let val = Buffer.from(w_k,'base64').toString('utf-8')
+        console.log(value,val)
         if(req.path === '/api/login/admin_login'){
             next()
         }
-        let val = Buffer.from(w_k,'base64').toString('utf-8')
         if(!value || !w_k){
+            await this.cacheManager.del('w_k');
             throw new HttpException({ code: Status.NOSIGN, msg: "令牌失效,重新登录" }, HttpStatus.OK);
         }
         if(val != value){
+            await this.cacheManager.del('w_k');
             throw new HttpException({ code: Status.NOSIGN, msg: "令牌不正确" }, HttpStatus.OK);
         }
         next();

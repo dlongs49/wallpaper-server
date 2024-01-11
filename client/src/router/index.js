@@ -13,9 +13,9 @@ export default new Router({
         {
             path: '/',
             component: () => import('../lib/layout.svelte'),
-            beforeEnter: () => {
-                // return '/wallpaper_type'
-            }
+            // beforeEnter: () => {
+            //     return '/wallpaper_type'
+            // }
         },
         {
             component: () => import('../lib/layout.svelte'),
