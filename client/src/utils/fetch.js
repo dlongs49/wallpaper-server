@@ -35,7 +35,7 @@ export const fetchGet = (api, params = {}) => {
             .then(response => response.json())
             .then(data => {
                 if (data.code === 401) {
-                    document.cookie = "cookieName=; path=/;";
+                    localStorage.clear()
                     router.push("/login")
                 }
                 resolve(data)
@@ -57,7 +57,7 @@ export const fetchPost = (api, body = null, query = {}) => {
             .then(response => response.json())
             .then(data => {
                 if (data.code === 401) {
-                    document.cookie = "cookieName=; path=/;";
+                    localStorage.clear()
                     router.push("/login")
                 }
                 resolve(data)
