@@ -29,8 +29,6 @@
         }
 
     })
-    if(imgDom){
-    }
 </script>
 <div class="w-image" style={'width:'+width}>
     <img class="w-image-show" src={url} alt="" bind:this={imgDom}/>

@@ -3,14 +3,13 @@
   export let loading = false;
   export let title = "";
   export let style = "";
-
 </script>
 <!-- 参考ElementUI -->
 <button class={'w-button w-button_'+type} class:w-button_loading={loading} style={style} on:click type="button">
   <span class="w-button_flex">
     {#if loading}
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-           style="margin: auto; background: none;" width="200px" height="200px"
+           style="background: none;" width="200px" height="200px"
            viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
         <circle cx="50" cy="50" fill="none" stroke="#fff" stroke-width="10" r="35"
                 stroke-dasharray="164.93361431346415 56.97787143782138">

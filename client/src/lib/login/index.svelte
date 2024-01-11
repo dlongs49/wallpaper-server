@@ -6,10 +6,10 @@
     import router from '../../router/index'
 
     let form = {
-        password:'string',
-        account:'string'
+        password: 'string',
+        account: 'string'
     }
-
+    let loading = false
     const handleSubmit = async () => {
 
         if (!form.account || !form.password) {
@@ -17,14 +17,20 @@
             return
         }
         try {
-            const {code,data, msg} = await fetchPost("/api/login/admin_login", form)
-            if(code === 200){
-                localStorage.setItem('w_k',data)
-                router.push("/")
-            }else{
-                message.warning(msg)
-            }
+            loading = true
+            const {code, data, msg} = await fetchPost("/api/login/admin_login", form)
+            setTimeout(() => {
+                loading = false
+                if (code === 200) {
+                    localStorage.setItem('w_k', data)
+                    router.push("/")
+                } else {
+                    message.warning(msg)
+                }
+            }, 1500)
+
         } catch (e) {
+            loading = false
             message.error("服务内部异常,联系管理员")
         }
 
@@ -49,8 +55,8 @@
                 <BeInput bind:value={form.password} type="password" placeholder="输入密码"/>
             </BeFormItem>
             <BeFormItem>
-<!--                <WButton>登录</WButton>-->
-                <BeButton type='primary' class="login_btn" on:click={handleSubmit}>登录</BeButton>
+                <WButton style="width:70%;display: block;margin: 0 auto;" on:click={handleSubmit}
+                         loading={loading}>{loading ? '登录中' : '登录'}</WButton>
             </BeFormItem>
         </BeForm>
     </div>
@@ -89,12 +95,6 @@
       :global(.bform) {
         width: 90%;
         margin: 60px auto 0;
-      }
-
-      :global(.login_btn) {
-        width: 70%;
-        display: block;
-        margin: 0 auto;
       }
     }
   }
