@@ -2,6 +2,7 @@ import './app.css'
 import '@brewer/beerui/assets/beer.css'
 import { ClientApp } from 'svelte-pilot'
 import router from './router/index'
+let flag = true
 // 路由进来之前
 router.on('beforeChange',(to)=>{
     let ck = document.cookie;
@@ -18,6 +19,10 @@ router.on('beforeChange',(to)=>{
             router.push("/login")
         }
         if(to.path === '/'){
+            router.push("/login")
+        }
+        if(flag){
+            flag = false
             router.push("/login")
         }
     }
