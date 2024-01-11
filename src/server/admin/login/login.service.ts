@@ -6,6 +6,7 @@ import {ResFail, ResSuccess} from "../../../utils/http.response";
 import {CACHE_MANAGER} from "@nestjs/common/cache";
 import {Cache} from "cache-manager";
 import md5 from 'md5'
+import {v4 as uuid} from "uuid";
 @Injectable()
 export class LoginService {
     constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {
@@ -16,11 +17,11 @@ export class LoginService {
         if (ac != loginDto.account || pwd != loginDto.password) {
             throw new ResFail("账号或密码错误")
         }
-        let val = md5(ac) + new Date().getTime()
-        let expired = Number(process.env.COOKIES_EXPIRED)
-        res.cookie('w_k', val, {maxAge: expired*1000, httpOnly: true, signed: true})
-        await this.cacheManager.set('w_k', val, expired*1000);
-        throw new ResSuccess('登录成功')
+        let str:string = md5(uuid()+new Date().getTime().toString())
+        let val = Buffer.from(str,'utf-8').toString('base64')
+        let expired = Number(process.env.ADMIN_EXPIRED)
+        await this.cacheManager.set('w_k', str, expired*1000);
+        throw new ResSuccess(val)
     }
     test(req:Request){
         throw new ResSuccess(req.ip)

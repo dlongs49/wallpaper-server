@@ -30,7 +30,7 @@ export class AppModule implements NestModule {
             {path: "sign/(.*)", method: RequestMethod.ALL},
             {path: "upload/(.*)", method: RequestMethod.ALL},
             {path: "wallpaper/app/(.*)", method: RequestMethod.ALL},
-            {path: "login/(.*)", method: RequestMethod.ALL},
+            {path: "login/admin_login", method: RequestMethod.ALL},
         ).forRoutes(SignController, WallpaperController, LoginController)
     }
 }

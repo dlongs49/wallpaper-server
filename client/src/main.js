@@ -5,27 +5,25 @@ import router from './router/index'
 let flag = true
 // 路由进来之前
 router.on('beforeChange',(to)=>{
-    let ck = document.cookie;
-    console.log(ck)
-    if(ck){
-        if(to.path === "/"){
-            router.push("/wallpaper_type")
-        }
-        if(to.path === "/login"){
-            router.push("/")
-        }
-    }else{
-        if(to.path !== '/login'){
-            router.push("/login")
-        }
-        if(to.path === '/'){
-            router.push("/login")
-        }
-        if(flag){
-            flag = false
-            router.push("/login")
-        }
-    }
+    // if(ck){
+    //     if(to.path === "/"){
+    //         router.push("/wallpaper_type")
+    //     }
+    //     if(to.path === "/login"){
+    //         router.push("/")
+    //     }
+    // }else{
+    //     if(to.path !== '/login'){
+    //         router.push("/login")
+    //     }
+    //     if(to.path === '/'){
+    //         router.push("/login")
+    //     }
+    //     if(flag){
+    //         flag = false
+    //         router.push("/login")
+    //     }
+    // }
 })
 router.start(
     () =>

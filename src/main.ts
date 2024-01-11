@@ -4,11 +4,9 @@ import {swaggerConfig} from "./config/swagger.config";
 import {HttpAllFilter, HttpFilter} from "./utils/http.filter";
 import {join} from 'path'
 import * as express from 'express';
-import cookieParser from 'cookie-parser'
 import * as process from "process";
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
-    app.use(cookieParser(process.env.COOKEIS_KEY));
     app.setGlobalPrefix('api'); // 路由前缀
     app.useGlobalFilters(new HttpAllFilter(), new HttpFilter())
     let file_path = join(__dirname, '..')

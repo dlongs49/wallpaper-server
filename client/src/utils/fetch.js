@@ -26,7 +26,12 @@ export const fetchGet = (api, params = {}) => {
     }
     spStr(par_str);
     return new Promise((resolve, reject) => {
-        fetch(`${base_url}${api}?${par_str}`)
+        fetch(`${base_url}${api}?${par_str}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "w_k": localStorage.getItem('w_k')
+            },
+        })
             .then(response => response.json())
             .then(data => {
                 if (data.code === 401) {
@@ -43,7 +48,10 @@ export const fetchPost = (api, body = null, query = {}) => {
     return new Promise((resolve, reject) => {
         fetch(`${base_url}${api}${spStr(query)}`, {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                "w_k": localStorage.getItem('w_k')
+            },
             body: JSON.stringify(body)
         })
             .then(response => response.json())

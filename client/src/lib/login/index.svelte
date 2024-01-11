@@ -17,8 +17,9 @@
             return
         }
         try {
-            const {code, msg} = await fetchPost("/api/login/admin_login", form)
+            const {code,data, msg} = await fetchPost("/api/login/admin_login", form)
             if(code === 200){
+                localStorage.setItem('w_k',data)
                 router.push("/")
             }else{
                 message.warning(msg)
