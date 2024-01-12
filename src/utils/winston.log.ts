@@ -2,7 +2,6 @@
 * Author:dinglong
 * DateTime:2024/1/12 下午 10:23
 */
-import {utilities, WinstonModule} from 'nest-winston';
 import 'winston-daily-rotate-file';
 import winston, {createLogger} from "winston";
 

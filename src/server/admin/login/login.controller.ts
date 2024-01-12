@@ -16,7 +16,7 @@ export class LoginController {
     }
     @ApiOperation({ summary: '测试' })
     @Post("test")
-    test(@Req() req:Request){
-        return this.loginServie.test(req)
+    testCon(@Req() req:Request){
+        return this.loginServie.testService(req)
     }
 }

@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@nestjs/common';
+import {Inject, Injectable, Logger} from '@nestjs/common';
 import {LoginDto} from "./dto/login.dto";
 import * as process from "process";
 import {Response,Request} from "express";
@@ -23,7 +23,8 @@ export class LoginService {
         await this.cacheManager.set('w_k', str, expired*1000);
         throw new ResSuccess(val)
     }
-    test(req:Request){
-        throw new ResSuccess(req.ip)
+    testService(req:Request){
+        Logger.log(req.ip)
+        throw new ResFail(req.ip)
     }
 }
