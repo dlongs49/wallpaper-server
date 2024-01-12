@@ -4,6 +4,7 @@ import { SignModel } from "../server/sign/model/sign.model";
 import {WallpaperTypeModel} from "../server/wallpaper/model/wallpaper_type.model";
 import {WallpaperModel} from "../server/wallpaper/model/wallpaper.model";
 import {CollectModel} from "../server/sign/model/collect.model";
+import {Logger} from "@nestjs/common";
 
 export const dbProviders = [
   {
@@ -16,7 +17,10 @@ export const dbProviders = [
         username: process.env.DATABASE_USER_NAME,
         password: process.env.DATABASE_USER_PWD,
         database: process.env.DATABASE_NAME,
-        timezone: '+08:00'
+        timezone: '+08:00',
+        logging:(sql)=>{
+          Logger.debug(sql)
+        }
       });
       sequelize.addModels([SignModel,WallpaperTypeModel,WallpaperModel,CollectModel]);
       await sequelize.sync();

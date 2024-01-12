@@ -10,14 +10,6 @@ export default ()=> {
     return createLogger({
         // 日志选项
         transports: [
-            new winston.transports.Console({
-                level: 'info',
-                // 字符串拼接
-                format: winston.format.combine(
-                    winston.format.timestamp(),
-                    utilities.format.nestLike(),
-                ),
-            }),
             // warn、error日志存储到/logs/application-日期.log文件中
             new winston.transports.DailyRotateFile({
                 level: 'warn',
@@ -37,6 +29,21 @@ export default ()=> {
                 level: 'info',
                 dirname: 'logs',
                 filename: 'info-%DATE%.log',
+                datePattern: 'YYYY-MM-DD-HH',
+                zippedArchive: true,
+                // 文件大小
+                maxSize: '20m',
+                // 最多14 天
+                maxFiles: '14d',
+                format: winston.format.combine(
+                    winston.format.timestamp(),
+                    winston.format.simple(),
+                ),
+            }),
+            new winston.transports.DailyRotateFile({
+                level: 'debug',
+                dirname: 'logs',
+                filename: 'debug-%DATE%.log',
                 datePattern: 'YYYY-MM-DD-HH',
                 zippedArchive: true,
                 // 文件大小
