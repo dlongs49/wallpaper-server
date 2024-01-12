@@ -5,8 +5,14 @@ import {HttpAllFilter, HttpFilter} from "./utils/http.filter";
 import {join} from 'path'
 import * as express from 'express';
 import * as process from "process";
+import {WinstonModule} from "nest-winston";
+import LogInstace from "./utils/winston.log";
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule,{
+        logger:WinstonModule.createLogger({
+            instance:LogInstace()
+        })
+    });
     app.setGlobalPrefix('api'); // 路由前缀
     app.useGlobalFilters(new HttpAllFilter(), new HttpFilter())
     let file_path = join(__dirname, '..')
