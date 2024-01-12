@@ -7,7 +7,7 @@ import {
     Catch,
     ArgumentsHost,
     HttpException,
-    InternalServerErrorException,
+    InternalServerErrorException, Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import {Status} from "./status";
@@ -19,6 +19,7 @@ export class HttpAllFilter implements ExceptionFilter {
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
         const r:any = new InternalServerErrorException().getResponse();
+        Logger.warn(r)
         response.status(200).send({
             code:Status.ERROR,
             msg:ex.message,
@@ -35,6 +36,7 @@ export class HttpFilter implements ExceptionFilter {
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
         let r:any = ex.getResponse()
+        Logger.warn(r)
           if(r.code){
               response.status(200).send(r)
           }else{

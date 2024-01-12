@@ -16,11 +16,15 @@ export default ()=> {
                 dirname: 'logs',
                 filename: 'warn-%DATE%.log',
                 datePattern: 'YYYY-MM-DD-HH',
-                zippedArchive: true,
                 maxSize: '20m',
                 maxFiles: '14d',
                 format: winston.format.combine(
-                    winston.format.timestamp(),
+                    winston.format.timestamp({
+                        format: 'YYYY-MM-DD HH:mm:ss',
+                    }),
+                    // 以json输出
+                    // winston.format.json(),
+                    // 以字符输出
                     winston.format.simple(),
                 ),
             }),
@@ -30,13 +34,14 @@ export default ()=> {
                 dirname: 'logs',
                 filename: 'info-%DATE%.log',
                 datePattern: 'YYYY-MM-DD-HH',
-                zippedArchive: true,
                 // 文件大小
                 maxSize: '20m',
                 // 最多14 天
                 maxFiles: '14d',
                 format: winston.format.combine(
-                    winston.format.timestamp(),
+                    winston.format.timestamp({
+                        format: 'YYYY-MM-DD HH:mm:ss',
+                    }),
                     winston.format.simple(),
                 ),
             }),
@@ -45,13 +50,14 @@ export default ()=> {
                 dirname: 'logs',
                 filename: 'debug-%DATE%.log',
                 datePattern: 'YYYY-MM-DD-HH',
-                zippedArchive: true,
                 // 文件大小
                 maxSize: '20m',
                 // 最多14 天
                 maxFiles: '14d',
                 format: winston.format.combine(
-                    winston.format.timestamp(),
+                    winston.format.timestamp({
+                        format: 'YYYY-MM-DD HH:mm:ss',
+                    }),
                     winston.format.simple(),
                 ),
             }),
