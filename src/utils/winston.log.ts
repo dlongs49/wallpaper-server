@@ -22,7 +22,7 @@ export default ()=> {
             new winston.transports.DailyRotateFile({
                 level: 'warn',
                 dirname: 'logs',
-                filename: 'application-%DATE%.log',
+                filename: 'warn-%DATE%.log',
                 datePattern: 'YYYY-MM-DD-HH',
                 zippedArchive: true,
                 maxSize: '20m',
