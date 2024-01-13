@@ -193,4 +193,12 @@ export class WallpaperService {
         })
         throw new ResSuccess(result)
     }
+    async getWallpaperAppDetail(id: string) {
+        const result = await this.wallpaper_providers.findOne({where: {id}, raw: true})
+        if (result) {
+            throw new ResSuccess(result)
+        } else {
+            throw new ResFail("该壁纸不存在")
+        }
+    }
 }

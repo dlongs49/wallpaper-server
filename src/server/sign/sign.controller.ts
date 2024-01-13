@@ -1,4 +1,17 @@
-import {Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query, Req, Res, UseGuards} from "@nestjs/common";
+import {
+    Body,
+    Controller,
+    Get,
+    HttpCode,
+    HttpStatus,
+    Logger,
+    Param,
+    Post,
+    Query,
+    Req,
+    Res,
+    UseGuards
+} from "@nestjs/common";
 import {ApiBearerAuth, ApiOkResponse, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {RequestDto} from "./dto/request.dto";
 import { SignService } from "./sign.service";
@@ -13,7 +26,8 @@ export class SignController {
     }
     @ApiOperation({ summary: '登录注册二合一' })
     @Post("reg_login")
-    loginReg(@Body() requestDto: RequestDto) {
+    loginReg(@Body() requestDto: RequestDto,@Req() req:Request) {
+        Logger.debug(req)
         return this.signService.loginReg(requestDto)
     }
     @ApiBearerAuth()

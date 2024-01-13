@@ -75,4 +75,10 @@ export class WallpaperController {
     getWPAppList(@Query() pageReqDto: PageReqDto,@Body() filterKwDto:FilterKwDto){
         return this.wallpaperService.getWallpaperAppList(pageReqDto,filterKwDto)
     }
+    @ApiOperation({ summary: '壁纸详情【App端】' })
+    @ApiParam({ name: 'id' })
+    @Get("/app/detail_wallpaper/:id")
+    getWPADetail(@Param('id') id:string){
+        return this.wallpaperService.getWallpaperAppDetail(id)
+    }
 }
