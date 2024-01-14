@@ -5,6 +5,8 @@
   "author": "dinglong",
   "private": true,
   "license": "Apache 2.0",
+  "main": "main.js",
+  "bin": "main.js",
   "scripts": {
     "build": "nest build && node ./copy.script.js",
     "build-wp": "nest build --webpack --webpackPath=./webpack.config.js",
