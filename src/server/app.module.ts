@@ -14,7 +14,7 @@ import {CacheModule} from "@nestjs/common/cache";
 
 @Module({
     imports: [
-        ConfigModule.forRoot({isGlobal: true, envFilePath: ".env"}),
+        ConfigModule.forRoot({isGlobal: true, envFilePath: ".env.development"}),
         DbModule,
         SignModule,
         UploadModule,
