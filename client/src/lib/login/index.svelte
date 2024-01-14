@@ -6,8 +6,8 @@
     import router from '../../router/index'
 
     let form = {
-        password: 'string',
-        account: 'string'
+        password: '',
+        account: ''
     }
     let loading = false
     const handleSubmit = async () => {
