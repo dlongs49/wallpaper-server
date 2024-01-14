@@ -9,8 +9,13 @@ try {
     let json = JSON.parse(txt)
     json.scripts = {
         dev: 'node main',
-        rmdir: 'rmdir /s node_modules'
+        rmdir: 'rmdir /s node_modules',
+        pkg: "pkg . -t win --out-path=dist/"
     }
+    json.pkg = {
+        assets: ["www/**/*", "logs/**/*"]
+    }
+
     fs.writeFileSync("./dist/package.json", JSON.stringify(json))
     fs.copyFileSync("tsconfig.json", "./dist/tsconfig.json")
     let env_txt = fs.readFileSync(".env", 'utf8')
