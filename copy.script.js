@@ -13,7 +13,9 @@ try {
     }
     fs.writeFileSync("./dist/package.json", JSON.stringify(json))
     fs.copyFileSync("tsconfig.json", "./dist/tsconfig.json")
-    fs.copyFileSync(".env", "./dist/.env")
+    let env_txt = fs.readFileSync(".env", 'utf8')
+    env_txt = env_txt.replace("dev", "pro")
+    fs.writeFileSync("./dist/.env", env_txt)
 } catch (e) {
     console.log(e)
 }

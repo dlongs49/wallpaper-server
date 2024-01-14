@@ -7,10 +7,13 @@ import * as express from 'express';
 import * as process from "process";
 import {WinstonModule} from "nest-winston";
 import LogInstace from "./utils/winston.log";
+import {Logger} from "@nestjs/common";
+
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule,{
-        logger:WinstonModule.createLogger({
-            instance:LogInstace()
+    Logger.debug("环境：" + process.env.NODE_ENV)
+    const app = await NestFactory.create(AppModule, {
+        logger: WinstonModule.createLogger({
+            instance: LogInstace()
         })
     });
     app.setGlobalPrefix('api'); // 路由前缀
