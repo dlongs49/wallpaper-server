@@ -3,11 +3,16 @@ import '@brewer/beerui/assets/beer.css'
 import { ClientApp } from 'svelte-pilot'
 import router from './router/index'
 let flag = true
+const mode = import.meta.env.MODE
 // 路由进来之前
 router.on('beforeChange',(to)=>{
     let wk = localStorage.getItem("w_k")
     if(to.path === "/"){
-        window.location.href = "/wallpaper_type"
+        if(mode === 'production'){
+            window.location.href = "/wadmin/wallpaper_type"
+        }else{
+            window.location.href = "/wallpaper_type"
+        }
     }
     if(wk){
 

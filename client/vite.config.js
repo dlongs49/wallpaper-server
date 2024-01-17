@@ -4,11 +4,10 @@ import {resolve} from 'path'
 
 export default ({mode}) => {
     let base_url = loadEnv(mode, process.cwd()).VITE_APP_BASE_URL
-    console.log(mode)
     return defineConfig({
         plugins: [svelte()],
-        // base: mode === 'production' ? '/wadmin' : '/',
-        base: '/',
+        base: mode === 'production' ? '/wallpaper_client' : '/',
+        //base: '/',
         server: {
             hmr: true,
             host: "0.0.0.0",

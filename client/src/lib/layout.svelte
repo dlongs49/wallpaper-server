@@ -3,7 +3,7 @@
     import {View} from "svelte-pilot";
     import router from "../router/index.js";
     import {onMount} from "svelte";
-
+    const mode = import.meta.env.MODE
     let data = [
         {i: 0, title: "壁纸类型管理", path: "/wallpaper_type"},
         {i: 1, title: "壁纸管理", path: "/wallpaper"}];
@@ -24,7 +24,7 @@
 <main>
     <div class="bmenu">
         <div class="head_logo">
-            <img class="logo" src="/static/images/svelte.svg" alt="">
+            <img class="logo" src={`${mode === 'production' ? '/wallpaper_client' : ''}/static/images/svelte.svg`} alt="svelte"/>
         </div>
         <div class="menu_list">
             {#each data as item, i}

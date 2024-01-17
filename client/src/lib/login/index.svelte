@@ -4,7 +4,7 @@
     import {fetchPost} from "../../utils/fetch.js";
     import {WButton} from "../../components/w_component/index.js";
     import router from '../../router/index'
-
+    let mode = import.meta.env.MODE
     let form = {
         password: '',
         account: ''
@@ -37,10 +37,10 @@
     }
 </script>
 
-<main>
+<main style={`background-image:url(${mode === 'production' ? '/wallpaper_client' : ''}/static/images/bg.png)`}>
     <div class="login_container">
         <div class="head">
-            <img src="/static/images/svelte.svg" alt="svelte"/>
+            <img src={`${mode === 'production' ? '/wallpaper_client' : ''}/static/images/svelte.svg`} alt="svelte"/>
             <span>壁纸管理</span>
         </div>
         <BeForm
@@ -68,9 +68,8 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background: url('/static/images/bg.png') no-repeat;
     background-size: cover;
-
+    background-repeat: no-repeat;
     .login_container {
       width: 500px;
       padding: 60px 30px 100px 30px;
