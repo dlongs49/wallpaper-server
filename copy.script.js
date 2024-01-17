@@ -8,7 +8,7 @@ try {
     const txt = fs.readFileSync("package.json", 'utf8')
     let json = JSON.parse(txt)
     json.scripts = {
-        dev: 'node main',
+        dev: 'nodemon main',
         rmdir: 'rmdir /s node_modules',
         pkg: "pkg . -t win --out-path=dist/"
     }
