@@ -16,6 +16,7 @@ export let changePage = ()=> {}
 </div>
 <style lang="less">
 .pagin{
-  margin-top: 15px;
+  width: 90%;
+  margin: 15px auto 0;
 }
 </style>

@@ -4,30 +4,31 @@
     BeIcon,
     BeInput,
     BeOption,
-    BeSelect,
+    BeSelect
   } from "@brewer/beerui";
   import { onMount } from "svelte";
-  import {  fetchPost } from "../../utils/fetch.js";
+  import { fetchPost } from "../../utils/fetch.js";
   import Pagination from "../../components/pagination/BePagination.svelte";
   import FormDialog from "./formDialog.svelte";
   import dayjs from "dayjs";
   import { message } from "../../components/message/showNotice.js";
   import { loading } from "../../utils/useLoading.js";
-  import {WTable,WTag,WImage} from "../../components/w_component/index.js";
+  import { WTable, WTag, WImage } from "../../components/w_component/index.js";
+
   let isLoading = false;
   let tableData = [];
   let visible = false;
   let column = [
-    { key: "title", title: "壁纸名称",width:'20%' },
-    { key: "url", title: "壁纸资源", width:'20%' },
-    { key: "url_type", title: "类型", width:'20%' },
-    { key: "create_time", title: "操作时间",width:'20%' },
-    { key: "action", title: "操作",}
+    { key: "title", title: "壁纸名称", width: "20%" },
+    { key: "url", title: "壁纸资源", width: "20%" },
+    { key: "url_type", title: "类型", width: "20%" },
+    { key: "create_time", title: "操作时间", width: "20%" },
+    { key: "action", title: "操作" }
   ];
   let sort = {
     keyword: "",
     sort_type: "",
-    url_type:0
+    url_type: 0
   };
   let page = {
     count: 0,
@@ -147,10 +148,10 @@
       </span>
     </BeButton>
   </header>
-  <div use:loading={isLoading}>
+  <div class="load_auto" use:loading={isLoading}>
     <WTable data={tableData} column={column}>
       <div slot="cell_1" let:prop={row}>
-        <WImage url={row.url_type === 0 ? base_url + row.url : row.url}  width="80px" />
+        <WImage url={row.url_type === 0 ? base_url + row.url : row.url} width="80px" />
       </div>
       <div slot="cell_2" let:prop={row}>
         <WTag type={row.url_type === 1 ? '' : 'info'}>{row.url_type === 1 ? '链接' : '本地'}</WTag>
@@ -194,5 +195,6 @@
     margin: 0 auto;
     padding: 20px 0;
   }
+
 
 </style>
