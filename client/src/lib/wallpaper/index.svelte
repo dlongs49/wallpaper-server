@@ -20,9 +20,10 @@
   let visible = false;
   let column = [
     { key: "title", title: "壁纸名称", width: "20%" },
-    { key: "url", title: "壁纸资源", width: "20%" },
-    { key: "url_type", title: "类型", width: "20%" },
-    { key: "create_time", title: "操作时间", width: "20%" },
+    { key: "url", title: "壁纸资源", width: "15%" },
+    { key: "type_name", title: "壁纸类型", width: "15%" },
+    { key: "url_type", title: "资源类型", width: "20%" },
+    { key: "create_time", title: "操作时间", width: "15%" },
     { key: "action", title: "操作" }
   ];
   let sort = {
@@ -151,15 +152,18 @@
   <div class="load_auto" use:loading={isLoading}>
     <WTable data={tableData} column={column}>
       <div slot="cell_1" let:prop={row}>
-        <WImage url={row.url_type === 0 ? base_url + row.url : row.url} width="80px" />
+        <WImage url={row.url_type === 0 ? base_url + row.url : row.url} width="50px" />
       </div>
       <div slot="cell_2" let:prop={row}>
-        <WTag type={row.url_type === 1 ? '' : 'info'}>{row.url_type === 1 ? '链接' : '本地'}</WTag>
+        <span>{row.type_name}</span>
       </div>
       <div slot="cell_3" let:prop={row}>
-        {dayjs(row.create_time).format("YYYY-MM-DD HH:mm:ss")}
+        <WTag type={row.url_type === 1 ? '' : 'info'}>{row.url_type === 1 ? '链接' : '本地'}</WTag>
       </div>
       <div slot="cell_4" let:prop={row}>
+        {dayjs(row.create_time).format("YYYY-MM-DD HH:mm:ss")}
+      </div>
+      <div slot="cell_5" let:prop={row}>
         <BeButton type="primary" size="small" on:click={()=>handleEdit(row.id)}>编辑</BeButton>
         <BeButton type="danger" size="small" on:click={()=>handleDel([row.id])}>删除</BeButton>
       </div>
