@@ -18,7 +18,7 @@
     }
     const tosign = ()=>{
         localStorage.clear()
-        window.location.href = '/login'
+        window.location.href = mode === 'production' ? '/wadmin/login' : '/login'
     }
 </script>
 <main>

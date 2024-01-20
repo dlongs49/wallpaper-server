@@ -88,7 +88,22 @@ export class SignService {
         })
         throw new ResSuccess(type == 0 ? "收藏成功" : "应用壁纸成功")
     }
-
+    async delUserCollect(idArr: Array<string>) {
+        let flag = false
+        for (let i = 0; i < idArr.length; i++) {
+            const result = await this.collectProviders.destroy({where: {id: idArr[i]}})
+            if (result == 0) {
+                flag = true
+                break;
+            } else {
+                flag = false
+            }
+        }
+        if (flag) {
+            throw new ResSuccess(`删除其中一条收藏记录失败`)
+        }
+        throw new ResSuccess("删除成功")
+    }
     async getUerWallpaper(pageReqDto: PageReqDto,type:number) {
         let offset = Number(pageReqDto.offset)
         let limit = Number(pageReqDto.limit)

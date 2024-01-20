@@ -8,6 +8,7 @@ import * as process from "process";
 import {WinstonModule} from "nest-winston";
 import LogInstace from "./utils/winston.log";
 import {Logger} from "@nestjs/common";
+import * as requestIp from 'request-ip'
 async function bootstrap() {
     let mode = process.env.NODE_ENV
     Logger.debug("环境：" + mode)
@@ -23,6 +24,11 @@ async function bootstrap() {
     swaggerConfig(app) // swagger抽出
     app.use(`${mode === 'dev' ? '/' : '/wapi'}`, express.static(join(file_path, 'www/client'))); // 静态资源开放
     app.enableCors(); // 解决跨域
+    app.use("*",(req,res,next)=>{
+        Logger.log("访问IP:",requestIp.getClientIp(req))
+        console.log("访问IP:",requestIp.getClientIp(req));
+        next()
+    })
     await app.listen(process.env.SERVER_POTY);
 }
 

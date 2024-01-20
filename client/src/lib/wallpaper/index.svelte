@@ -4,30 +4,32 @@
     BeIcon,
     BeInput,
     BeOption,
-    BeSelect,
+    BeSelect
   } from "@brewer/beerui";
   import { onMount } from "svelte";
-  import {  fetchPost } from "../../utils/fetch.js";
+  import { fetchPost } from "../../utils/fetch.js";
   import Pagination from "../../components/pagination/BePagination.svelte";
   import FormDialog from "./formDialog.svelte";
   import dayjs from "dayjs";
   import { message } from "../../components/message/showNotice.js";
   import { loading } from "../../utils/useLoading.js";
-  import {WTable,WTag,WImage} from "../../components/w_component/index.js";
+  import { WTable, WTag, WImage } from "../../components/w_component/index.js";
+
   let isLoading = false;
   let tableData = [];
   let visible = false;
   let column = [
-    { key: "title", title: "壁纸名称",width:'20%' },
-    { key: "url", title: "壁纸资源", width:'20%' },
-    { key: "url_type", title: "类型", width:'20%' },
-    { key: "create_time", title: "操作时间",width:'20%' },
-    { key: "action", title: "操作",}
+    { key: "title", title: "壁纸名称", width: "20%" },
+    { key: "url", title: "壁纸资源", width: "15%" },
+    { key: "type_name", title: "壁纸类型", width: "15%" },
+    { key: "url_type", title: "资源类型", width: "20%" },
+    { key: "create_time", title: "操作时间", width: "15%" },
+    { key: "action", title: "操作" }
   ];
   let sort = {
     keyword: "",
     sort_type: "",
-    url_type:0
+    url_type: 0
   };
   let page = {
     count: 0,
@@ -147,18 +149,21 @@
       </span>
     </BeButton>
   </header>
-  <div use:loading={isLoading}>
+  <div class="load_auto" use:loading={isLoading}>
     <WTable data={tableData} column={column}>
       <div slot="cell_1" let:prop={row}>
-        <WImage url={row.url_type === 0 ? base_url + row.url : row.url}  width="80px" />
+        <WImage url={row.url_type === 0 ? base_url + row.url : row.url} width="50px" />
       </div>
       <div slot="cell_2" let:prop={row}>
-        <WTag type={row.url_type === 1 ? '' : 'info'}>{row.url_type === 1 ? '链接' : '本地'}</WTag>
+        <span>{row.type_name}</span>
       </div>
       <div slot="cell_3" let:prop={row}>
-        {dayjs(row.create_time).format("YYYY-MM-DD HH:mm:ss")}
+        <WTag type={row.url_type === 1 ? '' : 'info'}>{row.url_type === 1 ? '链接' : '本地'}</WTag>
       </div>
       <div slot="cell_4" let:prop={row}>
+        {dayjs(row.create_time).format("YYYY-MM-DD HH:mm:ss")}
+      </div>
+      <div slot="cell_5" let:prop={row}>
         <BeButton type="primary" size="small" on:click={()=>handleEdit(row.id)}>编辑</BeButton>
         <BeButton type="danger" size="small" on:click={()=>handleDel([row.id])}>删除</BeButton>
       </div>
@@ -194,5 +199,6 @@
     margin: 0 auto;
     padding: 20px 0;
   }
+
 
 </style>
