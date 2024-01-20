@@ -14,7 +14,6 @@ export class SessionMiddleware implements  NestMiddleware{
         const value = await this.cacheManager.get('w_k');
         let w_k = req.headers.w_k ? req.headers.w_k.toString() :''
         let val = Buffer.from(w_k,'base64').toString('utf-8')
-        console.log(value,val)
         if(req.path === '/api/login/admin_login'){
             next()
         }
