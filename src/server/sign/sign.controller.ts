@@ -62,6 +62,13 @@ export class SignController {
     }
     @ApiBearerAuth()
     @UseGuards(AuthenGuard)
+    @ApiOperation({ summary: '删除个人收藏壁纸【App端】' })
+    @Post("/app/del_collect_wallpaper")
+    delUserCollect(@Body() idArr:Array<string>){
+        return this.signService.delUserCollect(idArr)
+    }
+    @ApiBearerAuth()
+    @UseGuards(AuthenGuard)
     @ApiOperation({ summary: '应用壁纸操作【App端】' })
     @Post("/app/apply_wallpaper")
     setUerApply(@Query() idDto: IdDto,@Req() req:Request) {
