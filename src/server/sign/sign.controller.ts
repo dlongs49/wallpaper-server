@@ -27,7 +27,6 @@ export class SignController {
     @ApiOperation({ summary: '登录注册二合一' })
     @Post("reg_login")
     loginReg(@Body() requestDto: RequestDto,@Req() req:Request) {
-        Logger.debug(req)
         return this.signService.loginReg(requestDto)
     }
     @ApiBearerAuth()
