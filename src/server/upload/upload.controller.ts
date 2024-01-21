@@ -1,7 +1,7 @@
-import { Controller, Post, Res, UploadedFiles, UseInterceptors } from "@nestjs/common";
+import {Controller, Get, Param, Post, Query, Res, UploadedFiles, UseInterceptors} from "@nestjs/common";
 import {FilesInterceptor} from "@nestjs/platform-express";
-import {ApiBody, ApiConsumes, ApiOperation, ApiTags} from "@nestjs/swagger";
-import {FileDto, WallpaperFileDto} from "./dto/file.dto";
+import {ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiProperty, ApiTags} from "@nestjs/swagger";
+import {FileDto, UploadLogDto, WallpaperFileDto} from "./dto/file.dto";
 import { UploadService } from "./upload.service";
 @ApiTags("文件上传")
 
@@ -31,5 +31,10 @@ export class UploadController {
     @UseInterceptors(FilesInterceptor('wallpaper'))
     uploadWallpaper(@UploadedFiles() files: Array<Express.Multer.File>){
         return this.uploadService.uploadWallpaperSer(files)
+    }
+    @ApiOperation({ summary: '根据名称获取图片地址' })
+    @Get("path")
+    getUploadFath(@Query() uploadLogDto:UploadLogDto){
+        return this.uploadService.getUploadFath(uploadLogDto)
     }
 }

@@ -1,7 +1,8 @@
 import {Inject, Injectable} from '@nestjs/common';
-import { ResSuccess } from "../../utils/http.response";
+import {ResFail, ResSuccess} from "../../utils/http.response";
 import { JsonFile } from "./upload.utils";
 import {v4 as uuid} from "uuid";
+import {UploadLogDto} from "./dto/file.dto";
 
 @Injectable()
 export class UploadService {
@@ -19,5 +20,12 @@ export class UploadService {
   }
   uploadWallpaperSer(files:Array<Express.Multer.File>){
     throw new ResSuccess(JsonFile(files[0]))
+  }
+  async getUploadFath(uploadLogDto:UploadLogDto){
+    let data = await this.uploadlogProviders.findOne({where:{file_name:uploadLogDto.file_name},raw:true})
+    if(data){
+      throw new ResSuccess(data)
+    }
+    throw new ResFail("未找到该图片")
   }
 }
