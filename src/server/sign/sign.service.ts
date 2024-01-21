@@ -1,4 +1,4 @@
-import {HttpStatus, Inject, Injectable} from "@nestjs/common";
+import {Inject, Injectable} from "@nestjs/common";
 import {ResFail, ResSuccess} from "../../utils/http.response";
 import {RequestDto} from "./dto/request.dto";
 import {AuthenService} from "../../authen/authen.service";
@@ -6,7 +6,7 @@ import {Request} from "express";
 import {JwtService} from "@nestjs/jwt";
 import {IdDto, UserDto} from "./dto/user.dto";
 import {PageReqDto} from "../../utils/global.dto";
-import {SeqScreen} from "../../utils/tool";
+import {getNation, SeqScreen} from "../../utils/tool";
 import {v4 as uuid} from "uuid";
 import {Op} from "sequelize";
 
@@ -15,8 +15,8 @@ export class SignService {
     constructor(private authenService: AuthenService, private jwtService: JwtService, @Inject("SIGN_PROVIDERS") private readonly signProviders: any, @Inject("COLLECT_PROVIDERS") private readonly collectProviders: any, @Inject("WALLPAPER_PROVIDERS") private readonly wallpaper_providers: any) {
     }
 
-    async loginReg(requestDto: RequestDto) {
-        let token = await this.authenService.validateSign(requestDto.uname, requestDto.password);
+    async loginReg(requestDto: RequestDto,req: Request) {
+        let token = await this.authenService.validateSign(requestDto.uname, requestDto.password,req);
         throw new ResSuccess(token);
     }
 
@@ -25,7 +25,7 @@ export class SignService {
         const result = await this.signProviders.findOne({where: {id}, raw: true})
         delete result.password
         delete result.id
-        throw new ResSuccess(result);
+        throw new ResSuccess({...result,nation:getNation(req)});
     }
 
     async updateUser(userDto: UserDto, request: Request) {

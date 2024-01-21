@@ -23,6 +23,7 @@ specifiers:
   cache-manager: ^5.3.2
   dayjs: ^1.11.10
   express: ^4.18.2
+  ip2region: ^2.3.0
   md5: ^2.3.0
   multer: 1.4.5-lts.1
   mysql2: ^3.6.5
@@ -55,6 +56,7 @@ dependencies:
   cache-manager: registry.npmmirror.com/cache-manager/5.3.2
   dayjs: 1.11.10
   express: registry.npmmirror.com/express/4.18.2
+  ip2region: registry.npmmirror.com/ip2region/2.3.0_@types+node@20.10.5
   md5: 2.3.0
   multer: registry.npmmirror.com/multer/1.4.5-lts.1
   mysql2: 3.6.5
@@ -2757,6 +2759,17 @@ packages:
     version: 1.4.0
     engines: {node: '>= 0.10'}
     dev: true
+
+  registry.npmmirror.com/ip2region/2.3.0_@types+node@20.10.5:
+    resolution: {integrity: sha512-zV5Xsadzrx9Ej6heoyhbXMsfGWWQ3C6bAIYStrHhw9kzLpGpVNlnAyRBxxPgxA1GNqr1Ti7oUxcWsMWNN3jZBg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ip2region/-/ip2region-2.3.0.tgz}
+    id: registry.npmmirror.com/ip2region/2.3.0
+    name: ip2region
+    version: 2.3.0
+    peerDependencies:
+      '@types/node': '*'
+    dependencies:
+      '@types/node': registry.npmmirror.com/@types/node/20.10.5
+    dev: false
 
   registry.npmmirror.com/ipaddr.js/1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz}
