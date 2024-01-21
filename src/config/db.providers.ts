@@ -6,6 +6,7 @@ import {WallpaperModel} from "../server/wallpaper/model/wallpaper.model";
 import {CollectModel} from "../server/sign/model/collect.model";
 import {Logger} from "@nestjs/common";
 import mysql2 from "mysql2";
+import {UploadLogModel} from "../server/upload/model/uploadLog.model";
 export const dbProviders = [
   {
     provide: 'SEQUELIZE',
@@ -23,7 +24,7 @@ export const dbProviders = [
           Logger.debug(sql)
         }
       });
-      sequelize.addModels([SignModel,WallpaperTypeModel,WallpaperModel,CollectModel]);
+      sequelize.addModels([SignModel,WallpaperTypeModel,WallpaperModel,UploadLogModel,CollectModel]);
       await sequelize.sync();
       return sequelize;
     },

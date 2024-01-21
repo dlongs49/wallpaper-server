@@ -4,6 +4,7 @@ import {UploadController} from "./upload.controller";
 import { MulterModule } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { HandleFileFilter, HandleFilename,HandleDestination } from "./upload.utils";
+import {UploadLogModel} from "./model/uploadLog.model";
 
 @Module({
   imports:[
@@ -15,7 +16,10 @@ import { HandleFileFilter, HandleFilename,HandleDestination } from "./upload.uti
       fileFilter: HandleFileFilter // 文件校验处理回调
     }),
   ],
-  providers: [UploadService],
+  providers: [
+      UploadService,
+     { provide: 'UPLOADLOG_PROVIDERS', useValue: UploadLogModel},
+  ],
   controllers:[UploadController]
 })
 export class UploadModule{
