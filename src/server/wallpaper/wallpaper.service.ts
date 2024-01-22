@@ -191,7 +191,7 @@ export class WallpaperService {
         let seq = SeqScreen(offset, limit, kw, 'title')
         const result = await this.wallpaper_providers.findAndCountAll({
             ...seq,
-            weher:{
+            where:{
                 ...seq.where,
                 type_id
             },
