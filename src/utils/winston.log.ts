@@ -14,7 +14,7 @@ export default ()=> {
                 level: 'warn',
                 dirname: 'logs',
                 filename: 'warn-%DATE%.log',
-                datePattern: 'YYYY-MM-DD-HH',
+                datePattern: 'YYYY-MM-DD HH',
                 maxSize: '20m',
                 maxFiles: '14d',
                 format: winston.format.combine(
@@ -32,7 +32,7 @@ export default ()=> {
                 level: 'info',
                 dirname: 'logs',
                 filename: 'info-%DATE%.log',
-                datePattern: 'YYYY-MM-DD-HH',
+                datePattern: 'YYYY-MM-DD HH',
                 // 文件大小
                 maxSize: '20m',
                 // 最多14 天
@@ -48,7 +48,7 @@ export default ()=> {
                 level: 'debug',
                 dirname: 'logs',
                 filename: 'debug-%DATE%.log',
-                datePattern: 'YYYY-MM-DD-HH',
+                datePattern: 'YYYY-MM-DD HH',
                 // 文件大小
                 maxSize: '20m',
                 // 最多14 天
