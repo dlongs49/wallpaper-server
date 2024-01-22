@@ -185,7 +185,7 @@ export class WallpaperService {
     }
     async getWallpaperAppList(pageReqDto: PageReqDto, filterappDto:FilterAppDto) {
         let kw = filterappDto.keyword
-        let type_id = filterappDto.type_id
+        let type_id = filterappDto.type_id || ''
         let offset = Number(pageReqDto.offset)
         let limit = Number(pageReqDto.limit)
         let seq = SeqScreen(offset, limit, kw, 'title')
