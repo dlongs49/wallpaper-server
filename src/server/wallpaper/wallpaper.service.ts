@@ -188,12 +188,16 @@ export class WallpaperService {
         let type_id = filterappDto.type_id || ''
         let offset = Number(pageReqDto.offset)
         let limit = Number(pageReqDto.limit)
+        let where = {}
+        if(type_id){
+            where["type_id"] = type_id
+        }
         let seq = SeqScreen(offset, limit, kw, 'title')
         const result = await this.wallpaper_providers.findAndCountAll({
             ...seq,
             where:{
                 ...seq.where,
-                type_id
+                ...where
             },
             raw: true
         })
