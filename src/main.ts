@@ -9,7 +9,6 @@ import {WinstonModule} from "nest-winston";
 import LogInstace from "./utils/winston.log";
 import {Logger} from "@nestjs/common";
 import * as requestIp from 'request-ip'
-import {getNation} from "./utils/tool";
 import {Request, Response} from "express";
 import IP2Region from "ip2region";
 

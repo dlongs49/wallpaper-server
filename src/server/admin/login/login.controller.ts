@@ -11,8 +11,8 @@ export class LoginController {
     }
     @ApiOperation({ summary: '登录' })
     @Post("admin_login")
-    adminLogin(@Body() loginDto:LoginDto,@Res() res:Response){
-        return this.loginServie.adminLogin(loginDto,res)
+    adminLogin(@Body() loginDto:LoginDto){
+        return this.loginServie.adminLogin(loginDto)
     }
     @ApiOperation({ summary: '测试' })
     @Post("test")

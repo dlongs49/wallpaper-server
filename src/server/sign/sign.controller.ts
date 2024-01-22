@@ -15,7 +15,7 @@ import {
 import {ApiBearerAuth, ApiOkResponse, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {RequestDto} from "./dto/request.dto";
 import { SignService } from "./sign.service";
-import { Request } from "express";
+import { Request, Response } from "express";
 import { AuthenGuard } from "../../authen/authen.guard";
 import {ArticleListResponse, IdDto, UserDto} from "./dto/user.dto";
 import {PageReqDto} from "../../utils/global.dto";
@@ -26,8 +26,8 @@ export class SignController {
     }
     @ApiOperation({ summary: '登录注册二合一' })
     @Post("reg_login")
-    loginReg(@Body() requestDto: RequestDto,@Req() req:Request) {
-        return this.signService.loginReg(requestDto,req)
+    loginReg(@Body() requestDto: RequestDto,@Req() req:Request,@Res() res:Response) {
+        return this.signService.loginReg(requestDto,req,res)
     }
     @ApiBearerAuth()
     @UseGuards(AuthenGuard)
