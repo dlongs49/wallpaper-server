@@ -2,7 +2,7 @@ import {Body, Controller, Get, Inject, Param, Post, Query} from '@nestjs/common'
 import {ApiOperation, ApiParam, ApiQuery, ApiTags} from "@nestjs/swagger";
 import {WallpaperService} from "./wallpaper.service";
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
-import {FilterKwDto, FilterReqDto, PageReqDto} from "../../utils/global.dto";
+import {FilterAppDto, FilterKwDto, FilterReqDto, PageReqDto} from "../../utils/global.dto";
 import {WallpaperReqDto, WallpaperReqExDto, WallpaperSortExDto} from "./dto/wallpaper.dto";
 @ApiTags("壁纸管理")
 @Controller('wallpaper')
@@ -72,8 +72,8 @@ export class WallpaperController {
     }
     @ApiOperation({ summary: '壁纸列表【App端】' })
     @Post("/app/get_wallpaper")
-    getWPAppList(@Query() pageReqDto: PageReqDto,@Body() filterKwDto:FilterKwDto){
-        return this.wallpaperService.getWallpaperAppList(pageReqDto,filterKwDto)
+    getWPAppList(@Query() pageReqDto: PageReqDto,@Body() filterappDto:FilterAppDto){
+        return this.wallpaperService.getWallpaperAppList(pageReqDto,filterappDto)
     }
     @ApiOperation({ summary: '壁纸详情【App端】' })
     @ApiParam({ name: 'id' })

@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@nestjs/common';
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
 import {v4 as uid} from "uuid";
 import {ResFail, ResSuccess} from "../../utils/http.response";
-import {FilterKwDto, FilterReqDto, PageReqDto} from "../../utils/global.dto";
+import {FilterAppDto, FilterKwDto, FilterReqDto, PageReqDto} from "../../utils/global.dto";
 import {SeqScreen} from "../../utils/tool";
 import {WallpaperReqDto, WallpaperReqExDto, WallpaperSortExDto} from "./dto/wallpaper.dto";
 
@@ -183,12 +183,18 @@ export class WallpaperService {
         })
         throw new ResSuccess(result)
     }
-    async getWallpaperAppList(pageReqDto: PageReqDto, filterKwDto:FilterKwDto) {
-        let kw = filterKwDto.keyword
+    async getWallpaperAppList(pageReqDto: PageReqDto, filterappDto:FilterAppDto) {
+        let kw = filterappDto.keyword
+        let type_id = filterappDto.type_id
         let offset = Number(pageReqDto.offset)
         let limit = Number(pageReqDto.limit)
+        let seq = SeqScreen(offset, limit, kw, 'title')
         const result = await this.wallpaper_providers.findAndCountAll({
-            ...SeqScreen(offset, limit, kw, 'title'),
+            ...seq,
+            weher:{
+                ...seq.where,
+                type_id
+            },
             raw: true
         })
         throw new ResSuccess(result)

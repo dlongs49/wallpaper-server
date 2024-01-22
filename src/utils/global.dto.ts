@@ -27,3 +27,9 @@ export class FilterReqDto extends FilterKwDto{
     })
     sort_type: string;
 }
+export class FilterAppDto extends FilterKwDto{
+    @ApiProperty({
+        description: '分类id',
+    })
+    type_id: string;
+}
