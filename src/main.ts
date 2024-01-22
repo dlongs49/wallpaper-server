@@ -30,8 +30,8 @@ async function bootstrap() {
     app.use("*", (req:Request, res:Response, next:Function) => {
         let ip = requestIp.getClientIp(req)
         let region = new IP2Region().search(requestIp.getClientIp(req))
-        Logger.log("访问IP:", JSON.stringify({ip,...region}))
-        console.log("访问IP:",JSON.stringify({ip,...region}));
+        Logger.log("访问IP:",{ip,...region})
+        console.log("访问IP:",{ip,...region});
         next()
     })
     await app.listen(process.env.SERVER_POTY);
