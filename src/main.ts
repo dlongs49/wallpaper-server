@@ -9,7 +9,6 @@ import {WinstonModule} from "nest-winston";
 import LogInstace from "./utils/winston.log";
 import {Logger} from "@nestjs/common";
 import * as requestIp from 'request-ip'
-import {getNation} from "./utils/tool";
 import {Request, Response} from "express";
 import IP2Region from "ip2region";
 
@@ -31,7 +30,7 @@ async function bootstrap() {
     app.use("*", (req:Request, res:Response, next:Function) => {
         let ip = requestIp.getClientIp(req)
         let region = new IP2Region().search(requestIp.getClientIp(req))
-        Logger.log("访问IP:", JSON.stringify({ip,...region}))
+        Logger.log("访问IP:",{ip,...region})
         console.log("访问IP:",JSON.stringify({ip,...region}));
         next()
     })

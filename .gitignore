@@ -29,7 +29,7 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
-
+pnpm-lock.yaml
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json

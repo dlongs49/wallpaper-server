@@ -21,7 +21,6 @@ export class AuthenGuard implements CanActivate {
       request["uid"] = payload.uid;
       return true;
     } catch (e) {
-      console.log("JWT异常:", e.message);
       /**
        *  jwt expired 【token过期】
        *  invalid signature 【token 签名错误】

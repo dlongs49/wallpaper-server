@@ -1,8 +1,8 @@
 import {Inject, Injectable} from "@nestjs/common";
-import {ResFail, ResSuccess} from "../../utils/http.response";
+import { ResFail, ResSuccess } from "../../utils/http.response";
 import {RequestDto} from "./dto/request.dto";
 import {AuthenService} from "../../authen/authen.service";
-import {Request} from "express";
+import { Request, Response } from "express";
 import {JwtService} from "@nestjs/jwt";
 import {IdDto, UserDto} from "./dto/user.dto";
 import {PageReqDto} from "../../utils/global.dto";
@@ -15,9 +15,9 @@ export class SignService {
     constructor(private authenService: AuthenService, private jwtService: JwtService, @Inject("SIGN_PROVIDERS") private readonly signProviders: any, @Inject("COLLECT_PROVIDERS") private readonly collectProviders: any, @Inject("WALLPAPER_PROVIDERS") private readonly wallpaper_providers: any) {
     }
 
-    async loginReg(requestDto: RequestDto,req: Request) {
-        let token = await this.authenService.validateSign(requestDto.uname, requestDto.password,req);
-        throw new ResSuccess(token);
+    async loginReg(requestDto: RequestDto,req: Request,res:Response) {
+        let result = await this.authenService.validateSign(requestDto.uname, requestDto.password,req,res);
+        res.send(result)
     }
 
     async getUser(req: Request) {
@@ -25,7 +25,7 @@ export class SignService {
         const result = await this.signProviders.findOne({where: {id}, raw: true})
         delete result.password
         delete result.id
-        throw new ResSuccess({...result,nation:getNation(req)});
+        return new ResSuccess({...result,nation:getNation(req)});
     }
 
     async updateUser(userDto: UserDto, request: Request) {
@@ -50,16 +50,16 @@ export class SignService {
             data = "性别更新成功"
         }
         if (avatar && uname && sex) {
-            throw new ResSuccess("个人信息更新成功")
+            return new ResSuccess("个人信息更新成功")
         }
-        throw new ResSuccess(data)
+        return new ResSuccess(data)
     }
 
     async setUerWallpaper(idDto: IdDto, req: Request,type:number) {
         // 查询壁纸是否存在
         const result = await this.wallpaper_providers.findOne({where: {id: idDto.wallpaper_id}, raw: true})
         if (!result) {
-            throw new ResFail("该壁纸不存在")
+            return new ResFail("该壁纸不存在")
         }
         // 查询是否收藏 根据用户id 和 壁纸id查询
         const isOn = await this.collectProviders.findOne({
@@ -74,7 +74,7 @@ export class SignService {
         })
         if (isOn) {
             await this.collectProviders.destroy({where: {id: isOn.id}})
-            throw new ResSuccess(type == 0 ? "取消收藏成功" : "已取消应用壁纸")
+            return new ResSuccess(type == 0 ? "取消收藏成功" : "已取消应用壁纸")
         }
         await this.collectProviders.create({
             id: uuid(),
@@ -86,7 +86,7 @@ export class SignService {
             opear_type: type,
             create_time: new Date()
         })
-        throw new ResSuccess(type == 0 ? "收藏成功" : "应用壁纸成功")
+        return new ResSuccess(type == 0 ? "收藏成功" : "应用壁纸成功")
     }
     async delUserCollect(idArr: Array<string>) {
         let flag = false
@@ -100,9 +100,9 @@ export class SignService {
             }
         }
         if (flag) {
-            throw new ResSuccess(`删除其中一条收藏记录失败`)
+            return new ResSuccess("删除其中一条收藏记录失败")
         }
-        throw new ResSuccess("删除成功")
+        return new ResSuccess("删除成功")
     }
     async getUerWallpaper(pageReqDto: PageReqDto,type:number) {
         let offset = Number(pageReqDto.offset)
@@ -112,6 +112,6 @@ export class SignService {
             ...SeqScreen(offset, limit,'','','',order),
             raw: true
         })
-        throw new ResSuccess(result)
+        return new ResSuccess(result)
     }
 }
