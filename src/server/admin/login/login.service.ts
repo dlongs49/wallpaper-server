@@ -7,6 +7,8 @@ import {CACHE_MANAGER} from "@nestjs/common/cache";
 import {Cache} from "cache-manager";
 import md5 from 'md5'
 import {v4 as uuid} from "uuid";
+import IP2Region from "ip2region";
+import * as requestIp from 'request-ip'
 @Injectable()
 export class LoginService {
     constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {
@@ -24,6 +26,8 @@ export class LoginService {
         return new ResSuccess(val)
     }
     testService(req:Request){
-        return new ResSuccess(req.ip)
+        let ip = requestIp.getClientIp(req)
+        let region = new IP2Region().search(requestIp.getClientIp(req))
+        return new ResSuccess({ip,...region})
     }
 }
