@@ -1,4 +1,4 @@
-import {Module, NestMiddleware} from '@nestjs/common';
+import {Module} from '@nestjs/common';
 import { WallpaperService } from './wallpaper.service';
 import {WallpaperController} from "./wallpaper.controller";
 import {WallpaperTypeModel} from "./model/wallpaper_type.model";

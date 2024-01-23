@@ -1,4 +1,3 @@
-import { HttpException, HttpStatus } from "@nestjs/common";
 import { Status } from "./status";
 
 export class ResSuccess<T>{

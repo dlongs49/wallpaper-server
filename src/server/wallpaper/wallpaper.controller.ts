@@ -1,8 +1,8 @@
-import {Body, Controller, Get, Inject, Param, Post, Query} from '@nestjs/common';
-import {ApiOperation, ApiParam, ApiQuery, ApiTags} from "@nestjs/swagger";
+import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
+import {ApiOperation, ApiParam, ApiTags} from "@nestjs/swagger";
 import {WallpaperService} from "./wallpaper.service";
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
-import {FilterAppDto, FilterKwDto, FilterReqDto, PageReqDto} from "../../utils/global.dto";
+import {FilterAppDto,  FilterReqDto, PageReqDto} from "@/utils/global.dto";
 import {WallpaperReqDto, WallpaperReqExDto, WallpaperSortExDto} from "./dto/wallpaper.dto";
 @ApiTags("壁纸管理")
 @Controller('wallpaper')

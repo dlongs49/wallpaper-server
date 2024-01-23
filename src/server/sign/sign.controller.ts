@@ -2,23 +2,19 @@ import {
     Body,
     Controller,
     Get,
-    HttpCode,
-    HttpStatus,
-    Logger,
-    Param,
     Post,
     Query,
     Req,
     Res,
     UseGuards
 } from "@nestjs/common";
-import {ApiBearerAuth, ApiOkResponse, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
 import {RequestDto} from "./dto/request.dto";
 import { SignService } from "./sign.service";
 import { Request, Response } from "express";
-import { AuthenGuard } from "../../authen/authen.guard";
+import { AuthenGuard } from "@/authen/authen.guard";
 import {ArticleListResponse, IdDto, UserDto} from "./dto/user.dto";
-import {PageReqDto} from "../../utils/global.dto";
+import {PageReqDto} from "@/utils/global.dto";
 @ApiTags("登录/注册/用户信息")
 @Controller('sign')
 export class SignController {

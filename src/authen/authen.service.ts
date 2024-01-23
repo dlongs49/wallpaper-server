@@ -1,11 +1,11 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { ResFail, ResSuccess } from "../utils/http.response";
+import { ResFail, ResSuccess } from "@/utils/http.response";
 import { v4 as uuid } from "uuid";
 import md5 from "md5";
 import { Request, Response } from "express";
 import * as process from "process";
-import { getNation } from "../utils/tool";
+import { getNation } from "@/utils/tool";
 
 @Injectable()
 export class AuthenService {

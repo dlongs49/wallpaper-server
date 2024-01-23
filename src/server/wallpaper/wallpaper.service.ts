@@ -1,9 +1,9 @@
 import {Inject, Injectable} from '@nestjs/common';
 import {WallpaperTypeExDto, WallpaperTypeReqDto} from "./dto/wallpaper_type.dto";
 import {v4 as uid} from "uuid";
-import {ResFail, ResSuccess} from "../../utils/http.response";
-import {FilterAppDto, FilterKwDto, FilterReqDto, PageReqDto} from "../../utils/global.dto";
-import {SeqScreen} from "../../utils/tool";
+import {ResFail, ResSuccess} from "@/utils/http.response";
+import {FilterAppDto, FilterKwDto, FilterReqDto, PageReqDto} from "@/utils/global.dto";
+import {SeqScreen} from "@/utils/tool";
 import {WallpaperReqDto, WallpaperReqExDto, WallpaperSortExDto} from "./dto/wallpaper.dto";
 
 @Injectable()

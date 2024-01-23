@@ -1,12 +1,12 @@
 import {Inject, Injectable} from "@nestjs/common";
-import { ResFail, ResSuccess } from "../../utils/http.response";
+import { ResFail, ResSuccess } from "@/utils/http.response";
 import {RequestDto} from "./dto/request.dto";
-import {AuthenService} from "../../authen/authen.service";
+import {AuthenService} from "@/authen/authen.service";
 import { Request, Response } from "express";
 import {JwtService} from "@nestjs/jwt";
 import {IdDto, UserDto} from "./dto/user.dto";
-import {PageReqDto} from "../../utils/global.dto";
-import {getNation, SeqScreen} from "../../utils/tool";
+import {PageReqDto} from "@/utils/global.dto";
+import {getNation, SeqScreen} from "@/utils/tool";
 import {v4 as uuid} from "uuid";
 import {Op} from "sequelize";
 

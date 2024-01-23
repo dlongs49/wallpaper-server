@@ -2,7 +2,7 @@
 * Author:dinglong
 * DateTime:2024/1/6 下午 10:54
 */
-import {ApiProperty, ApiResponse} from "@nestjs/swagger";
+import {ApiProperty} from "@nestjs/swagger";
 
 export class UserDto{
     @ApiProperty({

@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import * as fs from "fs";
 import {join} from "path";
 import {v4 as uid} from "uuid";
-import {ResFail} from "../../utils/http.response";
+import {ResFail} from "@/utils/http.response";
 import process from 'process'
 
 let file_type = ["image/png", "image/jpeg", "image/gif"];

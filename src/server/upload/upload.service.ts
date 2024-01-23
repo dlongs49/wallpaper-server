@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@nestjs/common';
-import { ResFail, ResSuccess } from "../../utils/http.response";
+import { ResFail, ResSuccess } from "@/utils/http.response";
 import { JsonFile } from "./upload.utils";
 import {v4 as uuid} from "uuid";
 import {UploadLogDto} from "./dto/file.dto";

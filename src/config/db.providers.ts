@@ -1,19 +1,17 @@
 import { Sequelize } from 'sequelize-typescript';
 import * as process from "process";
-import { SignModel } from "../server/sign/model/sign.model";
-import {WallpaperTypeModel} from "../server/wallpaper/model/wallpaper_type.model";
-import {WallpaperModel} from "../server/wallpaper/model/wallpaper.model";
-import {CollectModel} from "../server/sign/model/collect.model";
+import { SignModel } from "@/server/sign/model/sign.model";
+import {WallpaperTypeModel} from "@/server/wallpaper/model/wallpaper_type.model";
+import {WallpaperModel} from "@/server/wallpaper/model/wallpaper.model";
+import {CollectModel} from "@/server/sign/model/collect.model";
 import {Logger} from "@nestjs/common";
-import mysql2 from "mysql2";
-import {UploadLogModel} from "../server/upload/model/uploadLog.model";
+import {UploadLogModel} from "@/server/upload/model/uploadLog.model";
 export const dbProviders = [
   {
     provide: 'SEQUELIZE',
     useFactory: async () => {
       const sequelize = new Sequelize({
         dialect: 'mysql',
-        // dialectModule: mysql2,
         host: process.env.DATABASE_HOST,
         port: Number(process.env.DATABASE_PORT),
         username: process.env.DATABASE_USER_NAME,

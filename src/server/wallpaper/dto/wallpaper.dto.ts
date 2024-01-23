@@ -3,7 +3,7 @@
 * DateTime:2024/1/7 下午 1:47
 */
 import {ApiProperty} from "@nestjs/swagger";
-import {FilterReqDto} from "../../../utils/global.dto";
+import {FilterReqDto} from "@/utils/global.dto";
 
 export class WallpaperReqDto {
     @ApiProperty({

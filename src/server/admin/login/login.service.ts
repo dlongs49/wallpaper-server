@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@nestjs/common';
 import {LoginDto} from "./dto/login.dto";
 import * as process from "process";
 import {Request} from "express";
-import { ResFail, ResSuccess } from "../../../utils/http.response";
+import { ResFail, ResSuccess } from "@/utils/http.response";
 import {CACHE_MANAGER} from "@nestjs/common/cache";
 import {Cache} from "cache-manager";
 import md5 from 'md5'
