@@ -27,7 +27,6 @@ export class WallpaperController {
     @ApiOperation({ summary: '删除壁纸类型' })
     @Post("del_wallpaper_type")
     delWallpaperType(@Body() idArr:Array<string>){
-        console.log(idArr);
         return this.wallpaperService.delWallpaperType(idArr)
     }
     @ApiOperation({ summary: '壁纸类型列表' })

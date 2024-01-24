@@ -39,7 +39,6 @@ export const JsonFile = (files) => {
     let files_path = files.path.replace(/\\/g, "/")
     let i = files_path.lastIndexOf(files.fieldname)
     let slice_path = files_path.slice(i, files_path.length)
-    console.log(files_path, i, files.fieldname, slice_path)
     let url = `/upload/${slice_path}`
     return {url, name: files.originalname}
 }
