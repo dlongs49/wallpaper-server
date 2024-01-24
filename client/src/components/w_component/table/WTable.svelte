@@ -43,6 +43,10 @@
                             <div class="cell">
                                 <slot name="cell_5" prop={item}></slot>
                             </div>
+                        {:else if i === 6}
+                            <div class="cell">
+                                <slot name="cell_5" prop={item}></slot>
+                            </div>
                         {:else}
                             <div class="cell">{item[cell.key]}</div>
                         {/if}

@@ -21,8 +21,9 @@
   let column = [
     { key: "title", title: "类型名称",width:'20%' },
     { key: "cover_url", title: "封面", width:'20%' },
-    { key: "cover_type", title: "封面类型", width:'20%' },
-    { key: "create_time", title: "操作时间",width:'20%' },
+    { key: "cover_type", title: "封面类型", width:'15%' },
+    { key: "count", title: "壁纸总计", width:'10%' },
+    { key: "create_time", title: "操作时间",width:'15%' },
     { key: "action", title: "操作",}
   ];
   let sort = {
@@ -156,9 +157,12 @@
         <WTag type={row.cover_type === 1 ? '' : 'info'}>{row.cover_type === 1 ? '链接' : '本地'}</WTag>
       </div>
       <div slot="cell_3" let:prop={row}>
-        {dayjs(row.create_time).format("YYYY-MM-DD HH:mm:ss")}
+        {row.count + "张"}
       </div>
       <div slot="cell_4" let:prop={row}>
+        {dayjs(row.create_time).format("YYYY-MM-DD HH:mm:ss")}
+      </div>
+      <div slot="cell_5" let:prop={row}>
         <BeButton type="primary" size="small" on:click={()=>handleEdit(row.id)}>编辑</BeButton>
         <BeButton type="danger" size="small" on:click={()=>handleDel([row.id])}>删除</BeButton>
       </div>
