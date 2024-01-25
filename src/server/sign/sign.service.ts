@@ -117,9 +117,10 @@ export class SignService {
             ...SeqScreen(offset, limit, "", "", "", order),
             raw: true
         }).then(v => {
-            return v.rows.map(x => {
+            let rows= v.rows.map(x => {
                 return {...x, format_date: dayjs(x.create_time).format("YYYY/MM/DD")}
             })
+            return {count:v.count,rows}
         });
         return new ResSuccess(result);
     }
