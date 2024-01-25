@@ -4,7 +4,6 @@
 */
 import { Column, DataType, Model, Table, HasMany } from "sequelize-typescript";
 import { WallpaperModel } from "@/server/wallpaper/model/wallpaper.model";
-import { ForeignKey } from "_sequelize-typescript@2.1.6@sequelize-typescript";
 @Table({
   tableName: "wallpaper_type",
   timestamps: false
