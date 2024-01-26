@@ -101,7 +101,7 @@ export class WallpaperService {
         }
       ]
     }).then((x) => {
-      return x.rows.map(y => {
+      let rows = x.rows.map(y => {
         return {
           ...y.dataValues,
           count: y.dataValues.list.length
@@ -110,8 +110,9 @@ export class WallpaperService {
         delete z.list;
         return z;
       });
+      return {rows,count:x.count}
     });
-    return new ResSuccess({ rows:result,count:result.length });
+    return new ResSuccess(result);
   }
 
   async setWallpaper(wallpaperReqDto: WallpaperReqDto) {
