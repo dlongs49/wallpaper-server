@@ -92,15 +92,18 @@ export class WallpaperService {
 
     const result = await this.wallpaper_type_providers.findAndCountAll({
       ...SeqScreen(offset, limit, kw, "title", sort),
+      distinct:true,
       include: [
         {
           model: WallpaperModel,
+          duplicating:false,
           attributes: [
             "type_id"
           ]
         }
-      ]
-    }).then((x) => {
+      ],
+    })
+        .then((x) => {
       let rows = x.rows.map(y => {
         return {
           ...y.dataValues,
