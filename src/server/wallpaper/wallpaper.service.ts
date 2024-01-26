@@ -96,7 +96,6 @@ export class WallpaperService {
       include: [
         {
           model: WallpaperModel,
-          duplicating:false,
           attributes: [
             "type_id"
           ]
