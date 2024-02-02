@@ -69,15 +69,9 @@
       tooltip: {
         trigger: 'item',
       }, 
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true,
-      },
       legend: {
-        orient: 'vertical',
         left: 'left',
+        bottom: 10,
       },
       series: [
         {
