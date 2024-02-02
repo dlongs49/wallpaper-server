@@ -29,7 +29,7 @@ export class StatisService {
             let arr = []
             let count = []
             for (let i = 0; i < data.length; i++) {
-                arr.push(data[i]['column_key'])
+                arr.push(data[i][column_key])
                 count.push(data[i].count)
             }
             return [arr,count]

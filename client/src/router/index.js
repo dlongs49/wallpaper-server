@@ -25,6 +25,10 @@ export default new Router({
                 {
                     path: "/wallpaper",
                     component: () => import("../lib/wallpaper/index.svelte")
+                },
+                {
+                    path: "/statis",
+                    component: () => import("../lib/statis/index.svelte")
                 }
             ]
         },

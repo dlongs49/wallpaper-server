@@ -44,3 +44,8 @@ html, body, #app {
 .load_auto .wtable::-webkit-scrollbar-thumb:hover {
     background-color: rgba(144, 147, 153, .3);
 }
+
+.load_auto_s .wtable{
+    overflow-y: auto;
+    height: calc(100vh - 420px);
+}

@@ -6,7 +6,9 @@
     const mode = import.meta.env.MODE
     let data = [
         {i: 0, title: "壁纸类型管理", path: "/wallpaper_type"},
-        {i: 1, title: "壁纸管理", path: "/wallpaper"}];
+        {i: 1, title: "壁纸管理", path: "/wallpaper"},
+        {i: 1, title: "访问统计", path: "/statis"},
+    ];
     let path = "/wallpaper";
     onMount(() => {
         path = router.current.path;

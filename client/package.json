@@ -12,6 +12,7 @@
     "@brewer/beerui": "^1.1.17",
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "dayjs": "^1.11.10",
+    "echarts": "^5.4.3",
     "less": "^4.2.0",
     "less-loader": "^11.1.4",
     "svelte": "^4.2.8",
