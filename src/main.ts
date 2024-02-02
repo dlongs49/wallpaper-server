@@ -11,7 +11,7 @@ import {Logger} from "@nestjs/common";
 import * as requestIp from 'request-ip'
 import {Request, Response} from "express";
 import IP2Region from "ip2region";
-
+import accessIp from './access_ip'
 async function bootstrap() {
     let mode = process.env.NODE_ENV
     Logger.debug("环境：" + mode)
@@ -27,14 +27,9 @@ async function bootstrap() {
     swaggerConfig(app) // swagger抽出
     app.use(`${mode === 'dev' ? '/' : '/wapi'}`, express.static(join(file_path, 'www/client'))); // 静态资源开放
     app.enableCors(); // 解决跨域
-    app.use("*", (req:Request, res:Response, next:Function) => {
-        let ip = requestIp.getClientIp(req)
-        let region = new IP2Region().search(requestIp.getClientIp(req))
-        Logger.log("访问IP:",{ip,...region})
-        console.log("访问IP:",JSON.stringify({ip,...region}));
-        next()
-    })
-    await app.listen(process.env.SERVER_POTY);
+    accessIp(app)
+   
+    await app.listen(process.env.SERVER_POTY,'0.0.0.0');
 }
 
 bootstrap();
